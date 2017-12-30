@@ -68,8 +68,6 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友情链接</a>
-    			
             
     			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
@@ -446,6 +444,19 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、文档"><span class="toc-number">1.</span> <span class="toc-text">一、文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（一）排版"><span class="toc-number">1.1.</span> <span class="toc-text">（一）排版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（二）输写"><span class="toc-number">1.2.</span> <span class="toc-text">（二）输写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、前端"><span class="toc-number">2.</span> <span class="toc-text">二、前端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（一）HTML"><span class="toc-number">2.1.</span> <span class="toc-text">（一）HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（二）CSS"><span class="toc-number">2.2.</span> <span class="toc-text">（二）CSS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、后端"><span class="toc-number">3.</span> <span class="toc-text">三、后端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（一）命名风格"><span class="toc-number">3.1.</span> <span class="toc-text">（一）命名风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（二）代码格式"><span class="toc-number">3.2.</span> <span class="toc-text">（二）代码格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（三）注释"><span class="toc-number">3.3.</span> <span class="toc-text">（三）注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、MySQL-数据库"><span class="toc-number">4.</span> <span class="toc-text">四、MySQL 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（一）命名风格-1"><span class="toc-number">4.1.</span> <span class="toc-text">（一）命名风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（二）类型"><span class="toc-number">4.2.</span> <span class="toc-text">（二）类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（三）其他"><span class="toc-number">4.3.</span> <span class="toc-text">（三）其他</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
@@ -490,7 +501,7 @@
 		toc_hide_index: true,
 		root: "/blog/",
 		innerArchive: true,
-		showTags: false
+		showTags: true
 	}
 </script>
 
@@ -510,8 +521,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
     
       
-      
-      
     
       
       
@@ -523,15 +532,13 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友情链接</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -598,38 +605,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     	</section>
     
 
-    
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
     
 
     
