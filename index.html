@@ -169,7 +169,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>问题：在 Windows 的命令提示符中输入验证 Gradle 和 Maven 是否安装成功的版本信息时，输出 <code>ERROR: JAVA_HOME is set to an invalid directory: C:\Program Files\Java\jdk1.</code></p>
+        <p>问题：</p>
+<ul>
+<li>在 Windows10 的命令提示符中输入验证 Gradle 和 Maven 是否安装成功的版本信息时，输出 <code>ERROR: JAVA_HOME is set to an invalid directory: C:\Program Files\Java\jdk1.</code></li>
+<li>配置好后，输入命令，说<code>不是内部或外部命令，也不是可运行的程序或批处理文件</code></li>
+</ul>
 <p>总结：</p>
 <ul>
 <li>配置 Maven 的环境变量名称是 M2_HOME，而不是  MAVEN_HOME</li>
@@ -178,7 +182,7 @@
 <li>JAVA_HOME，GRADLE_HOME,  M2_HOME 三个环境变量的路径后面不要加 ; （分号）</li>
 </ul>
 <ul>
-<li>Path 环境变量中使用上面三个环境变量时，注意前后都有 %（百分号），不要忘了后面的百分号</li>
+<li>Path 环境变量中使用上面三个环境变量时，注意前后都有 %（百分号），不要忘了后面的百分号，并且在 bin 后面加上 \ （反斜杠），如 <code>;%GRADLE_HOME%\bin\;</code> 分号不要多加</li>
 </ul>
 
       
@@ -572,6 +576,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
               </li>
              
@@ -589,10 +597,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
             
             <div class="clearfix"></div>
