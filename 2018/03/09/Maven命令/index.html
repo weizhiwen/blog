@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="A cat named github&#39;s blog">
 <meta property="og:description" content="mvn 为命令前缀 mvn -v 查看 Maven 的版本 mvn compile 编译 mvn test 测试 mvn package 打包 mvn install 安装 jar 包到本地仓库 mvn clean 删除生成的 target 文件">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-03-09T04:22:01.519Z">
+<meta property="og:updated_time" content="2018-03-09T04:31:30.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven命令">
 <meta name="twitter:description" content="mvn 为命令前缀 mvn -v 查看 Maven 的版本 mvn compile 编译 mvn test 测试 mvn package 打包 mvn install 安装 jar 包到本地仓库 mvn clean 删除生成的 target 文件">
@@ -176,6 +176,15 @@
 <p>mvn package 打包</p>
 <p>mvn install 安装 jar 包到本地仓库</p>
 <p>mvn clean 删除生成的 target 文件</p>
+<a id="more"></a>
+<p>创建目录的两种方式：</p>
+<ol>
+<li>mvn archetype:generate 按照提示进行选择</li>
+<li>mvn archetype:generate -DgroupId=组织名（公司网址的反写+项目名）-DartifactId=项目名+模块名 -Dversion=版本号（0.0.1-SNAPSHOT）-Dpackage=代码所在的包名</li>
+</ol>
+<p><em>注：</em></p>
+<p> <em>版本号的第一个数字表示大版本号， 第二个数字表示分支版本号，第三个数字表示小版本号。</em>  </p>
+<p><em>snapshot 快照  alpha 内部测试  beta 公测  Release 稳定  GA 正式发布</em></p>
 
       
 
@@ -454,7 +463,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -462,7 +471,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
