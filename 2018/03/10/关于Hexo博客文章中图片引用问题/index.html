@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
-  <title>Archives: 2018/3 | A cat named github&#39;s blog</title>
+  <title>关于Hexo博客文章中图片引用问题 | A cat named github&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魏志文，文士心，个人博客，记录学习的点滴。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="A cat named github&#39;s blog">
-<meta property="og:url" content="http://wenshixin.gitee.io/blog/archives/2018/03/index.html">
+  <meta name="description" content="Hexo 中的博客文章都是用 Markdown 来写的，在 Markdown 中解决上传到码云上的显示不正常的问题，是通过先找到项目的根路径，在逐层寻找图片存放的位置。">
+<meta name="keywords" content="Hexo,Markdown,问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Hexo博客文章中图片引用问题">
+<meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/03/10/关于Hexo博客文章中图片引用问题/index.html">
 <meta property="og:site_name" content="A cat named github&#39;s blog">
-<meta property="og:description" content="魏志文，文士心，个人博客，记录学习的点滴。">
+<meta property="og:description" content="Hexo 中的博客文章都是用 Markdown 来写的，在 Markdown 中解决上传到码云上的显示不正常的问题，是通过先找到项目的根路径，在逐层寻找图片存放的位置。">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-03-10T03:57:51.343Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A cat named github&#39;s blog">
-<meta name="twitter:description" content="魏志文，文士心，个人博客，记录学习的点滴。">
+<meta name="twitter:title" content="关于Hexo博客文章中图片引用问题">
+<meta name="twitter:description" content="Hexo 中的博客文章都是用 Markdown 来写的，在 Markdown 中解决上传到码云上的显示不正常的问题，是通过先找到项目的根路径，在逐层寻找图片存放的位置。">
   
     <link rel="alternative" href="/atom.xml" title="A cat named github&#39;s blog" type="application/atom+xml">
   
@@ -147,36 +149,72 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-关于Hexo博客文章中图片引用问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/03/10/关于Hexo博客文章中图片引用问题/" class="archive-article-date">
-  	<time datetime="2018-03-10T11:24:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/03/10/关于Hexo博客文章中图片引用问题/">关于Hexo博客文章中图片引用问题</a>
+    <h1 class="article-title" itemprop="name">
+      关于Hexo博客文章中图片引用问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/blog/2018/03/10/关于Hexo博客文章中图片引用问题/" class="archive-article-date">
+  	<time datetime="2018-03-10T11:24:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Hexo 中的博客文章都是用 Markdown 来写的，在 Markdown 中解决上传到码云上的显示不正常的问题，是通过先找到项目的根路径，在逐层寻找图片存放的位置。</p>
+<a id="more"></a>
+<p>而在 Hexo 中 Markdown 的图片使用并不是这样的，Hexo 官网上给出了 <a href="https://hexo.io/zh-cn/docs/asset-folders.html#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%BC%95%E7%94%A8%E7%9A%84%E6%A0%87%E7%AD%BE%E6%8F%92%E4%BB%B6" target="_blank" rel="noopener">资源文件夹</a> 的介绍，正确的引用图片方式是使用下列的标签插件。</p>
+<p>在使用标签插件时，需要在 Hexo 的 _config.yml 文件中把 post_asset_folder 选项设置为 true，这样在使用 <code>hexo new 博客文章名</code> 命令创建新的博客时，会在 source 目录中的 post 文件夹下创建该博客文章的 Markdown 文件，并且还会创建一个用来存放该篇博客文章相关的静态资源，比如说图片，这样也便于对文章资源的分类。</p>
+<p>在博客文章中，我们需要引入图片时，则先把图片放入到该篇文章的资源文件夹，在正文使用图片的标签插件， <code></code> ，asset_img 代表引用图片，example.jpg 是要引用的图片的名称，This is an example image 为给图片加的标注信息（鼠标放上去可以显示出来）。</p>
+<p>这样该博客文章的图片就显示正常了。</p>
+<p>其实万能的解决方法是，讲图片这些静态资源存放到专门的服务器上，推荐使用 <a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a>。我们在使用图片时，使用图片的 web url 就可以访问到，不过这样做的弊端时，如果服务器不能正常工作，所有的图片链接都会失效，博客中引用的图片资源都会无法显示。而上面的解决方法虽然保证了图片和文章在同一个项目中，但是会增加项目的占用空间，各有利弊。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>不接受1元以上的打赏&lt;br&gt;略表心意即可&lt;br&gt;土豪随意<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ompezbwwe.bkt.clouddn.com/%E6%94%AF%E4%BB%98%E5%AE%9D.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ompezbwwe.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -196,233 +234,129 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wenshixin.gitee.io/blog/2018/03/10/关于Hexo博客文章中图片引用问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/03/10/JavaWeb过滤器知识/" class="archive-article-date">
-  	<time datetime="2018-03-10T10:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2018/03/10/JavaWeb过滤器知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaWeb过滤器知识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/03/10/JavaWeb过滤器知识/">JavaWeb过滤器知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">过滤器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/03/09/Maven核心知识/" class="archive-article-date">
-  	<time datetime="2018-03-09T10:39:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/03/09/Maven核心知识/">Maven核心知识</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">依赖</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/03/09/Maven命令/" class="archive-article-date">
-  	<time datetime="2018-03-09T10:38:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/03/09/Maven命令/">Maven命令</a>
-    </h1>
+  <div id="SOHUCS" sid="关于Hexo博客文章中图片引用问题" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyt0mIw6i",
+        conf: "d5b3c78e5bb54e2e9fe88a4f21ebab68"
+    });
+</script>
+</script>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">命令</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/03/09/Maven的pom文件解析/" class="archive-article-date">
-  	<time datetime="2018-03-08T22:50:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/03/09/Maven的pom文件解析/">Maven的pom文件解析</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">pom文件</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2018/03/08/安装Gradle和Maven中遇到的问题/" class="archive-article-date">
-  	<time datetime="2018-03-07T23:14:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2018/03/08/安装Gradle和Maven中遇到的问题/">安装Gradle和Maven中遇到的问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Gradle</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -445,8 +379,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
