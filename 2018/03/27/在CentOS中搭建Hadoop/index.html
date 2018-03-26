@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/Hadoop正常启动Web界面.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/启动YARN.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/YARN的Web界面.png">
-<meta property="og:updated_time" content="2018-03-26T14:19:20.038Z">
+<meta property="og:updated_time" content="2018-03-26T14:22:46.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在CentOS中搭建Hadoop">
 <meta name="twitter:description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  软件环境：虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
@@ -205,7 +205,7 @@
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/设置用户密码.png" title="设置用户密码">
 <h2 id="用户选择"><a href="#用户选择" class="headerlink" title="用户选择"></a>用户选择</h2><p>使用虚拟机安装好系统后，可以看到登录界面，如下图所示。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/进入系统.png" title="进入系统">
-<p>选择 <strong>other</strong> ，在 <strong>Username</strong> 输入框中输入 <strong>root</strong>，回车，再在 <strong>Password</strong> 输入框中输入你创建用户时密码。root 用户是安装 CentOS 自动创建的超级用户，但密码和你安装系统时创建的普通用户密码是一样的。</p>
+<p>选择 <strong>Other</strong> ，在 <strong>Username</strong> 输入框中输入 <strong>root</strong>，回车，再在 <strong>Password</strong> 输入框中输入你创建用户时密码。root 用户是安装 CentOS 自动创建的超级用户，但密码和你安装系统时创建的普通用户密码是一样的。</p>
 <p>平时在使用 CentOS 时，并不推荐使用 root 用户，因为该用户具有整个系统的最高权限，使用该用户可能会导致严重的后果，但前提是你对 Linux 很熟，才会误操作。搭建 Hadoop 的大数据平台，使用普通用户，很多命令需要 sudo 命令来获取 root 用户的权限，比较麻烦，所以索性直接使用 root 用户。</p>
 <h2 id="安装SSH"><a href="#安装SSH" class="headerlink" title="安装SSH"></a>安装SSH</h2><p>集群、单节点模式都需要用到 SSH 登陆（类似于远程登陆，你可以登录某台 Linux 主机，并且在上面运行命令)。</p>
 <p>首先确保你的 CentOS 系统可以正常的上网，你可以查看桌面右上角的网络图标，若显示红叉则表明未联网，可点击选择可用网络，也可以使用桌面左上角的火狐浏览器输入网址验证是否网络连接正常。如果还是无法上网，检查虚拟机的设置，选用 NAT 模式，或者上网百度解决。</p>
@@ -260,10 +260,10 @@
 <li>伪分布式模式：Hadoop 可以在单节点上以伪分布式的方式运行，Hadoop 进程以分离的 Java 进程来运行，节点既作为 NameNode 也作为 DataNode，同时，读取的是 HDFS 中的文件。</li>
 <li>分布式模式：使用多个节点构成集群环境来运行Hadoop，需要多台主机，也可以是虚拟主机。</li>
 </ul>
-<h2 id="Hadoop-伪分布式配置"><a href="#Hadoop-伪分布式配置" class="headerlink" title="Hadoop 伪分布式配置"></a>Hadoop 伪分布式配置</h2><p>现在我们就可以来使用Hadoop运行一些例子，Hadoop 附带了很多的例子，可以运行 <code>hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.5.jar</code> 看到所有的例子。</p>
+<h2 id="Hadoop-伪分布式配置"><a href="#Hadoop-伪分布式配置" class="headerlink" title="Hadoop 伪分布式配置"></a>Hadoop 伪分布式配置</h2><p>现在我们就可以来使用 Hadoop 运行一些例子，Hadoop 附带了很多的例子，可以运行 <code>hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.5.jar</code> 看到所有的例子。</p>
 <p>我们这里来运行一个查询的例子，将 input 文件夹作为输入文件夹，筛选当中符合正则表达式 <code>dfs[a-z.]+</code> 的单词，统计它的次数，将筛选结果输出到 output 文件夹中。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop			# 切换当前目录为 /usr/local/hadoop 目录</span><br><span class="line">mkdir ./input					# 在当前目录下创建 input 文件夹</span><br><span class="line">cp ./etc/hadoop/*.xml ./input   # 将 hadoop 的配置文件复制到新建的输入文件夹 input 中</span><br><span class="line">./bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar grep ./input ./output 'dfs[a-z.]+' </span><br><span class="line">cat ./output/*  				# 查看输出结果</span><br></pre></td></tr></table></figure>
-<p>通过命令 <code>cat ./output/*</code> 查看结果，符合正则的单词 dfsadmin 出现了1次。</p>
+<p>通过命令 <code>cat ./output/*</code> 查看结果，符合正则的单词 dfsadmin 出现了 1次。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/运行测试Hadoop例子.png" title="运行测试Hadoop例子">
 <p>若运行出错，如出现如下图提示。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/运行Hadoop例子出错.png" title="运行Hadoop例子出错">
@@ -655,15 +655,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
