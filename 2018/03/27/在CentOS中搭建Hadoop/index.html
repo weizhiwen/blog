@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>在CentOS中搭建Hadoop | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  软件环境虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
-<meta name="keywords" content="Hadoop,CentOS,大数据">
+  <meta name="description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  0.软件环境虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
+<meta name="keywords" content="CentOS,Hadoop,大数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在CentOS中搭建Hadoop">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  软件环境虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
+<meta property="og:description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  0.软件环境虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/设置用户密码.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/进入系统.png">
@@ -35,10 +35,10 @@
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/Hadoop正常启动Web界面.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/启动YARN.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/YARN的Web界面.png">
-<meta property="og:updated_time" content="2018-03-27T14:21:22.783Z">
+<meta property="og:updated_time" content="2018-03-27T14:24:54.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在CentOS中搭建Hadoop">
-<meta name="twitter:description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  软件环境虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
+<meta name="twitter:description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  0.软件环境虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
 <meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop/设置用户密码.png">
   
   
@@ -196,18 +196,18 @@
         <blockquote>
 <p>搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。</p>
 </blockquote>
-<h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><p>虚拟机：VMware Pro14</p>
+<h2 id="0-软件环境"><a href="#0-软件环境" class="headerlink" title="0.软件环境"></a>0.软件环境</h2><p>虚拟机：VMware Pro14</p>
 <p>Linux：CentOS-6.4（<a href="http://vault.centos.org/6.4/isos/x86_64/" target="_blank" rel="noopener">下载地址</a>，下载DVD版本即可）</p>
 <p>JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK）</p>
 <p>Hadoop：2.6.5（<a href="http://mirror.bit.edu.cn/apache/hadoop/common/" target="_blank" rel="noopener">下载地址</a>）</p>
 <a id="more"></a>
 <p>虚拟机的安装和Linux系统的安装这里就省略了，可以参照网上的教程安装，一般没什么大问题，需要注意的是记住这里你输入的用户密码，下面还要用，如下图所示。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/设置用户密码.png" title="设置用户密码">
-<h2 id="用户选择"><a href="#用户选择" class="headerlink" title="用户选择"></a>用户选择</h2><p>使用虚拟机安装好系统后，可以看到登录界面，如下图所示。</p>
+<h2 id="1-用户选择"><a href="#1-用户选择" class="headerlink" title="1.用户选择"></a>1.用户选择</h2><p>使用虚拟机安装好系统后，可以看到登录界面，如下图所示。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/进入系统.png" title="进入系统">
 <p>选择 <strong>Other</strong> ，在 <strong>Username</strong> 输入框中输入 <strong>root</strong>，回车，再在 <strong>Password</strong> 输入框中输入你创建用户时密码。root 用户是安装 CentOS 自动创建的超级用户，但密码和你安装系统时创建的普通用户密码是一样的。</p>
 <p>平时在使用 CentOS 时，并不推荐使用 root 用户，因为该用户具有整个系统的最高权限，使用该用户可能会导致严重的后果，但前提是你对 Linux 很熟，才会误操作。搭建 Hadoop 的大数据平台，使用普通用户，很多命令需要 sudo 命令来获取 root 用户的权限，比较麻烦，所以索性直接使用 root 用户。</p>
-<h2 id="安装SSH"><a href="#安装SSH" class="headerlink" title="安装SSH"></a>安装SSH</h2><p>集群、单节点模式都需要用到 SSH 登陆（类似于远程登陆，你可以登录某台 Linux 主机，并且在上面运行命令)。</p>
+<h2 id="2-安装SSH"><a href="#2-安装SSH" class="headerlink" title="2.安装SSH"></a>2.安装SSH</h2><p>集群、单节点模式都需要用到 SSH 登陆（类似于远程登陆，你可以登录某台 Linux 主机，并且在上面运行命令)。</p>
 <p>首先确保你的 CentOS 系统可以正常的上网，你可以查看桌面右上角的网络图标，若显示红叉则表明未联网，可点击选择可用网络，也可以使用桌面左上角的火狐浏览器输入网址验证是否网络连接正常。如果还是无法上网，检查虚拟机的设置，选用 NAT 模式，或者上网百度解决。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/检查网络状况.png" title="检查网络状况">
 <p>确定网络连接正常后，打开 CentOS 的终端，可在 CentOS 的桌面点击鼠标右键，选择 <strong>Open In Terminal</strong>，如下图所示。</p>
@@ -227,7 +227,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">exit                           # 退出刚才的 ssh localhost</span><br><span class="line">cd ~/.ssh/                     # 若提示没有该目录，请先执行一次ssh localhost</span><br><span class="line">ssh-keygen -t rsa              # 会有提示，都按回车即可</span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys  # 加入授权</span><br><span class="line">chmod 600 ./authorized_keys    # 修改文件权限</span><br></pre></td></tr></table></figure>
 <p>此时再用 <code>ssh localhost</code> 命令，无需输入密码就可以直接登陆了，如下图所示。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/再次登录SSH.png" title="再次登录SSH">
-<h2 id="安装-Java-环境"><a href="#安装-Java-环境" class="headerlink" title="安装 Java 环境"></a>安装 Java 环境</h2><p>Java 环境可选择 Oracle 的 JDK，或是 OpenJDK（可看作 JDK 的开源版本），现在一般 Linux 系统默认安装的基本是 OpenJDK，这里安装的是 OpenJDK1.8.0版本的。</p>
+<h2 id="3-安装-Java-环境"><a href="#3-安装-Java-环境" class="headerlink" title="3.安装 Java 环境"></a>3.安装 Java 环境</h2><p>Java 环境可选择 Oracle 的 JDK，或是 OpenJDK（可看作 JDK 的开源版本），现在一般 Linux 系统默认安装的基本是 OpenJDK，这里安装的是 OpenJDK1.8.0版本的。</p>
 <p>有的 CentOS 6.4 默认安装了 OpenJDK 1.7，这里我们可以使用命令检查一下，和 Windows 下的命令一样，还可以查看 JAVA_HOME 这个环境变量的值。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java -version				    # 查看 java 的版本</span><br><span class="line">javac -version					# 查看编译命令 Javac 的版本</span><br><span class="line">echo $JAVA_HOME					# 查看 $JAVA_HOME 这个环境变量的值</span><br></pre></td></tr></table></figure>
 <p>如果系统没有安装 OpenJDK，我们可以通过 yum 包管理器来安装。（安装过程中会让输入 [y/N]，输入 y 即可）</p>
@@ -245,7 +245,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo $JAVA_HOME     # 检验变量值</span><br><span class="line">java -version</span><br><span class="line">javac -version</span><br><span class="line"><span class="meta">$</span>JAVA_HOME/bin/java -version  # 与直接执行 java -version 一样</span><br></pre></td></tr></table></figure>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/检查JAVA_HOME环境变量是否配置正确.png" title="检查JAVA_HOME环境变量是否配置正确">
 <p>这样，Hadoop 所需的 Java 运行环境就安装好了。</p>
-<h2 id="安装-Hadoop"><a href="#安装-Hadoop" class="headerlink" title="安装 Hadoop"></a>安装 Hadoop</h2><p>在前面<strong>软件环境</strong>已经给出了 hadoop2.6.5 的下载地址，可以直接通过火狐浏览器打开下载，默认下载位置是在用户的 Home 中的 Downloads 文件夹下，如下图所示。</p>
+<h2 id="4-安装-Hadoop"><a href="#4-安装-Hadoop" class="headerlink" title="4.安装 Hadoop"></a>4.安装 Hadoop</h2><p>在前面<strong>软件环境</strong>已经给出了 hadoop2.6.5 的下载地址，可以直接通过火狐浏览器打开下载，默认下载位置是在用户的 Home 中的 Downloads 文件夹下，如下图所示。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/下载Hadoop.png" title="下载Hadoop">
 <p>下载完成后，我们将 Hadoop 解压到 /usr/local/  中。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf ~/下载/hadoop-2.6.5.tar.gz -C /usr/local    # 解压到/usr/local目录中</span><br><span class="line">cd /usr/local/								# 切换当前目录为 /usr/local 目录</span><br><span class="line">mv ./hadoop-2.6.5/ ./hadoop            # 将文件夹名改为hadoop</span><br><span class="line">chown -R root:root ./hadoop        	# 修改文件权限，root 是当前用户名</span><br></pre></td></tr></table></figure>
@@ -260,7 +260,7 @@
 <li>伪分布式模式：Hadoop 可以在单节点上以伪分布式的方式运行，Hadoop 进程以分离的 Java 进程来运行，节点既作为 NameNode 也作为 DataNode，同时，读取的是 HDFS 中的文件。</li>
 <li>分布式模式：使用多个节点构成集群环境来运行Hadoop，需要多台主机，也可以是虚拟主机。</li>
 </ul>
-<h2 id="Hadoop-伪分布式配置"><a href="#Hadoop-伪分布式配置" class="headerlink" title="Hadoop 伪分布式配置"></a>Hadoop 伪分布式配置</h2><p>现在我们就可以来使用 Hadoop 运行一些例子，Hadoop 附带了很多的例子，可以运行 <code>hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.5.jar</code> 看到所有的例子。</p>
+<h2 id="5-Hadoop-伪分布式配置"><a href="#5-Hadoop-伪分布式配置" class="headerlink" title="5.Hadoop 伪分布式配置"></a>5.Hadoop 伪分布式配置</h2><p>现在我们就可以来使用 Hadoop 运行一些例子，Hadoop 附带了很多的例子，可以运行 <code>hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.5.jar</code> 看到所有的例子。</p>
 <p>我们这里来运行一个查询的例子，将 input 文件夹作为输入文件夹，筛选当中符合正则表达式 <code>dfs[a-z.]+</code> 的单词，统计它的次数，将筛选结果输出到 output 文件夹中。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop			# 切换当前目录为 /usr/local/hadoop 目录</span><br><span class="line">mkdir ./input					# 在当前目录下创建 input 文件夹</span><br><span class="line">cp ./etc/hadoop/*.xml ./input   # 将 hadoop 的配置文件复制到新建的输入文件夹 input 中</span><br><span class="line">./bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar grep ./input ./output 'dfs[a-z.]+' </span><br><span class="line">cat ./output/*  				# 查看输出结果</span><br></pre></td></tr></table></figure>
 <p>通过命令 <code>cat ./output/*</code> 查看结果，符合正则的单词 dfsadmin 出现了 1次。</p>
@@ -294,7 +294,7 @@
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/启动Hadoop注意事项.png" title="启动Hadoop注意事项> 启动完成后，可以通过命令 `jps` 来判断是否成功启动，若出现下面 NameNode、DataNode、SecondaryNameNode、Jps 四个进程，则 Hadoop 启动成功。 undefined {% asset_img 判断Hadoop是否启动成功.png 判断Hadoop是否启动成功">
 <p>成功启动后，也可以访问 Web 界面 <a href="http://localhost:50070/" target="_blank" rel="noopener">http://localhost:50070</a> 查看 NameNode 和 Datanode 信息，还可以在线查看 HDFS 中的文件。</p>
 <img src="/blog/2018/03/27/在CentOS中搭建Hadoop/Hadoop正常启动Web界面.png" title="Hadoop正常启动Web界面">
-<h2 id="启动YARN"><a href="#启动YARN" class="headerlink" title="启动YARN"></a>启动YARN</h2><p>YARN 是从 MapReduce 中分离出来的，负责资源管理与任务调度。YARN 运行于 MapReduce 之上，提供了高可用性、高扩展性。（伪分布式不启动 YARN 也可以，一般不会影响程序执行）</p>
+<h2 id="6-启动YARN"><a href="#6-启动YARN" class="headerlink" title="6.启动YARN"></a>6.启动YARN</h2><p>YARN 是从 MapReduce 中分离出来的，负责资源管理与任务调度。YARN 运行于 MapReduce 之上，提供了高可用性、高扩展性。（伪分布式不启动 YARN 也可以，一般不会影响程序执行）</p>
 <p>上述通过 <code>start-dfs.sh</code> 命令启动 Hadoop，仅仅是启动了 MapReduce 环境，我们可以启动 YARN ，让 YARN 来负责资源管理与任务调度。</p>
 <p>首先修改配置文件 <strong>mapred-site.xml</strong>，需要先将 mapred-site.xml.template 文件的重命名为 mapred-site.xml。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv ./etc/hadoop/mapred-site.xml.template ./etc/hadoop/mapred-site.xml 	# 文件重命名</span><br><span class="line">gedit ./etc/hadoop/mapred-site.xml										# 用gedit 文本编辑器打开</span><br></pre></td></tr></table></figure>
@@ -363,11 +363,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CentOS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CentOS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -470,7 +470,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#软件环境"><span class="toc-number">1.</span> <span class="toc-text">软件环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户选择"><span class="toc-number">2.</span> <span class="toc-text">用户选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装SSH"><span class="toc-number">3.</span> <span class="toc-text">安装SSH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Java-环境"><span class="toc-number">4.</span> <span class="toc-text">安装 Java 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Hadoop"><span class="toc-number">5.</span> <span class="toc-text">安装 Hadoop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hadoop-伪分布式配置"><span class="toc-number">6.</span> <span class="toc-text">Hadoop 伪分布式配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动YARN"><span class="toc-number">7.</span> <span class="toc-text">启动YARN</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-软件环境"><span class="toc-number">1.</span> <span class="toc-text">0.软件环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-用户选择"><span class="toc-number">2.</span> <span class="toc-text">1.用户选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装SSH"><span class="toc-number">3.</span> <span class="toc-text">2.安装SSH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-安装-Java-环境"><span class="toc-number">4.</span> <span class="toc-text">3.安装 Java 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-安装-Hadoop"><span class="toc-number">5.</span> <span class="toc-text">4.安装 Hadoop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Hadoop-伪分布式配置"><span class="toc-number">6.</span> <span class="toc-text">5.Hadoop 伪分布式配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-启动YARN"><span class="toc-number">7.</span> <span class="toc-text">6.启动YARN</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -595,34 +595,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
@@ -631,11 +603,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,6 +632,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -691,11 +671,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MFC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">课程设计脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
             
             <div class="clearfix"></div>
