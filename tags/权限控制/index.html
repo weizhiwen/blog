@@ -6,19 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
-  <title>在CentOS中搭建Hadoop大数据平台 | Wizey&#39;s blog</title>
+  <title>Tag: 权限控制 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  软件环境：虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
-<meta property="og:type" content="article">
-<meta property="og:title" content="在CentOS中搭建Hadoop大数据平台">
-<meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop大数据平台/index.html">
+  <meta name="description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wizey&#39;s blog">
+<meta property="og:url" content="http://wenshixin.gitee.io/blog/tags/权限控制/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  软件环境：虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
+<meta property="og:description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-03-26T13:18:55.957Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在CentOS中搭建Hadoop大数据平台">
-<meta name="twitter:description" content="搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。  软件环境：虚拟机：VMware Pro14 Linux：CentOS-6.4（下载地址，下载DVD版本即可） JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK） Hadoop：2.6.5（下载地址）">
+<meta name="twitter:title" content="Wizey&#39;s blog">
+<meta name="twitter:description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -147,331 +146,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-在CentOS中搭建Hadoop大数据平台" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      在CentOS中搭建Hadoop大数据平台
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/blog/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/blog/2018/04/08/OA系统的功能权限控制/" class="archive-article-date">
+  	<time datetime="2018-04-08T09:49:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-08</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/blog/2018/04/08/OA系统的功能权限控制/">OA系统的功能权限控制</a>
     </h1>
   
 
-        
-        <a href="/blog/2018/03/27/在CentOS中搭建Hadoop大数据平台/" class="archive-article-date">
-  	<time datetime="2018-03-26T16:52:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-26</time>
-</a>
-        
-      </header>
-    
-    
-      <span class="archive-article-date">
-        阅读量 <span id="busuanzi_value_page_pv" style="font-size:bold;"></span>
-      </span>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>搭建说明：第一次搭建 Hadoop 的小伙伴，请严格按照文章中的软件环境和步骤搭建，不一样的版本都可能会导致问题。</p>
-</blockquote>
-<h2 id="软件环境："><a href="#软件环境：" class="headerlink" title="软件环境："></a>软件环境：</h2><p>虚拟机：VMware Pro14</p>
-<p>Linux：CentOS-6.4（<a href="http://vault.centos.org/6.4/isos/x86_64/" target="_blank" rel="noopener">下载地址</a>，下载DVD版本即可）</p>
-<p>JDK：OpenJDK1.8.0 （强力建议不要使用 Oracle 公司的 Linux 版本的 JDK）</p>
-<p>Hadoop：2.6.5（<a href="http://mirror.bit.edu.cn/apache/hadoop/common/" target="_blank" rel="noopener">下载地址</a>）</p>
-<a id="more"></a>
-<p>虚拟机的安装和Linux系统的安装这里就省略了，可以参照网上的教程安装，一般没什么大问题，需要注意的是记住这里你输入的用户密码，下面还要用，如下图所示。</p>
-<p>&lt;% asset_img 设置用户密码.png 设置用户密码 %&gt;</p>
-<h2 id="用户选择"><a href="#用户选择" class="headerlink" title="用户选择"></a>用户选择</h2><p>使用虚拟机安装好系统后，可以看到登录界面，如下图所示。</p>
-<p>&lt;% asset_img 进入系统.png 进入系统%&gt;</p>
-<p>选择 <strong>other</strong> ，在 <strong>Username</strong> 输入框中输入 <strong>root</strong>，回车，再在 <strong>Password</strong> 输入框中输入你创建用户时密码。root 用户是安装 CentOS 自动创建超级用户，但密码和你安装系统时创建的普通用户密码是一样的。</p>
-<p>平时在使用 CentOS 时，并不推荐使用 Root 用户，因为该用户具有整个系统的最高权限，使用该用户可能会导致严重的后果，但前提是你对 Linux 很熟，才会误操作。搭建 Hadoop 的大数据平台，使用普通用户，很多命令需要 sudo 命令来获取 root 用户的权限，比较麻烦，所以索性直接使用 root 用户。</p>
-<h2 id="安装SSH"><a href="#安装SSH" class="headerlink" title="安装SSH"></a>安装SSH</h2><p>集群、单节点模式都需要用到 SSH 登陆（类似于远程登陆，你可以登录某台 Linux 主机，并且在上面运行命令)。</p>
-<p>首先确保你的 CentOS 系统可以正常的上网，你可以查看桌面右上角的网络图标，若显示红叉则表明未联网，可点击选择可用网络，也可以使用桌面左上角的火狐浏览器输入网址验证是否网络连接正常。如果还是无法上网，检查虚拟机的设置，选用 NAT 模式，或者上网百度解决。</p>
-<p>&lt;% asset_img 检查网络状况.png 检查网络状况%&gt;</p>
-<p>确定网络连接正常后，打开 CentOS 的终端，可在 CentOS 的桌面点击鼠标右键，选择 <strong>Open In Terminal</strong>，如下图所示。</p>
-<p>&lt;% asset_img 打开终端.png 打开终端%&gt;</p>
-<p>一般情况下，CentOS 默认已安装了 SSH client、SSH server，可打开终端执行如下命令进行检验：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep ssh</span><br></pre></td></tr></table></figure>
-<p>如果返回的结果如下图所示，包含了 SSH client 跟 SSH server，则不需要再安装。</p>
-<p>&lt;% asset_img 查看SSH是否已安装.png 查看SSH是否已安装%&gt;</p>
-<p>如果需要安装，则可以通过 yum 这个包管理器进行安装。（安装过程中会让你输入 [y/N]，输入 y 即可）</p>
-<p><strong><em>注意：命令是单条执行的，不是直接把两条命令粘贴过去。</em></strong></p>
-<p>终端中的粘贴可通过鼠标点击右键选择 <strong>Paste</strong> 粘贴，也可通过快捷键 【Shift + Insert】粘贴。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install openssh-clients</span><br><span class="line">yum install openssh-server</span><br></pre></td></tr></table></figure>
-<p>SSH安装完成后，执行如下命令测试一下 SSH 是否可用（SSH首次登陆提示 yes/no 信息，输入 yes 即可，然后按照提示输入 root 用户的密码，这样就登录到本机了），如下图所示。</p>
-<p>&lt;% asset_img 首次登录SSH.png 首次登录SSH%&gt;</p>
-<p>但这样登陆需要每次都输入密码，我们需要配置成SSH无密码登陆比较方便。</p>
-<p>首先输入 <code>exit</code> 退出刚才的 ssh，就回到了我们原先的终端窗口，然后利用 ssh-keygen 生成密钥，并将密钥加入到授权中。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">exit                           # 退出刚才的 ssh localhost</span><br><span class="line">cd ~/.ssh/                     # 若提示没有该目录，请先执行一次ssh localhost</span><br><span class="line">ssh-keygen -t rsa              # 会有提示，都按回车即可</span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys  # 加入授权</span><br><span class="line">chmod 600 ./authorized_keys    # 修改文件权限</span><br></pre></td></tr></table></figure>
-<p>此时再用 <code>ssh localhost</code> 命令，无需输入密码就可以直接登陆了，如下图所示。</p>
-<p>&lt;% asset_img 再次登录SSH.png 再次登录SSH%&gt;</p>
-<h2 id="安装-Java-环境"><a href="#安装-Java-环境" class="headerlink" title="安装 Java 环境"></a>安装 Java 环境</h2><p>Java 环境可选择 Oracle 的 JDK，或是 OpenJDK（可看作 JDK 的开源版本），现在一般 Linux 系统默认安装的基本是 OpenJDK，这里安装的是 OpenJDK1.8.0版本的。</p>
-<p>有的 CentOS 6.4 默认安装了 OpenJDK 1.7，这里我们可以使用命令检查一下，和 Windows 下的命令一样，还可以查看 JAVA_HOME 这个环境变量的值。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java -version				    # 查看 java 的版本</span><br><span class="line">javac -version					# 查看编译命令 Javac 的版本</span><br><span class="line">echo $JAVA_HOME					# 查看 $JAVA_HOME 这个环境变量的值</span><br></pre></td></tr></table></figure>
-<p>如果系统没有安装 OpenJDK，我们可以通过 yum 包管理器来安装。（安装过程中会让输入 [y/N]，输入 y 即可）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install java-1.8.0-openjdk  java-1.8.0-openjdk-devel  #安装 openjdk1.8.0</span><br></pre></td></tr></table></figure>
-<p>通过上述命令安装 OpenJDK，默认安装位置为 /usr/lib/jvm/java-1.8.0，下面配置 JAVA_HOME 时就使用这个位置。</p>
-<p>接着需要配置一下 JAVA_HOME 环境变量，为了方便，直接在 ~/.bashrc 中进行设置，相当于配置的是 Windows 的用户环境变量，只对单个用户生效，当用户登录后，每次打开 shell 终端，.bashrc 文件都会被读取。</p>
-<p>修改文件，可以直接使用 vim 编辑器打开文件，也可以使用类似于 Windows 记事本的 gedit 文本编辑器。</p>
-<p>下面命令任选其一。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc					# 使用 vim 编辑器在终端中打开 .bashrc 文件</span><br><span class="line">gedit ~/.bashrc					# 使用 gedit 文本编辑器打开 .bashrc 文件</span><br></pre></td></tr></table></figure>
-<p>在文件最后面添加如下单独一行（指向 JDK 的安装位置），并<strong>保存</strong>（）。</p>
-<p>&lt;% asset_img 配置JAVA_HOME环境变量.png 配置JAVA_HOME环境变量%&gt;</p>
-<p>接着还需要让该环境变量生效，执行如下命令。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc    			# 使变量设置生效</span><br></pre></td></tr></table></figure>
-<p>设置好后我们来检验一下是否设置正确，如下图所示。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo $JAVA_HOME     # 检验变量值</span><br><span class="line">java -version</span><br><span class="line">javac -version</span><br><span class="line"><span class="meta">$</span><span class="bash">JAVA_HOME/bin/java -version  <span class="comment"># 与直接执行 java -version 一样</span></span></span><br></pre></td></tr></table></figure>
-<p>&lt;% asset_img 检查JAVA_HOME环境变量是否配置正确.png 检查JAVA_HOME环境变量是否配置正确%&gt;</p>
-<p>这样，Hadoop 所需的 Java 运行环境就安装好了。</p>
-<h2 id="安装-Hadoop"><a href="#安装-Hadoop" class="headerlink" title="安装 Hadoop"></a>安装 Hadoop</h2><p>在前面<strong>软件环境</strong>已经给出了 hadoop2.6.5 的下载地址，可以直接通过火狐浏览器打开下载，默认下载位置是在用户的 Home 中的 Downloads 文件夹下，如下图所示。</p>
-<p>&lt;% asset_img 下载Hadoop.png 下载Hadoop%&gt;</p>
-<p>下载完成后，我们将 Hadoop 解压到 /usr/local/  中。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf ~/下载/hadoop-2.6.5.tar.gz -C /usr/local    # 解压到/usr/local目录中</span><br><span class="line">cd /usr/local/								# 切换当前目录为 /usr/local 目录</span><br><span class="line">sudo mv ./hadoop-2.6.5/ ./hadoop            # 将文件夹名改为hadoop</span><br><span class="line">sudo chown -R root:root ./hadoop        	# 修改文件权限，root 是当前用户名</span><br></pre></td></tr></table></figure>
-<p>Hadoop 解压后即可使用，输入如下命令来检查 Hadoop 是否可用，成功则会显示 Hadoop 版本信息。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop						# 切换当前目录为 /usr/local/hadoop 目录</span><br><span class="line">./bin/hadoop version						# 查看 Hadoop 的版本信息</span><br></pre></td></tr></table></figure>
-<p>或者直接输入 <code>hadoop version</code> 命令也可以查看。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop version								# 查看 Hadoop 的版本信息</span><br></pre></td></tr></table></figure>
-<p>&lt;% asset_img 查看Hadoop版本信息.png 查看Hadoop版本信息%&gt;</p>
-<p><strong>Hadoop 安装方式有三种，分别是单机模式，伪分布式模式，分布式模式。</strong></p>
-<ul>
-<li>单机模式：Hadoop 默认模式为非分布式模式（本地模式），无需进行其他配置即可运行。非分布式即单 Java 进程，方便进行调试。</li>
-<li>伪分布式模式：Hadoop 可以在单节点上以伪分布式的方式运行，Hadoop 进程以分离的 Java 进程来运行，节点既作为 NameNode 也作为 DataNode，同时，读取的是 HDFS 中的文件。</li>
-<li>分布式模式：使用多个节点构成集群环境来运行Hadoop，需要多台主机，也可以是虚拟主机。</li>
-</ul>
-<h2 id="Hadoop-伪分布式配置"><a href="#Hadoop-伪分布式配置" class="headerlink" title="Hadoop 伪分布式配置"></a>Hadoop 伪分布式配置</h2><p>现在我们就可以来使用Hadoop运行一些例子，Hadoop 附带了很多的例子，可以运行 <code>hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.5.jar</code> 看到所有的例子。</p>
-<p>我们这里来运行一个查询的例子，将 input 文件夹作为输入文件夹，筛选当中符合正则表达式 <code>dfs[a-z.]+</code> 的单词，统计它的次数，将筛选结果输出到 output 文件夹中。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop			# 切换当前目录为 /usr/local/hadoop 目录</span><br><span class="line">mkdir ./input					# 在当前目录下创建 input 文件夹</span><br><span class="line">cp ./etc/hadoop/*.xml ./input   # 将 hadoop 的配置文件复制到新建的输入文件夹 input 中</span><br><span class="line">./bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar grep ./input ./output 'dfs[a-z.]+' </span><br><span class="line">cat ./output/*  				# 查看输出结果</span><br></pre></td></tr></table></figure>
-<p>通过命令 <code>cat ./output/*</code> 查看结果，符合正则的单词 dfsadmin 出现了1次。</p>
-<p>&lt;% asset_img 运行测试Hadoop例子.png 运行测试Hadoop例子%&gt;</p>
-<p>若运行出错，如出现如下图提示。</p>
-<p>&lt;% asset_img 运行Hadoop例子出错.png 运行Hadoop例子出错%&gt;</p>
-<p>若出现提示 “WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform… using builtin-java classes where applicable”，该 WARN 提示可以忽略，不影响 Hadoop 正常运行。</p>
-<p><strong><em>注意：Hadoop 默认不会覆盖结果文件，因此再次运行上面实例会提示出错，需要先将 output 文件夹删除。</em></strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -r ./output					# 在 /usr/local/hadoop 目录下执行</span><br></pre></td></tr></table></figure>
-<p>测试我们的 Hadoop 安装没有问题，我们可以开始设置 Hadoop 的环境变量，同样在 ~/.bashrc 文件中配置。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit ~/.bashrc					# 使用 gedit 文本编辑器打开 .bashrc 文件</span><br></pre></td></tr></table></figure>
-<p>在 .bashrc 文件最后面增加如下内容，注意 HADOOP_HOME 的位置对不对，如果都是按照前面的配置，这部分可照抄。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Hadoop Environment Variables</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/usr/<span class="built_in">local</span>/hadoop</span><br><span class="line"><span class="built_in">export</span> HADOOP_INSTALL=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_MAPRED_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_COMMON_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_HDFS_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> YARN_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_COMMON_LIB_NATIVE_DIR=<span class="variable">$HADOOP_HOME</span>/lib/native</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/sbin:<span class="variable">$HADOOP_HOME</span>/bin</span><br></pre></td></tr></table></figure>
-<p>&lt;% asset_img Hadoop环境变量的配置.png Hadoop环境变量的配置%&gt;</p>
-<p>保存后记得关掉 gedit 程序，否则会占用终端，无法执行下面的命令，可以按 【Ctrl + C】键终止该程序。</p>
-<p>保存后，不要忘记执行如下命令使配置生效。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>Hadoop 的配置文件位于 /usr/local/hadoop/etc/hadoop/ 下，伪分布式需要修改2个配置文件 <strong>core-site.xml</strong> 和 <strong>hdfs-site.xml</strong> 。Hadoop的配置文件是 xml 格式，每个配置以声明 property 的 name 和 value 的方式来实现。</p>
-<p>修改配置文件 <strong>core-site.xml</strong> (通过 gedit 编辑会比较方便，输入命令， <code>gedit ./etc/hadoop/core-site.xml</code>)。</p>
-<p>在 <code>&lt;configuration&gt;&lt;/configuration&gt;</code> 中间插入如下的代码。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>Abase for other temporary directories.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>同样的，修改配置文件 <strong>hdfs-site.xml</strong>，<code>gedit ./etc/hadoop/hdfs-site.xml</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp/dfs/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>配置完成后，执行 NameNode 的格式化。（Hadoop 首次启动需要该命令）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
-<p>成功的话，会看到 “successfully formatted” 和 “Exitting with status 0” 的提示，若为 “Exitting with status 1” 则是出错。</p>
-<p>&lt;% asset_img NameNode格式化.png NameNode格式化%&gt;</p>
-<p>接下来启动 Hadoop。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh					# 开启 NameNode 和 DataNode 进程</span><br></pre></td></tr></table></figure>
-<p>若出现如下 SSH 的提示 “Are you sure you want to continue connecting”，输入 yes 即可。</p>
-<p>&lt;% asset_img 启动Hadoop注意事项.png 启动Hadoop注意事项&gt;</p>
-<p>启动完成后，可以通过命令 <code>jps</code> 来判断是否成功启动，若出现下面 NameNode、DataNode、SecondaryNameNode、Jps 四个进程，则 Hadoop 启动成功。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps								# 查看进程判断 Hadoop 是否启动成功</span><br></pre></td></tr></table></figure>
-<p>&lt;% asset_img 判断Hadoop是否启动成功.png 判断Hadoop是否启动成功%&gt;</p>
-<p>成功启动后，也可以访问 Web 界面 <a href="http://localhost:50070/" target="_blank" rel="noopener">http://localhost:50070</a> 查看 NameNode 和 Datanode 信息，还可以在线查看 HDFS 中的文件。</p>
-<p>&lt;% asset_img Hadoop正常启动Web界面.png Hadoop正常启动Web界面%&gt;</p>
-<h2 id="启动YARN"><a href="#启动YARN" class="headerlink" title="启动YARN"></a>启动YARN</h2><p>YARN 是从 MapReduce 中分离出来的，负责资源管理与任务调度。YARN 运行于 MapReduce 之上，提供了高可用性、高扩展性。（伪分布式不启动 YARN 也可以，一般不会影响程序执行）</p>
-<p>上述通过 <code>start-dfs.sh</code> 命令启动 Hadoop，仅仅是启动了 MapReduce 环境，我们可以启动 YARN ，让 YARN 来负责资源管理与任务调度。</p>
-<p>首先修改配置文件 <strong>mapred-site.xml</strong>，需要先将 mapred-site.xml.template 文件的重命名为 mapred-site.xml。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv ./etc/hadoop/mapred-site.xml.template ./etc/hadoop/mapred-site.xml 	# 文件重命名</span><br><span class="line">gedit ./etc/hadoop/mapred-site.xml										# 用gedit 文本编辑器打开</span><br></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>接着修改配置文件 <strong>yarn-site.xml</strong>。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit ./etc/hadoop/yarn-site.xml										# 用gedit 文本编辑器打开</span><br></pre></td></tr></table></figure>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后就可以启动 YARN 了，执行 <code>start-yarn.sh</code> 命令。</p>
-<p>注意：在启动 YARN  之前，要确保 dfs Hadoop 已经启动，也就是执行过 <code>start-dfs.sh</code>。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-yarn.sh      							 # 启动YARN</span><br><span class="line">mr-jobhistory-daemon.sh start historyserver  # 开启历史服务器，才能在Web中查看任务运行情况</span><br></pre></td></tr></table></figure>
-<p>开启后通过 <code>jps</code> 查看，可以看到多了 NodeManager 和 ResourceManager 两个进程，如下图所示。</p>
-<p>&lt;% asset_img 启动YARN.png 启动YARN %&gt;</p>
-<p>启动 YARN 之后，运行实例的方法还是一样的，仅仅是资源管理方式、任务调度不同。启动 YARN 有个好处是可以通过 Web 界面查看任务的运行情况：<a href="http://localhost:8088/cluster" target="_blank" rel="noopener">http://localhost:8088/cluster</a> 如下图所示。</p>
-<p>&lt;% asset_img YARN的Web界面.png YARN的Web界面 %&gt;</p>
-<p>YARN 主要是为集群提供更好的资源管理与任务调度，如果不想启动 YARN，务必把配置文件 <strong>mapred-site.xml</strong> 重命名，改成 mapred-site.xml.template，需要用时改回来就行。否则在该配置文件存在，而未开启 YARN 的情况下，运行程序会提示 “Retrying connect to server: 0.0.0.0/0.0.0.0:8032” 的错误，这也是为何该配置文件初始文件名为 mapred-site.xml.template。</p>
-<p>关闭 YARN 的命令如下，开启是 start，关闭是 stop。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stop-yarn.sh</span><br><span class="line">mr-jobhistory-daemon.sh stop historyserver</span><br></pre></td></tr></table></figure>
-<p>在平时的学习中，我们使用伪分布式就足够了。</p>
-<p>参考文章：</p>
-<ol>
-<li><a href="http://dblab.xmu.edu.cn/blog/install-hadoop-in-centos/" target="_blank" rel="noopener">Hadoop安装教程_伪分布式配置_CentOS6.4/Hadoop2.6.0</a></li>
-<li><a href="https://dblab.xmu.edu.cn/blog/285/" target="_blank" rel="noopener">大数据处理架构Hadoop 学习指南</a></li>
-<li><a href="https://blog.csdn.net/youzhouliu/article/details/51183115" target="_blank" rel="noopener">CentOS7 使用yum命令安装Java SDK(openjdk)</a></li>
-</ol>
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">OA系统</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">权限控制</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">RBAC模型</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      
+          
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>不接受1元以上的打赏 略表心意即可 土豪随意<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="http://ompezbwwe.bkt.clouddn.com/%E6%94%AF%E4%BB%98%E5%AE%9D.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="http://ompezbwwe.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://wenshixin.gitee.io/blog/2018/03/27/在CentOS中搭建Hadoop大数据平台/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/blog/2018/03/27/在CentOS中搭建Hadoop/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          在CentOS中搭建Hadoop
-        
-      </div>
-    </a>
   
   
-    <a href="/blog/2018/03/26/JavaWeb各版本的web.xml约束写法整理/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JavaWeb各版本的web.xml约束写法整理</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#软件环境："><span class="toc-number">1.</span> <span class="toc-text">软件环境：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户选择"><span class="toc-number">2.</span> <span class="toc-text">用户选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装SSH"><span class="toc-number">3.</span> <span class="toc-text">安装SSH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Java-环境"><span class="toc-number">4.</span> <span class="toc-text">安装 Java 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Hadoop"><span class="toc-number">5.</span> <span class="toc-text">安装 Hadoop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hadoop-伪分布式配置"><span class="toc-number">6.</span> <span class="toc-text">Hadoop 伪分布式配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动YARN"><span class="toc-number">7.</span> <span class="toc-text">启动YARN</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="在CentOS中搭建Hadoop大数据平台" ></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "cyt0mIw6i",
-        conf: "d5b3c78e5bb54e2e9fe88a4f21ebab68"
-    });
-</script>
-</script>
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -497,9 +233,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -563,6 +299,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
@@ -571,7 +315,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,7 +339,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+                <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">命令</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,11 +359,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">命令</a>
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,11 +371,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+                <a href="javascript:void(0)" class="js-tag color5">OA系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">权限控制</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">RBAC模型</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,7 +399,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,11 +407,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
