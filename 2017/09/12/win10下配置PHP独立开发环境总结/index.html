@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>win10下配置PHP独立开发环境总结 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="昨晚强迫症犯了，觉得自己电脑很乱，就重装了系统，借此也安装一下 PHP 的独立开发环境，之前都是用的集成环境 Wampserver， 在安装中遇到的一些坑，总结一下。  本文所用到的软件：云盘下载 密码：jwga 1.安装 Apache 服务器Apache 的官网上是不能下载 Apache 服务器的安装包的，只提供 Apache 的源码，下载下来需要用 VC++ 重新编译一下，并且还要配置不少东">
+  <meta name="description" content="昨晚强迫症犯了，觉得自己电脑很乱，就重装了系统，借此也安装一下 PHP 的独立开发环境，之前都是用的集成环境 Wampserver， 在安装中遇到的一些坑，总结一下。  本文所用到的软件：云盘下载 密码：jwga">
 <meta name="keywords" content="PHP,Win10,环境配置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="win10下配置PHP独立开发环境总结">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2017/09/12/win10下配置PHP独立开发环境总结/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="昨晚强迫症犯了，觉得自己电脑很乱，就重装了系统，借此也安装一下 PHP 的独立开发环境，之前都是用的集成环境 Wampserver， 在安装中遇到的一些坑，总结一下。  本文所用到的软件：云盘下载 密码：jwga 1.安装 Apache 服务器Apache 的官网上是不能下载 Apache 服务器的安装包的，只提供 Apache 的源码，下载下来需要用 VC++ 重新编译一下，并且还要配置不少东">
+<meta property="og:description" content="昨晚强迫症犯了，觉得自己电脑很乱，就重装了系统，借此也安装一下 PHP 的独立开发环境，之前都是用的集成环境 Wampserver， 在安装中遇到的一些坑，总结一下。  本文所用到的软件：云盘下载 密码：jwga">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2017/09/12/win10下配置PHP独立开发环境总结/更改网站位置.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2017/09/12/win10下配置PHP独立开发环境总结/安装目录.png">
@@ -26,10 +26,10 @@
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2017/09/12/win10下配置PHP独立开发环境总结/配置扩展目录位置.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2017/09/12/win10下配置PHP独立开发环境总结/Mysql开启成功.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2017/09/12/win10下配置PHP独立开发环境总结/去除未定义信息.png">
-<meta property="og:updated_time" content="2018-04-27T01:58:36.338Z">
+<meta property="og:updated_time" content="2018-04-27T02:03:40.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="win10下配置PHP独立开发环境总结">
-<meta name="twitter:description" content="昨晚强迫症犯了，觉得自己电脑很乱，就重装了系统，借此也安装一下 PHP 的独立开发环境，之前都是用的集成环境 Wampserver， 在安装中遇到的一些坑，总结一下。  本文所用到的软件：云盘下载 密码：jwga 1.安装 Apache 服务器Apache 的官网上是不能下载 Apache 服务器的安装包的，只提供 Apache 的源码，下载下来需要用 VC++ 重新编译一下，并且还要配置不少东">
+<meta name="twitter:description" content="昨晚强迫症犯了，觉得自己电脑很乱，就重装了系统，借此也安装一下 PHP 的独立开发环境，之前都是用的集成环境 Wampserver， 在安装中遇到的一些坑，总结一下。  本文所用到的软件：云盘下载 密码：jwga">
 <meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2017/09/12/win10下配置PHP独立开发环境总结/更改网站位置.png">
   
   
@@ -188,6 +188,7 @@
 <p>昨晚强迫症犯了，觉得自己电脑很乱，就重装了系统，借此也安装一下 PHP 的独立开发环境，之前都是用的集成环境 Wampserver， 在安装中遇到的一些坑，总结一下。</p>
 </blockquote>
 <p>本文所用到的软件：<a href="https://pan.baidu.com/s/1pLE4U9t" target="_blank" rel="noopener">云盘下载</a> 密码：jwga</p>
+<a id="more"></a>
 <h2 id="1-安装-Apache-服务器"><a href="#1-安装-Apache-服务器" class="headerlink" title="1.安装 Apache 服务器"></a>1.安装 Apache 服务器</h2><p>Apache 的官网上是不能下载 Apache 服务器的安装包的，只提供 Apache 的源码，下载下来需要用 VC++ 重新编译一下，并且还要配置不少东西（心里有千万个草泥马驶过…）。所以不采用这种方法，而是在网上直接找 Apache 的安装版，这里我用的是 64 位的Apache HTTP server2.4 版本的 msi安装包。</p>
 <p>安装完成后，我们来测试一下是否 Apache 安装成功。打开浏览器，在地址栏输入 localhost，或者 127.0.0.1，还可以是自己电脑上的ipv4地址，这三种输入都是可以的。看到 <code>It works！</code> 则说明安装成功。</p>
 <p><strong>更改默认的网站位置</strong></p>
@@ -521,6 +522,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
@@ -529,7 +534,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,14 +566,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
               </li>
              
@@ -577,15 +578,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,11 +598,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,6 +618,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
@@ -626,6 +635,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,15 +654,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,27 +666,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,6 +683,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
               </li>
             
             <div class="clearfix"></div>
