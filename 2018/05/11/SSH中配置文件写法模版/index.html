@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>SSH中配置文件写法模版 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. Hibernate 相关配置文件1.1 Hibernate 实体类映射文件配置解释： 推荐的配置文件命名格式：实体类名.hbm.xml，如 User.hbm.xml。  hibernate-mapping.package 为实体类所在的包名 class.name 为 实体类名称（如果不加包名，则要用全限定的类名） class.table 为要创建的表名 id.name 为类中作为主键的属性">
+  <meta name="description" content="整合 SSH 框架，配置文件挺多的，特意整理写法模板供日常使用。">
 <meta name="keywords" content="SSH,配置文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH中配置文件写法模版">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/05/11/SSH中配置文件写法模版/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="1. Hibernate 相关配置文件1.1 Hibernate 实体类映射文件配置解释： 推荐的配置文件命名格式：实体类名.hbm.xml，如 User.hbm.xml。  hibernate-mapping.package 为实体类所在的包名 class.name 为 实体类名称（如果不加包名，则要用全限定的类名） class.table 为要创建的表名 id.name 为类中作为主键的属性">
+<meta property="og:description" content="整合 SSH 框架，配置文件挺多的，特意整理写法模板供日常使用。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-11T11:43:01.394Z">
+<meta property="og:updated_time" content="2018-05-11T11:56:18.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSH中配置文件写法模版">
-<meta name="twitter:description" content="1. Hibernate 相关配置文件1.1 Hibernate 实体类映射文件配置解释： 推荐的配置文件命名格式：实体类名.hbm.xml，如 User.hbm.xml。  hibernate-mapping.package 为实体类所在的包名 class.name 为 实体类名称（如果不加包名，则要用全限定的类名） class.table 为要创建的表名 id.name 为类中作为主键的属性">
+<meta name="twitter:description" content="整合 SSH 框架，配置文件挺多的，特意整理写法模板供日常使用。">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -46,11 +46,11 @@
 <div class="overlay" style="background: #787878"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="/" class="profilepic">
+		<a href="/blog" class="profilepic">
 			<img src="http://ompezbwwe.bkt.clouddn.com/github.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Wizey</a></h1>
+		  <h1 class="header-author"><a href="/blog">Wizey</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">长路漫漫，唯键作伴</p>
@@ -173,7 +173,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        <p>整合 SSH 框架，配置文件挺多的，特意整理写法模板供日常使用。</p>
+<a id="more"></a>
 <h2 id="1-Hibernate-相关配置文件"><a href="#1-Hibernate-相关配置文件" class="headerlink" title="1. Hibernate 相关配置文件"></a>1. Hibernate 相关配置文件</h2><h3 id="1-1-Hibernate-实体类映射文件配置"><a href="#1-1-Hibernate-实体类映射文件配置" class="headerlink" title="1.1 Hibernate 实体类映射文件配置"></a>1.1 Hibernate 实体类映射文件配置</h3><p>解释：</p>
 <p>推荐的配置文件命名格式：实体类名.hbm.xml，如 User.hbm.xml。</p>
 <ul>
@@ -529,14 +530,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
               </li>
              
@@ -545,7 +538,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,6 +551,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -569,18 +570,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
               </li>
              
@@ -593,6 +582,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
@@ -601,11 +602,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,11 +614,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,18 +642,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Win10</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">王者荣耀</a>
               </li>
              
@@ -662,6 +651,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Win10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -685,27 +686,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -718,6 +707,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
               </li>
             
             <div class="clearfix"></div>
