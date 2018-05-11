@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
-  <title>Archives: 2017/9 | Wizey&#39;s blog</title>
+  <title>SSH中配置文件写法模版 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wizey&#39;s blog">
-<meta property="og:url" content="http://wenshixin.gitee.io/blog/archives/2017/09/index.html">
+  <meta name="description" content="1. Hibernate 相关配置文件1.1 Hibernate 实体类映射文件配置解释： 推荐的配置文件命名格式：实体类名.hbm.xml，如 User.hbm.xml。  hibernate-mapping.package 为实体类所在的包名 class.name 为 实体类名称（如果不加包名，则要用全限定的类名） class.table 为要创建的表名 id.name 为类中作为主键的属性">
+<meta name="keywords" content="SSH,配置文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH中配置文件写法模版">
+<meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/05/11/SSH中配置文件写法模版/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
+<meta property="og:description" content="1. Hibernate 相关配置文件1.1 Hibernate 实体类映射文件配置解释： 推荐的配置文件命名格式：实体类名.hbm.xml，如 User.hbm.xml。  hibernate-mapping.package 为实体类所在的包名 class.name 为 实体类名称（如果不加包名，则要用全限定的类名） class.table 为要创建的表名 id.name 为类中作为主键的属性">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-05-11T11:43:01.394Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wizey&#39;s blog">
-<meta name="twitter:description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
+<meta name="twitter:title" content="SSH中配置文件写法模版">
+<meta name="twitter:description" content="1. Hibernate 相关配置文件1.1 Hibernate 实体类映射文件配置解释： 推荐的配置文件命名格式：实体类名.hbm.xml，如 User.hbm.xml。  hibernate-mapping.package 为实体类所在的包名 class.name 为 实体类名称（如果不加包名，则要用全限定的类名） class.table 为要创建的表名 id.name 为类中作为主键的属性">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -146,68 +148,294 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-SSH中配置文件写法模版" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/blog/2017/09/12/win10下配置PHP独立开发环境总结/" class="archive-article-date">
-  	<time datetime="2017-09-12T09:24:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2017/09/12/win10下配置PHP独立开发环境总结/">win10下配置PHP独立开发环境总结</a>
+    <h1 class="article-title" itemprop="name">
+      SSH中配置文件写法模版
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/blog/2018/05/11/SSH中配置文件写法模版/" class="archive-article-date">
+  	<time datetime="2018-05-11T09:48:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+</a>
+        
+      </header>
+    
+    
+      <span class="archive-article-date">
+        阅读量 <span id="busuanzi_value_page_pv" style="font-size:bold;"></span>
+      </span>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<h2 id="1-Hibernate-相关配置文件"><a href="#1-Hibernate-相关配置文件" class="headerlink" title="1. Hibernate 相关配置文件"></a>1. Hibernate 相关配置文件</h2><h3 id="1-1-Hibernate-实体类映射文件配置"><a href="#1-1-Hibernate-实体类映射文件配置" class="headerlink" title="1.1 Hibernate 实体类映射文件配置"></a>1.1 Hibernate 实体类映射文件配置</h3><p>解释：</p>
+<p>推荐的配置文件命名格式：实体类名.hbm.xml，如 User.hbm.xml。</p>
+<ul>
+<li>hibernate-mapping.package 为实体类所在的包名</li>
+<li>class.name 为 实体类名称（如果不加包名，则要用全限定的类名）</li>
+<li>class.table 为要创建的表名</li>
+<li>id.name 为类中作为主键的属性名</li>
+<li>id.column 为表中作为主键的字段名，如果不设置则与 name 中的值一样</li>
+<li>id.type 为主键字段的类型</li>
+<li>generator.class 为主键生成的方法</li>
+<li>property.name 为类中主键外属性名</li>
+<li>property.column 为表中对应的字段名，如果不设置则与 name 中的值一样</li>
+<li>property.type 为字段的类型</li>
+<li>多对多配置<ul>
+<li>set.name 为实体类中多对多的属性名</li>
+<li>set.table 为多对多关系产生的第三张表名</li>
+<li>set.lazy 为懒加载方式，默认值是 true 懒加载，false 为勤加载</li>
+<li>key.column 为在第三张表中加入的指向该实体类映射的表的外键字段名</li>
+<li>many-to-many.class 为该实体类多对多的实体类的类名，如果在 package 中没有配置实体类的包名，就需要写上实体类的全限定名</li>
+<li>many-to-many.column 为在第三张表中加入的指向该实体类多对多的实体类的映射表的外键字段名</li>
+</ul>
+</li>
+<li>一对多配置<ul>
+<li>set.name 为实体类中一对多的属性名</li>
+<li>key.column 为多的一方在表中的外键字段名，和多对一配置中 many-to-one.column 值相同</li>
+<li>one-to-many.class为在多的一方的类名，如果在 package 中没有配置实体类的包名，就需要写上实体类的全限定名</li>
+</ul>
+</li>
+<li>多对一配置<ul>
+<li>many-to-one.name 为多对一实体类的属性名</li>
+<li>many-to-one.class 为一的一方的类名，如果在 package 中没有配置实体类的包名，就需要写上实体类的全限定名</li>
+<li>many-to-one.column 为在多的一方的表中的外键字段名，和一对多配置中的 key.column 值相同</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span> <span class="attr">package</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">table</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">column</span>=<span class="string">""</span> <span class="attr">type</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>&gt;</span><span class="tag">&lt;/<span class="name">generator</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">column</span>=<span class="string">""</span> <span class="attr">type</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--多对多配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">table</span>=<span class="string">""</span> <span class="attr">lazy</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">many-to-many</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">column</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--一对多配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">one-to-many</span> <span class="attr">class</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--多对一配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">many-to-one</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">column</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-2-Hibernate-全局配置文件"><a href="#1-2-Hibernate-全局配置文件" class="headerlink" title="1.2 Hibernate 全局配置文件"></a>1.2 Hibernate 全局配置文件</h3><p>解释：</p>
+<p>推荐的配置文件命名格式：hibernate.cfg.xml</p>
+<ul>
+<li>property.name 为 Hibernate 配置项名称。</li>
+<li>mapping.resource 为 Hibernate 映射文件的路径</li>
+</ul>
+<p>在SSH框架整合时，这里将数据库的配置放入到了 Spring 的全局配置文件中。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-configuration PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--Hibernate 配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--引入实体类的映射文件--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="1-3-数据库相关的配置项文件"><a href="#1-3-数据库相关的配置项文件" class="headerlink" title="1.3 数据库相关的配置项文件"></a>1.3 数据库相关的配置项文件</h3><p>解释：</p>
+<p>推荐的配置文件命名格式：db.properties</p>
+<p>将数据库相关的配置项放到一个文件中，易于后期的修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.driverClass=com.mysql.jdbc.Driver</span><br><span class="line">db.jdbcUrl=jdbc:mysql://localhost:3306/数据库名</span><br><span class="line">db.user=</span><br><span class="line">db.password=</span><br></pre></td></tr></table></figure>
+<h2 id="2-Spring-相关配置"><a href="#2-Spring-相关配置" class="headerlink" title="2. Spring 相关配置"></a>2. Spring 相关配置</h2><h3 id="2-1-Spring-bean配置文件"><a href="#2-1-Spring-bean配置文件" class="headerlink" title="2.1 Spring bean配置文件"></a>2.1 Spring bean配置文件</h3><p>解释：</p>
+<p>推荐的配置文件命名格式：bean名.xml，如 user.xml</p>
+<p>这里将类中的属性注入对象配置放到单独的配置文件中，在 Spring 的全局配置文件中在将这些对象配置文件引入。</p>
+<ul>
+<li>bean.id 为bean的对象名</li>
+<li>bean.name 为bean的全路径名</li>
+<li>bean.scope 为bean的作用域，默认为单例模式（singleton）</li>
+<li>property.name 为bean中属性注入的属性名</li>
+<li>property.name 为属性引用的对象名</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">scope</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">ref</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-Spring-的全局配置文件"><a href="#2-2-Spring-的全局配置文件" class="headerlink" title="2.2 Spring 的全局配置文件"></a>2.2 Spring 的全局配置文件</h3><p>解释：</p>
+<p>推荐的配置文件命名：applicationContext.xml（也是官方推荐的命名）</p>
+<p>这里使用的是 c3p0 数据库连接池作为 Hibernate 的数据源。</p>
+<ul>
+<li>classpath路径指的是为资源配置文件根目录</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span> <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--引入 db.properties 配置文件--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:property-placeholder</span> <span class="attr">location</span>=<span class="string">"classpath:db.properties"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置 c3p0 数据源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">class</span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--注入属性值--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span> <span class="attr">value</span>=<span class="string">"$&#123;db.driverClass&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span> <span class="attr">value</span>=<span class="string">"$&#123;db.jdbcUrl&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">value</span>=<span class="string">"$&#123;db.user&#125;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;db.password&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置 Hibernate 的 SessionFactory 对象--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hibernate5.LocalSessionFactoryBean"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定数据源--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定使用 Hibernate 核心配置文件的位置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocations"</span> <span class="attr">value</span>=<span class="string">"classpath:hibernate.cfg.xml"</span>/&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">&lt;!--另外一种方式，不使用 Hibernate 核心配置文件，由 spring 配置 Hibernate 属性--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;property name="hibernateProperties"&gt;--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;props&gt;--&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--&lt;prop key="hibernate.show_sql"&gt;true&lt;/prop&gt;--&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--&lt;prop key="hibernate.format_sql"&gt;true&lt;/prop&gt;--&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--&lt;prop key="hibernate.hbm2ddl.auto"&gt;update&lt;/prop&gt;--&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--&lt;prop key="hibernate.dialect"&gt;org.hibernate.dialect.MySQL5Dialect&lt;/prop&gt;--&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--&lt;/props&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;/property&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--使用通配符加载同一路径的 .hbm.xml 文件--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;property name="mappingLocations" value="classpath:com/wenshixin/entity/*.hbm.xml"/&gt;--&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置 spring 的事务管理器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hibernate5.HibernateTransactionManager"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--注入 sessionFactory 对象--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sessionFactory"</span> <span class="attr">ref</span>=<span class="string">"sessionFactory"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--开启事务注解--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--开启注解扫描--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"包名"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--手动引入 spring 对象配置文件--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"classpath:spring/user.xml"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-Struts2-相关配置"><a href="#3-Struts2-相关配置" class="headerlink" title="3. Struts2 相关配置"></a>3. Struts2 相关配置</h2><h3 id="3-1-Struts2-action的配置文件"><a href="#3-1-Struts2-action的配置文件" class="headerlink" title="3.1 Struts2 action的配置文件"></a>3.1 Struts2 action的配置文件</h3><p>解释：</p>
+<p>推荐的配置文件命名格式：struts前缀名.xml，如 user.xml</p>
+<ul>
+<li>package.name 为 struts2 的包名。</li>
+<li>package.extends 为继承的 strust2  的文件</li>
+<li>package.namespace 为 strust2  的命名空间</li>
+<li>action.name 为访问的 action 名</li>
+<li>action.class 为 action 对应的全限定类名</li>
+<li>action.method 为 action 中的方法名</li>
+<li>result.name 为 action 方法返回的值</li>
+<li>result.type 为 action 的访问类型，重定向、转发等。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE struts PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"</span></span><br><span class="line"><span class="meta">        "http://struts.apache.org/dtds/struts-2.3.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"department"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"department_*"</span> <span class="attr">class</span>=<span class="string">"com.wenshixin.action.DepartmentAction"</span> <span class="attr">method</span>=<span class="string">"&#123;1&#125;"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"list"</span> <span class="attr">type</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-2-Struts2-的全局配置文件"><a href="#3-2-Struts2-的全局配置文件" class="headerlink" title="3.2 Struts2 的全局配置文件"></a>3.2 Struts2 的全局配置文件</h3><p>解释：</p>
+<p>推荐的配置文件命名：struts.xml</p>
+<ul>
+<li>include.file 为引入 struts 的 action 配置文件路径</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE struts PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"</span></span><br><span class="line"><span class="meta">        "http://struts.apache.org/dtds/struts-2.3.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置为开发模式--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constant</span> <span class="attr">name</span>=<span class="string">"struts.devMode"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--引入其他 struts 配置文件--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">file</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ompezbwwe.bkt.clouddn.com/%E6%94%AF%E4%BB%98%E5%AE%9D.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ompezbwwe.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SSH</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Win10</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">配置文件</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wenshixin.gitee.io/blog/2018/05/11/SSH中配置文件写法模版/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/blog/2018/04/23/HBase学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HBase学习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Hibernate-相关配置文件"><span class="toc-number">1.</span> <span class="toc-text">1. Hibernate 相关配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Hibernate-实体类映射文件配置"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 Hibernate 实体类映射文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Hibernate-全局配置文件"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 Hibernate 全局配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-数据库相关的配置项文件"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 数据库相关的配置项文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Spring-相关配置"><span class="toc-number">2.</span> <span class="toc-text">2. Spring 相关配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Spring-bean配置文件"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Spring bean配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Spring-的全局配置文件"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Spring 的全局配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Struts2-相关配置"><span class="toc-number">3.</span> <span class="toc-text">3. Struts2 相关配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Struts2-action的配置文件"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Struts2 action的配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Struts2-的全局配置文件"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 Struts2 的全局配置文件</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+  <div id="SOHUCS" sid="SSH中配置文件写法模版" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyt0mIw6i",
+        conf: "d5b3c78e5bb54e2e9fe88a4f21ebab68"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +463,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
