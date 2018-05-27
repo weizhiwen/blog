@@ -16,10 +16,14 @@
 <meta property="og:site_name" content="Wizey&#39;s blog">
 <meta property="og:description" content="Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。 说明：文本的测试环境是 CentOS 7。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-27T16:30:08.477Z">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/05/28/Linux目录及文件相关知识整理/列出主文件夹下的文件属性.png">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/05/28/Linux目录及文件相关知识整理/文件权限.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/05/28/Linux目录及文件相关知识整理/Linux目录树结构.gif">
+<meta property="og:updated_time" content="2018-05-27T16:33:06.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux目录及文件相关知识整理">
 <meta name="twitter:description" content="Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。 说明：文本的测试环境是 CentOS 7。">
+<meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/05/28/Linux目录及文件相关知识整理/列出主文件夹下的文件属性.png">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -182,13 +186,13 @@
 <p>root 这个特殊用户在 Linux 中是天神一般的存在，因为它可以做到一切事情，当然也包括查看任何用户的主文件夹下的文件，而普通用户是无法查看 root 用户的主文件夹 /root 的。</p>
 <p>在 Linux 系统当中，默认的情况下，系统上的所有帐号与一般身份使用者，还有 root 用户的相关信息， 都是记录在 /etc/passwd 这个文件内的。至于个人的密码则是记录在 /etc/shadow 这个文件中，但是密码都是经过算法加密的，即使是 root 用户也没法知道你的明文密码（查看加密算法可用 <code>authconfig --test | grep hashing</code> 命令）。 此外，Linux所有的群组名称都是记录在 /etc/group 文件内的。</p>
 <h3 id="1-2-文件属性"><a href="#1-2-文件属性" class="headerlink" title="1.2 文件属性"></a>1.2 文件属性</h3><p>使用 root 用户登录，cd 切换到 /root 目录，输入 <code>ls -al</code> 列出目录下的所有的文件（包含隐藏文件）及属性，ls 是 list 列表的缩写，a 即是 attribute 属性的首字母，l 也是 list 的首字母。</p>
-<p>&lt;% asset_img 列出主文件夹下的文件属性.png 列出主文件夹下的文件属性%&gt;</p>
+<img src="/blog/2018/05/28/Linux目录及文件相关知识整理/列出主文件夹下的文件属性.png" title="列出主文件夹下的文件属性">
 <p>如上图，把文件的属性分为 7 列来看。</p>
 <p><strong>第一列</strong>为这个文件的类型与权限，共有十个字符，第一个字符为文件的类型，d 表示是目录（dictionary），- 表示是普通的文件，剩下的九个字符为文件的权限。权限位可分为三组，第一组为文件拥有者的权限，r 表示是可读（read），w 表示是可写（write），x 表示是可执行（execute）；第二组为群组其他人的权限，- 表示没有该位的权限；第三组为群组外其他人的权限，Linux 中的文件权限控制就是通过这九个权限位来实现的。</p>
 <p><strong>说明</strong>：rwx 这三者对于文件和目录意思是不一样的。</p>
 <p>对于目录来说，r 表示拥有此权限可以读取该目录的结构列表，即查看目录下的文件名和子目录名，但仅仅是文件名称，能不能查看文件内容，还需要看有没有文件的可读（r）权限；w 表示拥有此权限可以更改该目录的结构列表，即更改目录下的文件名或者子目录名，具体为新建文件或目录，删除已存在的文件或目录，文件或目录的重命名，文件或目录的移动。x 表示拥有此权限的用户可以进入该目录中，无法进入该目录便不能读取目录中文件中的内容，但是如果有目录的 r 权限，是可以查看文件及目录列表的，注意这两者的区别，x 是文件内容，r 是文件名称。所以如果要开放某一目录给任何人浏览，应该至少给予 r 和 x 权限。</p>
 <p>对于文件来说，r 表示拥有此权限可以读取文件中的实际内容；w 表示拥有此权限可以修改文件中的内容，但不包括删除文件，删除文件权限是和文件所在目录的权限 w 有关的；x 表示拥有此权限可以执行文件，如一些命令文件。</p>
-<p>&lt;% asset_img 文件权限.jpg 文件权限%&gt;</p>
+<img src="/blog/2018/05/28/Linux目录及文件相关知识整理/文件权限.jpg" title="文件权限">
 <p><strong>第二列</strong>为这个文件有多少的链接文件，可想象 Windows 下一个文件的快捷方式有多少个。</p>
 <p><strong>第三列</strong>为这个文件的拥有者账号。</p>
 <p><strong>第四列</strong>为这个文件的群组名称，账号名默认和群组名同名。</p>
@@ -400,7 +404,7 @@
 </ul>
 <p>这样做带可以隐藏文件路径，增加权限安全，有节省存储的好处。</p>
 <p>结合上面的目录，Linux 的目录树结构如下图所示。</p>
-<p>&lt;% asset_img Linux目录树结构.gif Linux目录树结构%&gt;</p>
+<img src="/blog/2018/05/28/Linux目录及文件相关知识整理/Linux目录树结构.gif" title="Linux目录树结构">
 <h2 id="3-文件与目录管理"><a href="#3-文件与目录管理" class="headerlink" title="3. 文件与目录管理"></a>3. 文件与目录管理</h2><h3 id="3-1-特殊目录与路径"><a href="#3-1-特殊目录与路径" class="headerlink" title="3.1 特殊目录与路径"></a>3.1 特殊目录与路径</h3><h4 id="3-1-1-特殊目录"><a href="#3-1-1-特殊目录" class="headerlink" title="3.1.1 特殊目录"></a>3.1.1 特殊目录</h4><ul>
 <li>.：表示当前的目录，也可以使用 ./ 来表示。</li>
 <li>..：表示上一级目录，也可以使用 ../ 来表示。</li>
@@ -752,6 +756,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -761,14 +773,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">文件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,14 +824,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">上传</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
@@ -836,15 +832,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上传</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -912,7 +916,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+                <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -920,11 +928,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
               </li>
              
               <li class="article-tag-list-item">
