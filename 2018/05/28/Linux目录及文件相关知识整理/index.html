@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>Linux目录及文件相关知识整理 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。 说明：文本的测试环境是 CentOS 7。 1. 文件属性1.1 基本概念文件拥有者（Owner）：在 Linux 中，每个用户都有自己的主文件夹，也就是 /home/user 文件夹，user 为具体的用户名，你就是这个文件夹下文件的拥有者，用户之间是无法查看">
+  <meta name="description" content="Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。 说明：文本的测试环境是 CentOS 7。">
 <meta name="keywords" content="Linux,目录,文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux目录及文件相关知识整理">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/05/28/Linux目录及文件相关知识整理/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="[TOC] Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。 说明：文本的测试环境是 CentOS 7。 1. 文件属性1.1 基本概念文件拥有者（Owner）：在 Linux 中，每个用户都有自己的主文件夹，也就是 /home/user 文件夹，user 为具体的用户名，你就是这个文件夹下文件的拥有者，用户之间是无法查看">
+<meta property="og:description" content="Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。 说明：文本的测试环境是 CentOS 7。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="c:/Users/weizhiwen/Desktop/SelfFlying/source/_drafts/Linux目录及文件相关知识整理/列出主文夹下的文件属性.png">
 <meta property="og:image" content="c:/Users/weizhiwen/Desktop/SelfFlying/source/_drafts/Linux目录及文件相关知识整理/文件权限.jpg">
 <meta property="og:image" content="c:/Users/weizhiwen/Desktop/SelfFlying/source/_drafts/Linux目录及文件相关知识整理/Linux目录树结构.gif">
-<meta property="og:updated_time" content="2018-05-27T16:15:32.584Z">
+<meta property="og:updated_time" content="2018-05-27T16:19:29.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux目录及文件相关知识整理">
-<meta name="twitter:description" content="[TOC] Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。 说明：文本的测试环境是 CentOS 7。 1. 文件属性1.1 基本概念文件拥有者（Owner）：在 Linux 中，每个用户都有自己的主文件夹，也就是 /home/user 文件夹，user 为具体的用户名，你就是这个文件夹下文件的拥有者，用户之间是无法查看">
+<meta name="twitter:description" content="Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。 说明：文本的测试环境是 CentOS 7。">
 <meta name="twitter:image" content="c:/Users/weizhiwen/Desktop/SelfFlying/source/_drafts/Linux目录及文件相关知识整理/列出主文夹下的文件属性.png">
   
   
@@ -177,9 +177,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<p>Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。</p>
+        <p>Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。</p>
 <p><em>说明：文本的测试环境是 CentOS 7。</em></p>
+<a id="more"></a>
 <h2 id="1-文件属性"><a href="#1-文件属性" class="headerlink" title="1. 文件属性"></a>1. 文件属性</h2><h3 id="1-1-基本概念"><a href="#1-1-基本概念" class="headerlink" title="1.1 基本概念"></a>1.1 基本概念</h3><p><strong>文件拥有者</strong>（Owner）：在 Linux 中，每个用户都有自己的主文件夹，也就是 /home/user 文件夹，user 为具体的用户名，你就是这个文件夹下文件的拥有者，用户之间是无法查看的。</p>
 <p><strong>群组</strong>（Group）：为了便于用户之间的合作交流，用户可以组成一个小团体，也就是群组。在这里大家可以共享一些文件，这些文件就是属于整个群组的。</p>
 <p><strong>其他</strong>（Other）：对于群组之外的用户，都看作是其他人。</p>
@@ -756,6 +756,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -768,11 +776,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
+                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -781,10 +785,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">权限管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -824,15 +824,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -844,11 +844,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -861,14 +869,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">RBAC模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -892,14 +892,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">王者荣耀</a>
               </li>
              
@@ -912,7 +904,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -921,10 +925,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
