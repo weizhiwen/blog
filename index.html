@@ -171,34 +171,7 @@
       
         <p>安装了 Deepin 系统，当然要开始在这个系统中学习（ZheTeng）呀！</p>
 <p>先来安装个 Sublime Text 3，这个软件我已经用两年了，安装各种插件后简直不要太爽，在 Windows 中也是取代了记事本。</p>
-<p>虽然 Deepin 中的深度商店也有 Sublime Text 3，但是版本不是很新，所以自己手动安装一个 Sublime Text 3。</p>
-<p>先去 Sublime Text 官网下载个安装包，<a href="https://www.sublimetext.com/3" target="_blank" rel="noopener">官网地址</a>，下载 Linux 版本的，选择软件位数，我的系统是 64 位的，就选择 64 的包了。</p>
-<p>另外，Deepin 的软件安装方式和 Ubuntu 一样，所以适用 Ubuntu 的安装方式就可以用在 Deepin 上。</p>
-<p>当然也可以先添加 Sublime Text 3 的软件源，使用命令安装，我是直接使用压缩包安装的，这样自己很清楚软件的安装位置。</p>
-<p>下载好 Sublime Text 3 的安装包，解压到想要安装的位置，如 <strong>/usr/software/sublime_text_3</strong> 文件夹。</p>
-<img src="/blog/2018/06/03/Deepin下手动安装SublimeText3/解压的文件夹.png" title="解压的文件夹">
-<p>我的软件管理方式是，把编程相关的软件安装到一个文件夹，Windows 下也是也么搞的，普通的软件就放在普通的安装位置，如 Windows 下的 <strong>Program Files</strong> 和 <strong>Program Files(x86)</strong> 文件夹；Linux 下的 <strong>/opt/</strong>。</p>
-<p>为了方便在命令行中打开 Sublime Text，添加软链接来链接到 Sublime Text 的打开文件。</p>
-<p>命令如下:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/software/sublime_text_3/sublime_text /usr/bin/sublime</span><br></pre></td></tr></table></figure>
-<p>至此就可以在命令行中输入 sublime 打开 Sublime Text 3。</p>
-<p>但是还想添加个软件的图标到 Deepin 的启动器中，方便不输入命令就可以打开软件（虽然听起来和上面很矛盾，但这就是 Linux 带给你的的自由度呀！）</p>
-<p>先上个图，很像 Win10 中的开始屏幕。</p>
-<img src="/blog/2018/06/03/Deepin下手动安装SublimeText3/启动器.png" title="启动器">
-<p>这些图标都是放在 <strong>/usr/share/applications</strong> 文件夹下的，所以想在启动器中显示软件的图标，只需要也像这些软件一样在该文件夹下，创建软件的图标文件。</p>
-<img src="/blog/2018/06/03/Deepin下手动安装SublimeText3/软件图标.png" title="软件图标">
-<p>在 Sublime Text 3 解压后的文件中就有这个软件图标，但是里面写的位置不对，需要手动改一改。</p>
-<p>复制解压后的图标文件到 <strong>/usr/share/applications</strong> 下，可以使用 ls 命令查看文件名，发现该文件名称是 <strong>sublime_text.desktop</strong>。</p>
-<p>使用文本编辑器打开此文件，需要修改如下图所示的几个地方，Exec 后面的路径很关键。</p>
-<img src="/blog/2018/06/03/Deepin下手动安装SublimeText3/图标文件内容.png" title="图标文件内容.png">
-<p>Name 是软件的名称。</p>
-<p>Comment 是软件的说明。</p>
-<p>Exec 是软件的启动位置，要写完整的路径。</p>
-<p>Icon 是图标的文件名。</p>
-<p>Terminal 是是否在终端打开。</p>
-<p>只需要将 Exec 后面的路径改成 Sublime Text 的启动位置即可。</p>
-<p>你看到这篇文章就是我在 Deepin 下的 Typora Markdown 编辑器下写的，后面还会进一步体验和使用 Deepin 这个系统。</p>
-
+        
       
 
       
@@ -685,11 +658,43 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">组装</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,18 +707,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -741,6 +734,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -750,10 +747,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">文件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -769,6 +762,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">OA系统</a>
               </li>
              
@@ -778,14 +779,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">RBAC模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,15 +802,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+                <a href="javascript:void(0)" class="js-tag color5">王者荣耀</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -833,27 +826,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">王者荣耀</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -869,11 +846,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">坑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -901,23 +886,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
             
             <div class="clearfix"></div>
