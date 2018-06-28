@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
-  <title>Wizey&#39;s blog</title>
+  <title>SQLite的安装使用和编程 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wizey&#39;s blog">
-<meta property="og:url" content="http://wenshixin.gitee.io/blog/page/4/index.html">
+  <meta name="description" content="首先 SQLite 数据库也是一个关系型的数据库，但和常见的关系型数据库，如 MySQL 不同的是，它不是一个单独的进程，而是运行在其他进程内的。它非常的小巧，支持跨平台，很适合存储空间小的嵌入式设备。麻雀虽小五脏俱全，它同样支持关系型数据库的 ACID 事物操作，和部分的标准 SQL 语句。SQLite 中的数据库直接存储在文件中，使用起来非常的简单，为 C语言提供了API，所以 C语言也能很轻">
+<meta name="keywords" content="SQLite3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLite的安装使用和编程">
+<meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/06/28/SQLite的使用/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
+<meta property="og:description" content="首先 SQLite 数据库也是一个关系型的数据库，但和常见的关系型数据库，如 MySQL 不同的是，它不是一个单独的进程，而是运行在其他进程内的。它非常的小巧，支持跨平台，很适合存储空间小的嵌入式设备。麻雀虽小五脏俱全，它同样支持关系型数据库的 ACID 事物操作，和部分的标准 SQL 语句。SQLite 中的数据库直接存储在文件中，使用起来非常的简单，为 C语言提供了API，所以 C语言也能很轻">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/06/28/SQLite的使用/下载SQLite源码.png">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/06/28/SQLite的使用/SQLite常用命令.png">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/06/28/SQLite的使用/程序执行结果.png">
+<meta property="og:updated_time" content="2018-06-28T09:38:16.209Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wizey&#39;s blog">
-<meta name="twitter:description" content="魏志文，文士心，Wizey，个人博客，记录学习的点滴。">
+<meta name="twitter:title" content="SQLite的安装使用和编程">
+<meta name="twitter:description" content="首先 SQLite 数据库也是一个关系型的数据库，但和常见的关系型数据库，如 MySQL 不同的是，它不是一个单独的进程，而是运行在其他进程内的。它非常的小巧，支持跨平台，很适合存储空间小的嵌入式设备。麻雀虽小五脏俱全，它同样支持关系型数据库的 ACID 事物操作，和部分的标准 SQL 语句。SQLite 中的数据库直接存储在文件中，使用起来非常的简单，为 C语言提供了API，所以 C语言也能很轻">
+<meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/06/28/SQLite的使用/下载SQLite源码.png">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -146,33 +152,130 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-JavaWeb各版本的web.xml约束写法整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-SQLite的使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/03/26/JavaWeb各版本的web.xml约束写法整理/">JavaWeb各版本的web.xml约束写法整理</a>
+    <h1 class="article-title" itemprop="name">
+      SQLite的安装使用和编程
     </h1>
   
 
         
-        <a href="/blog/2018/03/26/JavaWeb各版本的web.xml约束写法整理/" class="archive-article-date">
-  	<time datetime="2018-03-25T21:40:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-25</time>
+        <a href="/blog/2018/06/28/SQLite的使用/" class="archive-article-date">
+  	<time datetime="2018-06-28T10:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-28</time>
 </a>
         
       </header>
     
     
+      <span class="archive-article-date">
+        阅读量 <span id="busuanzi_value_page_pv" style="font-size:bold;"></span>
+      </span>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>web.xml 文件约束可去 <a href="http://xmlns.jcp.org/xml/ns/javaee/" target="_blank" rel="noopener">官网</a> 下载各个版本的约束文档。</p>
-        
+        <p>首先 SQLite 数据库也是一个关系型的数据库，但和常见的关系型数据库，如 MySQL 不同的是，它不是一个单独的进程，而是运行在其他进程内的。它非常的小巧，支持跨平台，很适合存储空间小的嵌入式设备。麻雀虽小五脏俱全，它同样支持关系型数据库的 ACID 事物操作，和部分的标准 SQL 语句。SQLite 中的数据库直接存储在文件中，使用起来非常的简单，为 C语言提供了API，所以 C语言也能很轻松的操作 SQLite 数据库。</p>
+<a id="more"></a>
+<p>SQL 的下载和环境配置参考这篇文章：<a href="http://www.runoob.com/sqlite/sqlite-installation.html" target="_blank" rel="noopener">http://www.runoob.com/sqlite/sqlite-installation.html</a></p>
+<p>不建议使用微软的 VS IDE 来写 C语言，链接 SQLite 数据库很不方便，在 VS 下写的 C语言程序也根本就不是标准的 C语言程序，建议在 Linux 环境下编译程序。</p>
+<p>下面就在 CentOS7 环境下使用 SQLite 数据库。</p>
+<p>一种方式是离线安装，在 Linux 下可以在 SQLite 的<a href="https://www.sqlite.org/download.html" target="_blank" rel="noopener">官网下载</a> SQLite 的源码自己编译安装，如下图所示，编译过程可以查看这篇文章：<a href="https://blog.csdn.net/sunsea1026/article/details/6114037。编译的前提是要有" target="_blank" rel="noopener">https://blog.csdn.net/sunsea1026/article/details/6114037。编译的前提是要有</a> GCC 编译器，没有的话可以下载安装，这里详细说明了。另一种是在线安装，使用 Linux 发行版的包管理器，使用命令 <code>sudo yum install sqlite-devel</code>（CentOS），<code>sudo apt-get install sqlite3</code>（Ubuntu）。安装好后就可以输入 <code>sqlite3</code> 进入 SQLite 的命令行界面了。</p>
+<img src="/blog/2018/06/28/SQLite的使用/下载SQLite源码.png" title="下载SQLite源码">
+<p>SQLite3 的常用命令如下：</p>
+<p>参考文章：<a href="http://yshblog.com/blog/32" target="_blank" rel="noopener">http://yshblog.com/blog/32</a></p>
+<p>1、查看 SQLite 数据库的版本信息</p>
+<p><code>sqlite3 --version</code></p>
+<p>2、查看数据库文件（注意此命令不是进入 SQLite 命令行使用的）</p>
+<p>使用数据库，如果有该数据库文件，就使用该数据库，如果没有该数据库，则会创建。</p>
+<p><code>sqlite3 数据库文件</code></p>
+<p>3、进入 SQLite3 命令行</p>
+<p><code>sqlite3</code></p>
+<p>4、查看数据库</p>
+<p><code>.database</code></p>
+<p>5、查看数据表</p>
+<p><code>.table</code></p>
+<p>6、查看建表的语句</p>
+<p>不加表名，查看所有表的建表语句</p>
+<p><code>.schema 表名</code></p>
+<p>7、退出命令行界面</p>
+<p><code>.quit</code></p>
+<img src="/blog/2018/06/28/SQLite的使用/SQLite常用命令.png" title="SQLite常用命令">
+<p>下面将使用 C语言来使用安装好的 SQLite 数据库。</p>
+<p>安装好 SQLite 数据库后就可以使用 SQLite 所提供的 API 编程了，也即是 sqlite.h 和 sqlite.c 文件。</p>
+<p>SQLite API 如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">函数名</th>
+<th style="text-align:center">函数说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">sqlite3_open(const char *filename, sqlite3 **ppDb)</td>
+<td style="text-align:center">SQLite 数据库文件的连接，返回一个用于其他 SQLite 程序的数据库连接对象。如果 <em>filename</em> 参数是 NULL 或 ‘:memory:’，那么 sqlite3_open() 将会在 RAM 中创建一个内存数据库，这只会在 session 的有效时间内持续。如果文件名 filename 不为 NULL，那么 sqlite3_open() 将使用这个参数值尝试打开数据库文件。如果该名称的文件不存在，sqlite3_open() 将创建一个新的命名为该名称的数据库文件并打开。</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">sqlite3_exec(sqlite3*, const char <em>sql, sqlite_callback, void </em>data, char **errmsg)</td>
+<td style="text-align:center">执行 SQL 命令的函数，SQL 命令由 sql 参数提供，可以由多个 SQL 命令组成。在这里，第一个参数 sqlite3 是打开的数据库对象，<em>sqlite_callback</em> 是一个回调，<em>data</em> 作为其第一个参数，errmsg 将被返回用来获取程序生成的任何错误。</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">sqlite3_close(sqlite3*)</td>
+<td style="text-align:center">关闭之前调用 sqlite3_open() 打开的数据库连接。所有与连接相关的语句都应在连接关闭之前完成。 如果还有查询没有完成，sqlite3_close() 将返回 SQLITE_BUSY 禁止关闭的错误消息。</td>
+</tr>
+</tbody>
+</table>
+<p>对于上面的 API 函数，我又做了再一次的封装，加入了执行产生的信息，方便调试。</p>
+<p><strong>sqlite3Helper.h 文件：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sqlite3.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接数据库</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sqlite3Connect</span><span class="params">(<span class="keyword">char</span>* fileName, sqlite3** db)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> rc = sqlite3_open(fileName, db);</span><br><span class="line">	<span class="keyword">if</span> (rc) &#123;</span><br><span class="line">		<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Can't open database: %s\n"</span>, sqlite3_errmsg(*db));</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Opened database successfully\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行sql语句</span></span><br><span class="line">void sqlite3Execute(sqlite3* db, const char* sql, int(*callback)(void *, int, char **, char **), void *data, char *zErrMsg) &#123;</span><br><span class="line">	<span class="keyword">int</span> rc = sqlite3_exec(db, sql, callback, data, &amp;zErrMsg);</span><br><span class="line">	<span class="keyword">if</span> (rc != SQLITE_OK) &#123;</span><br><span class="line">		<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"SQL error: %s\n"</span>, zErrMsg);</span><br><span class="line">		sqlite3_free(zErrMsg);</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"Statement executed successfully\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭数据库连接</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sqlite3Close</span><span class="params">(sqlite3* db)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> rc = sqlite3_close(db);</span><br><span class="line">	<span class="keyword">if</span> (rc) &#123;</span><br><span class="line">		<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Can't Close database: %s\n"</span>, sqlite3_errmsg(db));</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Close database successfully\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>程序主文件 main.c：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"sqlite3Helper.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">callback</span><span class="params">(<span class="keyword">void</span> *data, <span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, <span class="keyword">char</span> **azColName)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; argc; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%s = %s\t"</span>, azColName[i], argv[i] ? argv[i] : <span class="string">"NULL"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	sqlite3 *db; <span class="comment">// sqlite3 数据库对象</span></span><br><span class="line">	<span class="keyword">char</span> *zErrMsg = <span class="number">0</span>; <span class="comment">// 错误信息</span></span><br><span class="line">	<span class="keyword">int</span> rc = <span class="number">0</span>; <span class="comment">// 执行结果</span></span><br><span class="line">	<span class="keyword">char</span> *sql; <span class="comment">// 具体的 SQL 语句</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建数据库 db</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"创建数据库 db\n"</span>);</span><br><span class="line">	sqlite3Connect(<span class="string">"sqlite.db"</span>, &amp;db);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建数据表 person</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"创建数据表 person\n"</span>);</span><br><span class="line">	sql = <span class="string">"CREATE TABLE person("</span> \</span><br><span class="line">		<span class="string">"ID INT PRIMARY KEY NOT NULL,"</span> \</span><br><span class="line">		<span class="string">"FirstName VARCHAR(20) NOT NULL,"</span> \</span><br><span class="line">		<span class="string">"LastName VARCHAR(20) NOT NULL);"</span>;</span><br><span class="line">	sqlite3Execute(db, sql, callback, <span class="number">0</span>, zErrMsg);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 插入 5 条记录, SQLite 不支持一次插入多条记录，不支持省略字段名</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"插入 5 条记录\n"</span>);</span><br><span class="line">	sql = <span class="string">"INSERT INTO person(ID, FirstName, LastName)"</span> \</span><br><span class="line">		<span class="string">"VALUES (1, 'Denny', 'Young'); "</span> \</span><br><span class="line">		<span class="string">"INSERT INTO person(ID, FirstName, LastName)"</span> \</span><br><span class="line">		<span class="string">"VALUES (2, 'Christine', 'Holand'); "</span>  \</span><br><span class="line">		<span class="string">"INSERT INTO person(ID, FirstName, LastName)"</span> \</span><br><span class="line">		<span class="string">"VALUES (3, 'Lars', 'Gordon');"</span> \</span><br><span class="line">		<span class="string">"INSERT INTO person(ID, FirstName, LastName)"</span> \</span><br><span class="line">		<span class="string">"VALUES (4, 'Roberto', 'Robitaille');"</span> \</span><br><span class="line">		<span class="string">"INSERT INTO person(ID, FirstName, LastName)"</span> \</span><br><span class="line">		<span class="string">"VALUES (5, 'Maria', 'Padadopoulos');"</span>;</span><br><span class="line">	sqlite3Execute(db, sql, callback, <span class="number">0</span>, zErrMsg);</span><br><span class="line">	sql = <span class="string">"SELECT * from person"</span>;</span><br><span class="line">	sqlite3Execute(db, sql, callback, <span class="number">0</span>, zErrMsg);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 查询 ID = 3 的记录</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"查询 ID = 3 的记录\n"</span>);</span><br><span class="line">	sql = <span class="string">"SELECT * from person WHERE ID = 3;"</span>;</span><br><span class="line">	sqlite3Execute(db, sql, callback, <span class="number">0</span>, zErrMsg);</span><br><span class="line">	sql = <span class="string">"SELECT * from person"</span>;</span><br><span class="line">	sqlite3Execute(db, sql, callback, <span class="number">0</span>, zErrMsg);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 删除 ID = 5 的记录</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"删除 ID = 5 的记录\n"</span>);</span><br><span class="line">	sql = <span class="string">"DELETE FROM person WHERE ID = 5;"</span>;</span><br><span class="line">	sqlite3Execute(db, sql, callback, <span class="number">0</span>, zErrMsg);</span><br><span class="line">	sql = <span class="string">"SELECT * from person"</span>;</span><br><span class="line">	sqlite3Execute(db, sql, callback, <span class="number">0</span>, zErrMsg);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 关闭数据库连接</span></span><br><span class="line">	sqlite3Close(db);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 Linux 下执行命令，<code>gcc main.c -o main -l sqlite3</code>。</p>
+<p>程序执行结果如下图所示。</p>
+<img src="/blog/2018/06/28/SQLite的使用/程序执行结果.png" title="程序执行结果">
+<p>需要注意的是在编译时需要链接 sqlite3 ，因为在 sqlite3Helper 中引入了系统中的 sqlite.h 头文件。</p>
+<p>另外特殊说明下 mian.c 文件中的回调函数，在执行查询 SQL 时，会为查询出的每条记录都调用一次回调函数，而回调函数设置了查询结构的格式输出，而在执行增删改 SQL 时，并不会查询出具体的记录，回调函数并不会执行。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ompezbwwe.bkt.clouddn.com/%E6%94%AF%E4%BB%98%E5%AE%9D.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://ompezbwwe.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -183,11 +286,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">web.xml</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SQLite3</a>
         		</li>
       		
 		</ul>
@@ -196,16 +295,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2018/03/26/JavaWeb各版本的web.xml约束写法整理/">more >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wenshixin.gitee.io/blog/2018/06/28/SQLite的使用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2018/06/08/JavaWeb相关知识整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaWeb相关知识整理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -220,366 +378,42 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JavaWeb上传文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/03/24/JavaWeb上传文件/">JavaWeb上传文件</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2018/03/24/JavaWeb上传文件/" class="archive-article-date">
-  	<time datetime="2018-03-24T15:27:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-24</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前在 Java Web 中上传文件，都是借助第三方的 jar 包和框架，而在 Servlet3.0 中，上传文件可以借助 Servlet 增加的 API 简化。</p>
-<p>需要注意的几点：</p>
-<ul>
-<li><ol>
-<li>form 表单的 <code>method</code> 属性要是 <code>post</code></li>
-</ol>
-</li>
-<li><ol>
-<li>form 表单的 <code>enctype</code> 属性要是 <code>multipart/form-data</code></li>
-</ol>
-</li>
-<li><ol>
-<li>Servlet 类要使用注解 <code>@MultipartConfig</code></li>
-</ol>
-</li>
-<li><ol>
-<li>处理文件上传的方法要在 Servlet 的 service 方法中</li>
-</ol>
-</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">上传</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2018/03/24/JavaWeb上传文件/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-自己动手实现Java中的StringBuffer类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/03/14/自己动手实现Java中的StringBuffer类/">自己动手实现Java中的StringBuffer类</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2018/03/14/自己动手实现Java中的StringBuffer类/" class="archive-article-date">
-  	<time datetime="2018-03-13T19:24:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在网上复习 Java 的基础知识，看到 String 和 StringBuffer 这里，简单的实现了下 StringBuffer 这个类，并对 String，StringBuffer，MyStringBuffer（自己实现的 StringBuffer 类名）做了拼接字符串的性能测试。</p>
-<p><strong>String</strong> 和 <strong>StringBuffer</strong> 内部都是通过字符数组实现的，但是 String 内部的字符数组是在第一次赋值时就固定了长度的，不可再更改，而 StringBuffer 内部的字符数组是留有冗余长度的，如果超过初始容量，就动态的增大数组的容量，使其看起来像是一个变长的数组。</p>
-<p>在进行大量的字符串拼接时，强烈推荐 <strong>StringBuffer</strong> 而不是 String，因为 String 拼接字符串，没拼接一次都需要创建一个 String 对象来存放要拼接的字符串。而 StringBuffer 拼接字符串只是在原有字符串对象的基础上扩展字符数组的空间，并不会创建新的 StringBuffer 对象，这点也是 StringBuffer 比 String 速度快的原因。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">String</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">StringBuffer</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2018/03/14/自己动手实现Java中的StringBuffer类/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于Hexo博客文章中图片引用问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/03/10/关于Hexo博客文章中图片引用问题/">关于Hexo博客文章中图片引用问题</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2018/03/10/关于Hexo博客文章中图片引用问题/" class="archive-article-date">
-  	<time datetime="2018-03-10T11:24:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Hexo 中的博客文章都是用 Markdown 来写的，在 Markdown 中解决上传到码云上的显示不正常的问题，是通过先找到项目的根路径，在逐层寻找图片存放的位置。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">问题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2018/03/10/关于Hexo博客文章中图片引用问题/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JavaWeb过滤器知识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/03/10/JavaWeb过滤器知识/">JavaWeb过滤器知识</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2018/03/10/JavaWeb过滤器知识/" class="archive-article-date">
-  	<time datetime="2018-03-10T10:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>过滤器的工作原理</strong></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">过滤器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2018/03/10/JavaWeb过滤器知识/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/blog/page/3/">&laquo; Prev</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><a class="page-number" href="/blog/page/6/">6</a><a class="extend next" rel="next" href="/blog/page/5/">Next &raquo;</a>
-    </nav>
+  
+
+  
+  <div id="SOHUCS" sid="SQLite的使用" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyt0mIw6i",
+        conf: "d5b3c78e5bb54e2e9fe88a4f21ebab68"
+    });
+</script>
+</script>
+  
+
+  
+
   
 
 
@@ -607,8 +441,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
