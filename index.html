@@ -227,135 +227,6 @@
 
 
   
-    <article id="post-前端布局总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/07/20/前端布局总结/">前端布局总结</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2018/07/20/前端布局总结/" class="archive-article-date">
-  	<time datetime="2018-07-20T09:03:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-20</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="0、基础知识"><a href="#0、基础知识" class="headerlink" title="0、基础知识"></a>0、基础知识</h2><p><strong>文档流</strong></p>
-<p><strong>浮动</strong></p>
-<p>对于浮动元素的浮动原理，只要理解浮动元素的浮动起始位置、浮动方向和浮动结束位置即可。</p>
-<ul>
-<li>浮动起始位置</li>
-</ul>
-<p>浮动元素（包括左右）的浮动起始位置，为一行最左侧的空白位置，而不管空白位置是否能够容纳当前浮动元素，如果一行内不能容纳所有的浮动元素，就另起一行，起始位置为下一行的最左侧的空白位置，一行的高度为该行最高的元素的高度； </p>
-<ul>
-<li>浮动方向</li>
-</ul>
-<p>左浮动元素的浮动方向为从起始位置向左浮动；</p>
-<p>右浮动元素的浮动方向为从起始位置向右浮动；</p>
-<ul>
-<li>浮动结束位置 </li>
-</ul>
-<p>左浮动元素遇到第一个左浮动元素或包含块的最左侧padding时，结束浮动；</p>
-<p>右浮动元素遇到第一个右浮动元素或包含块的最右侧padding时，结束浮动；</p>
-<p>代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    * &#123;</span></span><br><span class="line"><span class="undefined">      margin: 0;</span></span><br><span class="line"><span class="undefined">      padding: 0;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    body &#123;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">      border: 1px solid black;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    div.fl &#123;</span></span><br><span class="line"><span class="undefined">      width: 30%;</span></span><br><span class="line"><span class="undefined">      height: 100px;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">      border: 1px solid red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span>&gt;</span>左浮动元素－1（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"height: 200px"</span>&gt;</span>左浮动元素－2（width: 30%; height: 200px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"height: 230px"</span>&gt;</span>左浮动元素－3（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"width: 20%"</span>&gt;</span>左浮动元素－4（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\浮动4.png" alt=""></p>
-<p>把浮动元素3的高度改为150px，效果如下图所示。</p>
-<p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\浮动3.png" alt=""></p>
-<p>注意浮动元素4的位置并不是在浮动元素1的下面，下面这幅图可以很好的解释浮动元素4位置的原因。</p>
-<p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\浮动2.png" alt=""></p>
-<p>把浮动元素2的高度改为50px，效果图如下图所示。</p>
-<p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\浮动1.png" alt="浮动4"></p>
-<p><strong>清除浮动</strong></p>
-<p>清除浮动，其作用是改变<strong>“当前元素”</strong>与“<strong>前一个声明的浮动元素”</strong>之间的默认布局规则，这种改变主要体现为：让当前元素换行显示。这句话包含三个要素，分别为：</p>
-<ul>
-<li><strong>使用者：</strong>当前元素（浮动元素或者非浮动元素的块级元素）</li>
-<li><strong>作用对象（清除谁的浮动）：</strong>前一个声明的浮动元素</li>
-<li><strong>目的（作用）：</strong>让当前元素换行显示</li>
-</ul>
-<p>对于行内元素来说，是否清除”前一个声明的浮动元素“的浮动，其布局结果是一样的，非浮动的行内元素能够识别浮动元素。而非浮动的块级元素，因为无法识别前面声明的左浮动元素，故会和左浮动元素发生重叠（左浮动元素在上），所以非浮动的块级元素使用clear：left清除前一个左浮动元素，就能避免重叠的现象。 </p>
-<p>代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    * &#123;</span></span><br><span class="line"><span class="undefined">      margin: 0;</span></span><br><span class="line"><span class="undefined">      padding: 0;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    div &#123;</span></span><br><span class="line"><span class="undefined">      width: 100px;</span></span><br><span class="line"><span class="undefined">      height: 100px;</span></span><br><span class="line"><span class="undefined">      background: red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    .div1 &#123;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    .div2 &#123;</span></span><br><span class="line"><span class="undefined">      float: right;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span>左浮动<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span>右浮动<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>效果图如下：</p>
-<p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\清除浮动2.png" alt=""></p>
-<p>右浮动元素清除左浮动，即在右浮动样式中添加<code>clear:left</code>，效果图如下</p>
-<p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\清除浮动1.png" alt=""></p>
-<p>右浮动也是类似的，可以自己尝试一下，如果有多个块级浮动元素也都是按照这些基本的原则显示的。</p>
-<p>清除浮动后，两个浮动元素之间，其垂直方向上的margin不会发生合并；非浮动的块级元素和浮动元素之间，其垂直方向上的margin会发生合并 ；</p>
-<p><strong>定位</strong></p>
-<p>static定位元素定位时的相对坐标系：无法设置top、right、bottom和left这四个偏移属性；</p>
-<p>relative定位元素定位时的相对坐标系：相对于元素在文档流原来的位置（区域）；</p>
-<p>absolute定位元素定位时的相对坐标系：离元素最近的一个非static（包含relative、absolute和fixed）定位的祖先元素（包含块为其padding box），如果没有则为ICB（初始包含块），即根元素html的包含块；</p>
-<p>fixed定位元素定位时的相对坐标系：当前的视窗（viewport）；</p>
-<h2 id="1、居中"><a href="#1、居中" class="headerlink" title="1、居中"></a>1、居中</h2><h3 id="1-1-水平居中"><a href="#1-1-水平居中" class="headerlink" title="1.1 水平居中"></a>1.1 水平居中</h3><h3 id="1-2-垂直居中"><a href="#1-2-垂直居中" class="headerlink" title="1.2 垂直居中"></a>1.2 垂直居中</h3><h3 id="1-3-水平垂直都居中"><a href="#1-3-水平垂直都居中" class="headerlink" title="1.3 水平垂直都居中"></a>1.3 水平垂直都居中</h3><h2 id="2、列布局"><a href="#2、列布局" class="headerlink" title="2、列布局"></a>2、列布局</h2><h3 id="2-1-单列布局"><a href="#2-1-单列布局" class="headerlink" title="2.1 单列布局"></a>2.1 单列布局</h3><h3 id="2-2-多列布局"><a href="#2-2-多列布局" class="headerlink" title="2.2 多列布局"></a>2.2 多列布局</h3><p>参考资料：</p>
-<p>1、<a href="https://juejin.im/entry/5ab9bd86f265da23953100c3" target="_blank" rel="noopener">前端布局基础概述</a></p>
-<p>2、<a href="https://segmentfault.com/a/1190000011358507" target="_blank" rel="noopener">CSS布局说——可能是最全的</a></p>
-<p>3、<a href="https://segmentfault.com/a/1190000008789039" target="_blank" rel="noopener">CSS布局十八般武艺都在这里了</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">布局</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2018/07/20/前端布局总结/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-2018-年中总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -588,6 +459,90 @@
 
 
   
+    <article id="post-Linux目录及文件相关知识整理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/06/05/Linux目录及文件相关知识整理/">Linux目录及文件相关知识整理</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/06/05/Linux目录及文件相关知识整理/" class="archive-article-date">
+  	<time datetime="2018-06-05T10:29:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-05</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux 文件管理是学习 Linux 的基础，看了鸟叔的 Linux 书籍，把 Linux 目录及文件相关的知识整理如下。</p>
+<p><em>说明：文本的测试环境是 CentOS 7。</em></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">目录</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">文件</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2018/06/05/Linux目录及文件相关知识整理/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
@@ -686,42 +641,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">2018</a>
               </li>
              
@@ -730,19 +649,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">组装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">主机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">组装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">主机</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -782,6 +701,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
@@ -814,11 +737,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -842,11 +765,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">复习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SQLite3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SSH</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">配置文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -862,11 +797,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SSH</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">配置文件</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -879,22 +814,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -967,6 +886,42 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
             
             <div class="clearfix"></div>
