@@ -170,341 +170,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Life is short. I use python. </p>
-<p>&lt;– more –&gt;</p>
-<h2 id="1、-Python-概述"><a href="#1、-Python-概述" class="headerlink" title="1、 Python 概述"></a>1、 Python 概述</h2><p><strong>1、Python2.x 和 Python3.x 的区别</strong></p>
-<ul>
-<li>Python3.x 中的 print 函数替代了 Python2.x 中的 print 语句</li>
-<li>Python3.x 默认使用 UTF-8 编码，而 Python2.x 需要额外指定编码来显示中文</li>
-</ul>
-<p><strong>2、Python 其他语言不一样的地方</strong></p>
-<ul>
-<li><code>//</code> 双除号执行 floor 操作，即获取不大于结果值得最大整数，如：<code>5 // 2 = 2</code></li>
-</ul>
-<p><strong>3、Python 程序执行原理</strong></p>
-<p>Python 是一门解释性的语言，不同于 C语言和 C++ 这种编译性的语言，Python 源码不需要编译成二进制代码，直接是使用源码来运行程序的，在运行时，Python 解释器将源代码转换为字节码，转换好的字节码交个 Python 虚拟机（PVM）直接执行。</p>
-<h2 id="2、Python-基础语法"><a href="#2、Python-基础语法" class="headerlink" title="2、Python 基础语法"></a>2、Python 基础语法</h2><p><strong>1、注释</strong></p>
-<p>双重三引号、# 号。</p>
-<p><strong>2、缩进</strong></p>
-<p>建议使用 4 个空格进行悬挂式缩进，缩进不一致，执行后会报 <strong>IndentationError</strong>。</p>
-<p><strong>3、标识符</strong></p>
-<p>标识符由字母、下划线和数字组成，但不能以数字开头。Python 中的标识符是区分大小写的，标识符不能为关键字。</p>
-<p><strong>4、关键字</strong></p>
-<p>True、False、None、def、if、else、elif、raise、del、import、return、in、try、finally、and、is、while、as、except、lambda、with、assert、nonlocal、yield、break、for、not、or、class、from、continue、global、pass。</p>
-<p>关键字的信息可以在 python 命令行中查询。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>help()		<span class="comment"># 进入帮助系统</span></span><br><span class="line">help&gt; keywords	<span class="comment"># 查看所有的关键字列表</span></span><br><span class="line">help&gt; <span class="keyword">True</span>		<span class="comment"># 查看 True 这个关键字的说明</span></span><br><span class="line">help&gt; quit		<span class="comment"># 退出帮助系统</span></span><br></pre></td></tr></table></figure>
-<p><strong>5、数值类型</strong></p>
-<p>Python 是一门弱类型的语言，也就是在使用变量是不需要声明，但是内部还是有类型划分的。</p>
-<p>整型、浮点型、布尔类型、复数类型</p>
-<p>数值类型之间的转换：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">函数</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">int(x, [,base])</td>
-<td style="text-align:center">将 x 转换为一个整数</td>
-</tr>
-<tr>
-<td style="text-align:center">float(x)</td>
-<td style="text-align:center">将 x 转换为 一个浮点数</td>
-</tr>
-<tr>
-<td style="text-align:center">complex(real, [, imag])</td>
-<td style="text-align:center">创建一个复数类型</td>
-</tr>
-</tbody>
-</table>
-<p><strong>6、常用语句</strong></p>
-<ul>
-<li>if else，if elif  else：if 条件不使用括号包裹，条件后面记得使用冒号（:），Python 中没有 switch-case 语句。</li>
-<li>while：同样也要注意冒号和缩进，Python 中没有 do-while 循环。</li>
-<li>for：循环遍历任何序列的项目，常配合 range(start，end) 函数使用，该函数可以生成一个数字序列，此时循环的次数就是 end-start 的值。</li>
-</ul>
-<h2 id="3、字符串"><a href="#3、字符串" class="headerlink" title="3、字符串"></a>3、字符串</h2><p>Python 没有单字符类型，只有字符串，访问字符串中的值需要使用下标来实现。</p>
-<p><strong>1、转义字符</strong></p>
-<p>使用反斜杠（\）可以转义字符串中的特殊字符，如果不想使用反斜杠，也可以在字符串的前面添加一个 r，表示原始字符串。</p>
-<p><strong>2、字符串输入</strong></p>
-<p>Python 使用 input() 函数从标准输入读取一行文本，input 函数可以传入字符串信息提示用户，并将接收的输入直接赋值给等号左边的变量。</p>
-<p>注意：input() 函数获取数据，即使是数字，也是以字符串的方式保存的，可以使用 int() 函数转换，但要注意转换失败异常。</p>
-<p><strong>3、字符串的截取</strong></p>
-<p>Python 可以使用切片来截取字符串，所谓<strong>切片</strong>就是对操作的对象截取其中一部分的操作，字符串、列表、元组都是支持切片操作的。</p>
-<p>格式：<strong>[起始:结束:步长]</strong></p>
-<p>切片选取的区间属于<strong>左闭右开</strong>，也即是从“起始”位开始。到“结束”位结束（不包括结束位本身）。注意如果正着数就是正值，倒着数就是负数。</p>
-<p><strong>4、关于字符串操作的常见函数</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">函数名</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">find(sub [, start [, end]])</td>
-<td style="text-align:center">检测 sub 子串是否在该字符串中，可以指定 start（开始位）和 end（结束位），如果包含子串，则返回开始的索引值，否则返回 -1。</td>
-</tr>
-<tr>
-<td style="text-align:center">index(sub [, start [, end]])</td>
-<td style="text-align:center">和 find() 函数的功能一样，只不过如果 sub 子串不在字符串会报一个异常</td>
-</tr>
-<tr>
-<td style="text-align:center">count(sub [, start [, end]])</td>
-<td style="text-align:center">返回 sub 子串在字符串中出现的次数</td>
-</tr>
-<tr>
-<td style="text-align:center">replace(old, new, [count])</td>
-<td style="text-align:center">把 old 旧串替换为 new 新串，如果指定 count，则替换不超过 count 次</td>
-</tr>
-<tr>
-<td style="text-align:center">split(sep=None, maxsplit=-1)</td>
-<td style="text-align:center">以 sep为分割符截取字符串，如果制定 maxsplit，则仅截取 maxsplit 个字符串，截取的字符串放在一个列表中</td>
-</tr>
-<tr>
-<td style="text-align:center">capitalize()</td>
-<td style="text-align:center">将一个字符串的第一个字符转换为大写</td>
-</tr>
-<tr>
-<td style="text-align:center">title()</td>
-<td style="text-align:center">将字符串标题化，即将字符串中的所有单词的首字母大写，其余字母小写</td>
-</tr>
-<tr>
-<td style="text-align:center">startswith(prefix,[,start[,end]])</td>
-<td style="text-align:center">检查字符串是否以 prefix 前缀开头</td>
-</tr>
-<tr>
-<td style="text-align:center">endswith(suffix[,start[,end]])</td>
-<td style="text-align:center">检查字符串是否以 suffix 后缀结尾</td>
-</tr>
-<tr>
-<td style="text-align:center">upper()</td>
-<td style="text-align:center">将字符串中的小写字母转换为大写字母</td>
-</tr>
-<tr>
-<td style="text-align:center">lower()</td>
-<td style="text-align:center">将字符串中的大写字母转换为小写字母</td>
-</tr>
-<tr>
-<td style="text-align:center">strip([chars])</td>
-<td style="text-align:center">如果不指定参数，则删除字符串首尾两端的空格，如果指定字符，则删除字符串首尾指定的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">lstrip([chars])</td>
-<td style="text-align:center">是 strip() 的左半部分，不指定参数，则删除字符串首部的空格，如果制定字符，则删除字符串首部指定的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">rstrip([chars])</td>
-<td style="text-align:center">是 strip() 的右半部分，不指定参数，则删除字符串尾部的空格，如果制定字符，则删除字符串尾部指定的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">join(iterable)</td>
-<td style="text-align:center">以指定的字符串作为分隔符，将 iterable 序列中的元素使用分隔符连接成一个新的字符串，当 iterable 为字典时，字符串中只有键，没有值</td>
-</tr>
-<tr>
-<td style="text-align:center">ljust(width[, fillchar])</td>
-<td style="text-align:center">返回原字符串左对齐的新字符串，并使用指定的填充字符填充指定长度的新字符串，默认字符为空格</td>
-</tr>
-<tr>
-<td style="text-align:center">rjust(width[, fillchar])</td>
-<td style="text-align:center">返回原字符串右对齐的新字符串，并使用指定的填充字符填充指定长度的新字符串，默认字符为空格</td>
-</tr>
-<tr>
-<td style="text-align:center">center(width[, fillchar])</td>
-<td style="text-align:center">返回原字符串居中对齐的心字符串，并使用指定的填充字符填充指定长度的新字符串，默认字符为空格</td>
-</tr>
-</tbody>
-</table>
-<p><strong>5、字符串运算符</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">操作符</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:center">格式化输出字符，如 %s</td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">连接两个字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">重复字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">[]</td>
-<td style="text-align:center">通过索引获取字符串的某个字符</td>
-</tr>
-<tr>
-<td style="text-align:center">[:]</td>
-<td style="text-align:center">截取字符串</td>
-</tr>
-<tr>
-<td style="text-align:center">in</td>
-<td style="text-align:center">如果字符串中包含给定的字符串，返回 True</td>
-</tr>
-<tr>
-<td style="text-align:center">not in</td>
-<td style="text-align:center">如果字符串不包含给定的字符串，返回 True</td>
-</tr>
-<tr>
-<td style="text-align:center">r/R</td>
-<td style="text-align:center">返回字符串的原始字符串，显示转义和特殊字符</td>
-</tr>
-</tbody>
-</table>
-<h2 id="4、列表、元组和字典"><a href="#4、列表、元组和字典" class="headerlink" title="4、列表、元组和字典"></a>4、列表、元组和字典</h2><p><strong>1、列表</strong></p>
-<p>可看做是动态的数组。</p>
-<p>格式：中括号包裹，每个元素可以是任意数据类型。如 [1, ‘name’, {}, (), []]。</p>
-<p>增：</p>
-<ul>
-<li>通过 append() 方法向列表尾部添加元素。</li>
-<li>通过 insert(index, object) 方法向列表中的任意位置 index 添加元素 object。</li>
-<li>通过 extend() 方法将另一个列表中的元素逐一添加到列表尾部。</li>
-</ul>
-<p>查：</p>
-<ul>
-<li>使用下标索引查找某个元素。</li>
-<li>for 循环遍历列表中的每个元素。</li>
-<li>while 循环遍历列表中的每个元素。</li>
-<li>in 查找是否存在指定的元素，如果存在则为 True，否则为 False。</li>
-<li>not in 查找是否不存在指定的元素，如果不存在则为 True，否则为 False。</li>
-</ul>
-<p>改：</p>
-<ul>
-<li>使用下标索引修改某个位置的元素值。</li>
-</ul>
-<p>删：</p>
-<ul>
-<li>del 根据下标进行删除。</li>
-<li>pop 删除列表中最后一个元素，并将删除的值返回。</li>
-<li>remove 根据元素的值进行删除，不返回删除的值。</li>
-</ul>
-<p>排序：</p>
-<ul>
-<li>sort([reverse]) 方法将列表中指定元素按特定顺序重新排列，默认为从大到小，可以将 reverse 参数设为 True，使得列表中的元素倒序排列。</li>
-<li>reverse() 方法将列表中的元素倒置。</li>
-<li>sorted(list) 函数对列表排序，默认是升序排序。</li>
-<li>reserved(list) 函数对列表降序排列。</li>
-</ul>
-<p>求和：</p>
-<ul>
-<li>sum() 函数对数值型的列表元素进行求和运算，对非数值型的列表运算则会出错。</li>
-</ul>
-<p><strong>2、元组</strong></p>
-<p>可看做不可修改值的数组或者列表，增、删、改操作都是修改操作，所以元组只有查询操作。</p>
-<p>对元组不变性的理解：</p>
-<p>元组中的元素是不可改变的，但是整个元组其实是可以改变的。因为元组中的元素可能是可变元素，如列表，所以完全可以使用可变元素来更改整个元组，但是对于单个元组元素是不能改变的。可变元素的值可以改变，但是可变元素本身是不能改变的。这就像其他语言中的引用，对象的引用不可变，但引用的对象值是可以改变的。也可以类比 C语言中的指针，指针本身是不可变的，但是指针指向的值是可以改变的，即 <code>int const *p</code>。所以要想使元组内容也不变，就需要保证元组元素本身也是不可变的元素类型。</p>
-<p>格式：小括号包裹，每个元素也都可以是任意类型。如 (1, ‘name’, {}, (), [])。（也可以不加外边的小括号，元组本身就是一组以逗号隔开的序列）</p>
-<p>查：</p>
-<ul>
-<li>使用下标索引查找元组的某个元素</li>
-<li>for 循环遍历元组中的元素</li>
-</ul>
-<p>使用 + （加号）运算符可以将两个元组连接为一个新的元组。</p>
-<p><strong>3、字典</strong></p>
-<p>字典中的每个元素都是键值对类型，键必须是唯一的，可以是数字类型也可以是字符串类型，值可以是任意类型。</p>
-<p>增：</p>
-<ul>
-<li>使用 dict 函数使用其他序列建立字典</li>
-<li>使用 zip() 函数将前后两个 tuple 相对应构成键值对</li>
-<li>使用 ”字典变量[键] = 值“ 添加元素，当字典中存在这个键就会在字典中新增元素</li>
-</ul>
-<p>查：</p>
-<ul>
-<li>使用键来查找字典中的某个元素</li>
-<li>keys() 方法获取字典中键视图，结合 for 循环使用遍历键</li>
-<li>values() 方法获取字典中值视图，结合 for 循环使用遍历值</li>
-<li>items 方法获取字典中的键值视图，结合 for 循环使用遍历键和值</li>
-<li>get() 方法，当字典中不存在该项时，返回 None，还可以自定义默认值替换 None</li>
-<li>使用 setdefault(key, value) 方法，当键存在，则返回与其对应的值，不改变字典，当键不存在，就给指定建赋值并返回值</li>
-</ul>
-<p>改：</p>
-<ul>
-<li>当要添加的键存在时，该键的值就会被新值替代</li>
-</ul>
-<p>删：</p>
-<ul>
-<li>del 命令删除字典中指定键的元素</li>
-<li>clear() 方法清空整个字典</li>
-</ul>
-<p><strong>4、列表、元组和列表的常用方法</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">方法</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">len()</td>
-<td style="text-align:center">计算列表、元组和字典中的元素个数</td>
-</tr>
-<tr>
-<td style="text-align:center">max()</td>
-<td style="text-align:center">返回列表和元组中最大的元素值和键值最大的键值对</td>
-</tr>
-<tr>
-<td style="text-align:center">min()</td>
-<td style="text-align:center">返回列表和元组中最小的元素值和键值最小的键值对</td>
-</tr>
-<tr>
-<td style="text-align:center">list()</td>
-<td style="text-align:center">将列表式的字符串转换成列表</td>
-</tr>
-<tr>
-<td style="text-align:center">tuple(list)</td>
-<td style="text-align:center">将列表转换为元组</td>
-</tr>
-<tr>
-<td style="text-align:center">cmp(tuple1, tuple2)</td>
-<td style="text-align:center">比较两个元组的大小</td>
-</tr>
-<tr>
-<td style="text-align:center">copy()</td>
-<td style="text-align:center">list 是深拷贝，dict 是浅拷贝，直接使用 = 赋值运算符都是浅拷贝</td>
-</tr>
-</tbody>
-</table>
-<p><strong>5、集合</strong></p>
-<p>集合是 0 个或以上的对象引用的无序组合（0 个元素时为空集），这些对象所引用的对象都是可哈希运算的，集合是可变的。集合是只有 key 的字典，集合中的元素不能重复，和数学中的集合概念是一样的。</p>
-<p>增：</p>
-<ul>
-<li>使用 set() 函数创建一个集合</li>
-<li>add() 方法添加元素到 set 集合中，可以重复添加但不会有效果。</li>
-</ul>
-<p>查：</p>
-<ul>
-<li><p>for 循环遍历集合中的元素</p>
-</li>
-<li><p>in 判断某元素是否在集合中</p>
-</li>
-</ul>
-<p>删：</p>
-<ul>
-<li>remove(key) 方法删除指定的元素，当要删除的元素不在集合中，会报错</li>
-<li>discard(key) 方法删除指定的元素，当要删除的元素不在集合中，不会报错</li>
-<li>clear() 方法删除集合中的所有元素使它成为空集</li>
-</ul>
-<p>len() 函数计算集合中元素的数量。</p>
-<p>集合运算：</p>
-<ul>
-<li>交集：使用 &amp; 运算符或者 intersection() 方法</li>
-<li>并集：使用 | 运算符或者 union 方法</li>
-<li>差集：使用 - 运算符或者 difference 方法</li>
-<li>对称差集：使用 symmetric_difference 方法</li>
-</ul>
-<p>判断超集和子集：</p>
-<p>issubset 方法判断子集，issuperset 方法判断超集。</p>
-
+        
       
 
       
@@ -600,7 +266,7 @@
 <p>左浮动元素遇到第一个左浮动元素或包含块的最左侧padding时，结束浮动；</p>
 <p>右浮动元素遇到第一个右浮动元素或包含块的最右侧padding时，结束浮动；</p>
 <p>代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    * &#123;</span></span><br><span class="line"><span class="undefined">      margin: 0;</span></span><br><span class="line"><span class="undefined">      padding: 0;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    body &#123;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">      border: 1px solid black;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-class">.fl</span> &#123;</span></span><br><span class="line"><span class="undefined">      width: 30%;</span></span><br><span class="line"><span class="undefined">      height: 100px;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">      border: 1px solid red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span>&gt;</span>左浮动元素－1（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"height: 200px"</span>&gt;</span>左浮动元素－2（width: 30%; height: 200px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"height: 230px"</span>&gt;</span>左浮动元素－3（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"width: 20%"</span>&gt;</span>左浮动元素－4（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    * &#123;</span></span><br><span class="line"><span class="undefined">      margin: 0;</span></span><br><span class="line"><span class="undefined">      padding: 0;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    body &#123;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">      border: 1px solid black;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    div.fl &#123;</span></span><br><span class="line"><span class="undefined">      width: 30%;</span></span><br><span class="line"><span class="undefined">      height: 100px;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">      border: 1px solid red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span>&gt;</span>左浮动元素－1（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"height: 200px"</span>&gt;</span>左浮动元素－2（width: 30%; height: 200px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"height: 230px"</span>&gt;</span>左浮动元素－3（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fl"</span> <span class="attr">style</span>=<span class="string">"width: 20%"</span>&gt;</span>左浮动元素－4（width: 30%; height: 100px;）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\浮动4.png" alt=""></p>
 <p>把浮动元素3的高度改为150px，效果如下图所示。</p>
 <p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\浮动3.png" alt=""></p>
@@ -617,7 +283,7 @@
 </ul>
 <p>对于行内元素来说，是否清除”前一个声明的浮动元素“的浮动，其布局结果是一样的，非浮动的行内元素能够识别浮动元素。而非浮动的块级元素，因为无法识别前面声明的左浮动元素，故会和左浮动元素发生重叠（左浮动元素在上），所以非浮动的块级元素使用clear：left清除前一个左浮动元素，就能避免重叠的现象。 </p>
 <p>代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    * &#123;</span></span><br><span class="line"><span class="undefined">      margin: 0;</span></span><br><span class="line"><span class="undefined">      padding: 0;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    div &#123;</span></span><br><span class="line"><span class="undefined">      width: 100px;</span></span><br><span class="line"><span class="undefined">      height: 100px;</span></span><br><span class="line"><span class="undefined">      background: red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.div1</span> &#123;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.div2</span> &#123;</span></span><br><span class="line"><span class="undefined">      float: right;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span>左浮动<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span>右浮动<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    * &#123;</span></span><br><span class="line"><span class="undefined">      margin: 0;</span></span><br><span class="line"><span class="undefined">      padding: 0;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    div &#123;</span></span><br><span class="line"><span class="undefined">      width: 100px;</span></span><br><span class="line"><span class="undefined">      height: 100px;</span></span><br><span class="line"><span class="undefined">      background: red;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    .div1 &#123;</span></span><br><span class="line"><span class="undefined">      float: left;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    .div2 &#123;</span></span><br><span class="line"><span class="undefined">      float: right;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span>左浮动<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span>右浮动<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>效果图如下：</p>
 <p><img src="D:\Workspace\GitRepository\SelfFlying\source\_posts\前端布局总结\清除浮动2.png" alt=""></p>
 <p>右浮动元素清除左浮动，即在右浮动样式中添加<code>clear:left</code>，效果图如下</p>
@@ -1020,6 +686,42 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">2018</a>
               </li>
              
@@ -1028,19 +730,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">组装</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1068,18 +770,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">上传</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
               </li>
              
@@ -1092,15 +782,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">目录</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1116,11 +802,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">目录</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">文件</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1144,23 +842,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">复习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SQLite3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SSH</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">配置文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1176,11 +862,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color4">SSH</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">配置文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1196,6 +882,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -1208,31 +914,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">坑</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1252,6 +938,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">坑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
@@ -1264,14 +958,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MFC</a>
               </li>
              
@@ -1281,26 +967,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
             
             <div class="clearfix"></div>
