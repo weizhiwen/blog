@@ -17,7 +17,7 @@
 <meta property="og:description" content="先来看一道 equals和 == 相关的面试题吧。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/17/Java基础-equals和双等号/反编译.png">
-<meta property="og:updated_time" content="2018-08-16T15:03:12.521Z">
+<meta property="og:updated_time" content="2018-08-16T15:24:44.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础 equals和双等号">
 <meta name="twitter:description" content="先来看一道 equals和 == 相关的面试题吧。">
@@ -202,7 +202,10 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span> <span class="keyword">implements</span> <span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span>[] value;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object var1)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span> == var1) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (var1 <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">                    String var2 = (String)var1;</span><br><span class="line">                    <span class="keyword">int</span> var3 = <span class="keyword">this</span>.value.length;</span><br><span class="line">                    <span class="keyword">if</span> (var3 == var2.value.length) &#123;</span><br><span class="line">                        <span class="keyword">char</span>[] var4 = <span class="keyword">this</span>.value;</span><br><span class="line">                        <span class="keyword">char</span>[] var5 = var2.value;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">for</span>(<span class="keyword">int</span> var6 = <span class="number">0</span>; var3-- != <span class="number">0</span>; ++var6) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (var4[var6] != var5[var6]) &#123;</span><br><span class="line">                                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在 String 类的方法中，先判断这两个对象是不是同一个对象，如果是同一个对象，那么字符串值肯定一样嘛，直接返回 true。如果不是同一个对象，先判断要对比的对象是不是 String 类的实例，如果是，再看看两个对象中 value 数组是不是一样长，这个 value 数组中装的自然就是字符串中的每个字符啦。如果一样长，就再比较字符数组中每个字符是不是一样的，如果都是一样的，那么 equals 方法就返回 true。</p>
 <p>另外 String 类中有一个很奇怪的方法，源码是 <code>public native String intern();</code>，这个 intern() 方法并没有实现体，就一个声明，那么它的实现在哪呢？修饰这个方法的有个 native 关键字，这个关键字说明这个方法是原生函数，也即是这个函数实现不是 Java 写的，所以想看源码只能去看其他语言的。编程领域，JNI（Java Native Interface，Java 本地接口）是一种编程框架，使得 Java 虚拟机中的 Java 程序可以调用本地应用/库，当然也可以被其他程序调用。Java 虚拟机底层需要调用本机操作系统的程序，这些程序很可能是 C、C++或者汇编语言编写的，Java 的跨平台性一方面也是要依赖本地操作系统的。</p>
-<p>看 Java 源码，可能觉得有的地方写的“不好”，毕竟是老外写的嘛，老外也有他们的编程风格，明明是习惯，我们要从中吸取好的营养。</p>
+<p>在 Java 中，<code>String str1 = &quot;abcd&quot;;</code> 和 <code>String str2 = new String(&quot;abcd&quot;);</code>创建对象是不一样的，前者是从 String 类的字符串的常量池拿对象（如果没有该对象就先添加再拿），后者是在堆内存中创建一个新的对象，这里也不多说。上面的 intern() 方法会查找常量池中国是否存在字符串值相等的字符串对象，如果存在就返回该字符串对象的引用，如果没有就添加该字符串进入常量池。</p>
+<p>那么下面这道题答案就为 false, true, false。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="keyword">new</span> String(<span class="string">"abcd"</span>);</span><br><span class="line">String s2 = <span class="string">"abcd"</span>;</span><br><span class="line">String s3 = s2.intern();</span><br><span class="line">System.out.println(s1 == s2);</span><br><span class="line">System.out.println(s2 == s3);</span><br><span class="line">System.out.println(s1 == s3);</span><br></pre></td></tr></table></figure>
+<p>在看 Java 源码时，可能觉得有的地方写的“不好”，因为老外写的嘛，老外也有他们的编程风格，命名习惯，我们要从中吸取好的营养。</p>
 <p>下面这两道题，心里应该有数了吧，建议去看看相关源码哦。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Character ch1 = <span class="keyword">new</span> Character(<span class="string">'a'</span>);</span><br><span class="line">Character ch2 = <span class="keyword">new</span> Character(<span class="string">'a'</span>);</span><br><span class="line">Character ch3 = <span class="string">'b'</span>;</span><br><span class="line">Character ch4 = <span class="string">'b'</span>;</span><br><span class="line"><span class="keyword">char</span> ch5 = <span class="string">'b'</span>;</span><br><span class="line">System.out.println(ch1.equals(ch2));</span><br><span class="line">System.out.println(ch1 == ch2);</span><br><span class="line">System.out.println(ch3.equals(ch4));</span><br><span class="line">System.out.println(ch3 == ch4);</span><br><span class="line">System.out.println(ch3.equals(ch5));</span><br><span class="line">System.out.println(ch3 == ch5);</span><br><span class="line">System.out.println(ch2.equals(ch3));</span><br><span class="line">System.out.println(ch2 == ch3);</span><br><span class="line">System.out.println(ch2.equals(ch5));</span><br><span class="line">System.out.println(ch2 == ch5);</span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">"abc"</span>;</span><br><span class="line">String s2 = <span class="string">"abc"</span>;</span><br><span class="line">String s3 = <span class="keyword">new</span> String(<span class="string">"def"</span>);</span><br><span class="line">String s4 = <span class="keyword">new</span> String(<span class="string">"def"</span>);</span><br><span class="line">System.out.println(s1.equals(s2));</span><br><span class="line">System.out.println(s1 == s2);</span><br><span class="line">System.out.println(s3.equals(s4));</span><br><span class="line">System.out.println(s3 == s4);</span><br></pre></td></tr></table></figure>
@@ -485,50 +488,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">2018</a>
               </li>
              
@@ -553,18 +512,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">NoSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -574,6 +521,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">NoSQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,7 +548,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,6 +557,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,6 +584,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -630,10 +597,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">文件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -662,6 +625,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">RBAC模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,10 +680,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -729,6 +692,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
@@ -737,15 +704,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">写作</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">互联网杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,6 +728,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MFC</a>
               </li>
              
@@ -773,11 +748,39 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
             
             <div class="clearfix"></div>
