@@ -26,7 +26,7 @@
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/C语言写推箱子小游戏/有Bug的效果图.gif">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2016/05/20/C语言写推箱子小游戏/修复函数.png">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/C语言写推箱子小游戏/修复函数.png">
-<meta property="og:updated_time" content="2018-08-19T15:44:17.724Z">
+<meta property="og:updated_time" content="2018-08-20T05:02:00.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言写推箱子小游戏">
 <meta name="twitter:description" content="C语言，作为大多数人的第一门编程语言，重要性不言而喻，很多编程习惯，逻辑方式在此时就已经形成了。这个是我学习 C语言 后写的推箱子小游戏，自己的逻辑能力得到了提升，在这里同大家分享这个推箱子小游戏项目。 GitHub 仓库地址：https://github.com/weizhiwen/C-Sokoban">
@@ -190,7 +190,7 @@
 <p>先来看看最后的运行的效果。</p>
 <img src="/blog/2016/05/20/C语言写推箱子小游戏/最终的效果图.gif" title="最终的效果图">
 <p>这是一个在 Windows Dos 界面的小游戏，界面上有推箱子的地图，使用 <strong>#</strong> 来代表地图的边界，<strong>P</strong> 来代表推箱子的小人，<strong>X</strong> 来代表箱子，<strong>O</strong> 来代表箱子要推到的目标位置。</p>
-<p><strong>W（w）、S（s）、A（a）、D（d）</strong> 分别对应小人向上、下、左、右的移动方向。</p>
+<p><strong>W（w）、S（s）、A（a）、D（d）</strong> 分别对应小人向上、下、左、右移动。</p>
 <p>要写这个小游戏，我们面临的问题有以下几个。</p>
 <ul>
 <li>1、游戏地图怎么保存？</li>
@@ -200,7 +200,7 @@
 <li>5、游戏怎么结束？</li>
 </ul>
 <p><strong>1、游戏地图怎么保存？</strong></p>
-<p>C语言中只有基本的数据类型，游戏地图是二维的平面结构，很容易想到使用二维数组来保存游戏地图，代码详情见 GitHub 仓库的 <strong>关卡.h</strong> 文件。</p>
+<p>C语言中只有基本的数据类型，游戏地图是二维的平面结构，很容易想到使用二维数组来保存游戏地图，代码详情见 GitHub 仓库中的 <strong>关卡.h</strong> 文件。</p>
 <img src="/blog/2016/05/20/C语言写推箱子小游戏/游戏地图.png" title="游戏地图">
 <p><strong>2、游戏怎么运行？</strong></p>
 <p>因为推箱子游戏在游戏结束之前要不断接受用户的输入，所以我们可以设置一个标志来判断游戏是否结束，把这个标志设置为一个 while 循环的条件。在每次循环中，都要接收用户的输入，根据用户输入的值，来进行下一步的操作，在游戏中就是小人的移动方向，上下左右，这里我们可以用一个 switch 语句判断。每一次循环，对应一次用户输入。</p>
@@ -219,14 +219,14 @@
 <img src="/blog/2016/05/20/C语言写推箱子小游戏/可以向上移动.png" title="可以向上移动">
 <p>所以我们要对小人理论上可以移动到的那格（下一位置）进行判断，如果不是限制物（箱子和箱子要移动到的位置下面在详细说），小人就可以移动，如果有限制物就不能移动。所以我们需要记录一个坐标点的值，这里“下一位置”的参照物可以选取小人当前的位置，游戏开始时，把小人的开始位置作为当前位置。小人向上移动，“下一位置”的横坐标就是小人当前位置的横坐标减一，纵坐标就是小人当前位置的纵坐标。然后我们就可以根据“下一位置”的横纵坐标找到具体的字符值，如果是空的，就可以移动，如果是箱子要移动的目标位置，小人也可以移动，还有一种情况是“下一位置”是箱子，我们还要考虑箱子的“下一位置”，箱子的下一位置也很好得到。因为小人和箱子是在一条线上移动的，所以在小人向上移动时，箱子的“下一位置”的横坐标就是小人“下一位置”的横坐标减一，两者的纵坐标相同。同样我们也要对箱子“下一位置”的字符值进行判断，如果字符值是空格和箱子可以移动的位置，就是可以移动的。小人向上移动的代码如下：</p>
 <img src="/blog/2016/05/20/C语言写推箱子小游戏/小人向上移动.png" title="小人向上移动">
-<p>小人向下、向左、向右移动的代码也是类似的，无非就是把小人移动的下一坐标改一改，向下移动，“下一位置”的横坐标就是小人的横坐标位置加一，两者纵坐标相同，代码详情见 GitHub 仓库的 <strong>控制.cpp</strong> 文件。</p>
+<p>小人向下、向左、向右移动的代码也是类似的，无非就是把小人移动的下一坐标改一改，向下移动，“下一位置”的横坐标就是小人的横坐标位置加一，两者纵坐标相同，代码详情见 GitHub 仓库中的 <strong>控制.cpp</strong> 文件。</p>
 <p>到这里整个程序就算是完成了，可以运行整个程序效果如下，能发现哪里有 Bug 吗？</p>
 <img src="/blog/2016/05/20/C语言写推箱子小游戏/有Bug的效果图.gif" title="有Bug的效果图">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\C语言写推箱子小游戏\有Bug的效果图.gif" alt=""></p>
-<p>相信细心的你已经发现了，当小人移动到箱子要移动的目标位置，再移出，这个位置就会“消失”，为什么出现这种情况呢？我们在前面总是关注小人要移动的”下一位置“和箱子要移动的“下一位置”，却没有关注在移动之前，这个位置（上一位置）原本的值，我们可以记录这个“上一位置”的值，但是这样考虑的问题就比较多了，尤其是箱子和小人都在箱子要移动的目标位置时，情况很复杂，那么有木有简单的方法呢？其实到现在为止，我们的程序大体上是没什么问题的，只是箱子要移动的目标位置会出现“字符消失”。这只是个小 Bug，把用户当测试的微软是怎么做的呢？系统发行后不停的发布补丁，我们也可以像这样给这个程序打个“补丁”。箱子要移动的位置是不变的，我们可以能不能用一个二维数组来存放这些特殊位置呢？这些特殊位置的值也是特殊的，要不就是目标位置，要不就是箱子，要不就是小人，而不能是空白字符，所以我们可以写一个“补丁”——修复这个 Bug 的函数。当小人移动后，在每个方向的移动函数结尾加上下面这个修复函数。这里判断特殊位置是不是空白字符，如果是空白字符，就将特殊位置的值改为目标位置的字符值，这个是字符 “O”，这样就“修复”了程序了 Bug，“字符消失”的问题也被解决了。</p>
+<p>相信细心的你已经发现了，当小人移动到箱子要移动的目标位置，再移出，这个位置就会“消失”，为什么出现这种情况呢？我们在前面总是关注小人要移动的”下一位置“和箱子要移动的“下一位置”，却没有关注在移动之前，这个位置（上一位置）原本的值，我们可以记录这个“上一位置”的值，但是这样考虑的问题就比较多了，尤其是箱子和小人都在箱子要移动的目标位置时，情况很复杂，那么有木有简单的方法呢？其实到现在为止，我们的程序大体上是没什么问题的，只是箱子要移动的目标位置会出现“字符消失”。这只是个小 Bug，把用户当测试的微软是怎么做的呢？系统发行后不停的发布补丁，我们也可以像这样给这个程序打个“补丁”。箱子要移动的位置是不变的，我们可以能不能用一个二维数组来存放这些特殊位置呢？这些特殊位置的值也是特殊的，要不就是目标位置，要不就是箱子，要不就是小人，而不能是空白字符，所以我们可以写一个“补丁”——修复这个 Bug 的函数。当小人移动后，在每个方向的移动函数结尾加上下面这个修复函数。这里判断特殊位置是不是空白字符，如果是空白字符，就将特殊位置的值改为目标位置的字符值，这个是字符 “O”，这样就“修复”了程序的 Bug，“字符消失”的问题也被解决了。</p>
 <img src="/blog/2016/05/20/C语言写推箱子小游戏/修复函数.png" title="修复函数">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\C语言写推箱子小游戏\修复函数.png" alt=""></p>
-<p>我将程序划分成了不同的文件，GitHub仓库有程序目录的说明文件，读者在阅读代码时，会注意到 <strong>extern</strong> 关键字的使用，这个关键字达到多个文件之间共用某个变量或者函数的功能。将关卡中的游戏地图更换，这样可以实现推箱子的多个关卡，读者有兴趣可自己尝试改进，本文也是起到一个抛砖引玉的作用。</p>
+<p>我将程序划分成了不同的文件，GitHub仓库也有程序目录的说明文件，读者在阅读代码时，会注意到 <strong>extern</strong> 关键字的使用，这个关键字是为了拆分的多个文件之间共用某个变量或者函数。将关卡中的游戏地图更换，就可以实现推箱子的多个关卡，读者有兴趣可自己尝试改进，本文也是起到一个抛砖引玉的作用。</p>
 <p>最后想说的是，写程序很注重逻辑，无论用什么语言，程序的逻辑都是一样的，无非就是哪种语言更方便，更快捷。<strong>写程序真正玩的是逻辑</strong>，只有逻辑清晰，代码才能写得好，否则顶多也是代码的搬运工。</p>
 
       
@@ -502,6 +502,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">2018</a>
               </li>
              
@@ -510,11 +530,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,11 +562,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
+                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,6 +583,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,10 +614,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
@@ -582,11 +622,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,10 +646,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -622,19 +658,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -650,11 +682,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">复习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">复习</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,14 +746,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
@@ -726,11 +754,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+                <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
+                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -739,6 +771,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">互联网杂谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -767,42 +803,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
             
             <div class="clearfix"></div>
