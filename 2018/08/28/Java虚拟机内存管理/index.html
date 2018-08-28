@@ -24,7 +24,30 @@
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/通过句柄访问对象.jpg">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/通过直接指针访问对象.jpg">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/通过直接指针访问对象.jpg">
-<meta property="og:updated_time" content="2018-08-28T02:06:51.312Z">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/Debug设置.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/Debug设置.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/Java堆异常运行结果.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/Java堆异常运行结果.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/调出MAT视图.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/调出MAT视图.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/打开内存快照文件.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/打开内存快照文件.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/内存快照.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/内存快照.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/具体细节.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/具体细节.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/查看泄露对象到GC%20Roots的引用链.gif">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/栈异常结果1.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/栈异常结果1.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/栈异常结果2.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/栈异常结果2.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/方法区常量池内存异常.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/方法区常量池内存异常.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/方法区内存异常.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/方法区内存异常.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/直接内存异常.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/直接内存异常.jpg">
+<meta property="og:updated_time" content="2018-08-28T10:57:03.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机内存管理">
 <meta name="twitter:description" content="Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术所围成的 “高墙”，墙外面的人想进去，墙里面的人却想出来。——《深入理解Java虚拟机：JVM高级特性与最佳时实践（第二版）》周志明  Java 虚拟机作为运行 Java 程序抽象出来的计算机，具有内存管理的能力，像内存分配、垃圾回收等这些相关的内存管理问题，Java 虚拟机都会帮我们解决，所以作为一个 Java 程序员要比 C++ 程">
@@ -206,7 +229,7 @@
 <p>与虚拟机栈一样，本地方法栈也会抛出 StackOverflowError 和 OutOfMemoryError 异常。</p>
 <h3 id="1-4-Java-堆"><a href="#1-4-Java-堆" class="headerlink" title="1.4 Java 堆"></a>1.4 Java 堆</h3><p>Java 堆是 Java 虚拟机内存所管理的内存最大的一块，所有的线程都共享此区域，此区域可以说是 Java 对象的出生地，此区域的唯一目睹就是存放 Java 实例，几乎所有的对象实例都在这里分配内存（不同的编译器有所不同）。Java 堆也是垃圾收集器管理的主要区域，也被称为是 “GC堆”。Java 堆在物理上可以处于不连续的内存空间，只要在逻辑上是连续的就可以了，就像磁盘空间存放文件一样。Java 堆既可以是固定大小的，也可以是可扩展的，在主流的 java 虚拟机中是按照可扩展来实现的。关于 Java 堆的详细介绍将在后面说明。</p>
 <p>如果在 Java 堆中没有足够的内存空间完成对象实例的分配，并且堆也无法再扩展，将会抛出 OutOfMemoryError 异常。</p>
-<h3 id="1-5-方法区"><a href="#1-5-方法区" class="headerlink" title="1.5 方法区"></a>1.5 方法区</h3><p>同 Java 堆一样，方法区也是各个线程共享的区域，它用于存储已经被虚拟机加载过的类信息、常量、静态变量、即时编译器编译后的代码等数据。Java 虚拟机规范中把方法区描述为堆的一个逻辑部分，也叫做 “非堆”，也是为了和 Java 堆区分开来。方法区和 Java 堆一样，也不需要连续的内存空间，在 Java 虚拟机的实现中，也是可以选择固定大小或者可扩展，并且还可以选择不实现垃圾回收，因为这个区域的用到回收的地方很少，但是对方法区进行垃圾回收在实际开发教训中是很有必要的，这个区域也会出现内存泄漏的问题。</p>
+<h3 id="1-5-方法区"><a href="#1-5-方法区" class="headerlink" title="1.5 方法区"></a>1.5 方法区</h3><p>同 Java 堆一样，方法区也是各个线程共享的区域，它用于存储已经被虚拟机加载过的类信息、常量、静态变量、即时编译器编译后的代码等数据。Java 虚拟机规范中把方法区描述为堆的一个逻辑部分，也叫做 “非堆”，也是为了和 Java 堆区分开来。方法区和 Java 堆一样，也不需要连续的内存空间，在 Java 虚拟机的实现中，也是可以选择固定大小或者可扩展，并且还可以选择不实现垃圾回收，因为这个区域需要用到回收的地方很少，但是实际开发种的教训告诉我们，对方法区进行垃圾回收也是很有必要的，这个区域同样会出现内存泄漏的问题。</p>
 <p>在方法区中，有一部分被称为是运行时常量池。常量池除了用于存放在编译期生成的各种字面量和符号引用，此外还有直接引用也被存储在运行时常量池中。运行时常量池具有动态性，常量并不一定实在编译期才被放入该常量池，在运行期间也可以有新的常量放入池中，如我们在开发中使用 String 类的 intern() 方法时。</p>
 <p>对字面量和符号引用不清楚的小伙伴可以看下面两篇扩展阅读。</p>
 <p><a href="https://blog.csdn.net/u010130282/article/details/52573119" target="_blank" rel="noopener">字面量，常量和变量之间的区别？</a></p>
@@ -233,7 +256,85 @@
 <p>两种访问方式各有优势，使用句柄访问方式的最大好处是 reference 中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而 reference 本身不需要被修改。而使用直接指针访问方式的最大好处就是速度更快，它节省了一次指针定位的的时间开销。在 HotSpot 虚拟机中采用的是第二中访问方式，但使用句柄方式来访问的情况在软件开发中也很常见。</p>
 <p><strong>小结：</strong></p>
 <p>Java 堆就像是游戏玩家出生的新手村，承载着一个对象来到 Java 世界的梦想，资源的分配，初始的装备，以及对象的区分和查找，每一步都和对象的命运息息相关。</p>
-<h2 id="3-内存异常"><a href="#3-内存异常" class="headerlink" title="3.内存异常"></a>3.内存异常</h2><p>虽然说有 Java 虚拟机帮助我们管理内存，但是在管理过程中仍然有内存异常的发生。除了前面内存划分中说到的程序计数器外，其他区域都有发生 OutOfMemoryError 异常的可能。</p>
+<h2 id="3、内存异常"><a href="#3、内存异常" class="headerlink" title="3、内存异常"></a>3、内存异常</h2><p>虽然说有 Java 虚拟机帮助我们管理内存，但是在管理过程中仍然有内存异常的发生。除了前面内存划分中说到的程序计数器外，其他区域都有发生 OutOfMemoryError 异常的可能。</p>
+<p>我们可以给 Java 虚拟机设置参数来模拟这些异常的发生，不同的 Java 虚拟机运行结果可能也不同，这里使用的是 Oracle 公司的 JDK。</p>
+<p>特别说明：下面如果没有特殊说明，默认使用的是 JDK8。</p>
+<h3 id="3-1-Java-堆内存异常"><a href="#3-1-Java-堆内存异常" class="headerlink" title="3.1 Java 堆内存异常"></a>3.1 Java 堆内存异常</h3><p>Java 堆是用于存储对象实例的，所以只要不断的创建对象把 Java 堆区域填满，并且还要保证牢记垃圾回收机制不能清除这些对象，就可以模拟出 Java 堆内存的异常。</p>
+<p>模拟程序代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟 Java 堆内存异常</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeapOOM</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 声明类内部静态类，生命周期和外部类 HeapOOM 一样长，使垃圾收集器无法回收这些对象占用的内存空间</span></span><br><span class="line">	<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		List&lt;OOMObject&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="comment">// 死循环不断生成对象，并添加到 list 中, 直到占满 Java堆内存</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			list.add(<span class="keyword">new</span> OOMObject());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里使用 MAT 内存分析器插件来对内存异常进行分析，IDE 使用免费的 Eclipse，当然 IDEA 也可以安装，Eclipse种的安装教程可以参看这篇文章<a href="https://www.cnblogs.com/duanxz/p/3958504.html" target="_blank" rel="noopener">《mat之一–eclipse安装Memory Analyzer》</a>。</p>
+<p>在 Debug 的配置页面，设置  JVM 的参数。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/Debug设置.jpg" title="Debug设置">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\Debug设置.jpg" alt=""></p>
+<p>JVM Debug 参数：</p>
+<p>-verbose:gc -Xms20M -Xmx20M</p>
+<p>-XX:+PrintGCDetails </p>
+<p>-XX:+HeapDumpOnOutOfMemoryError </p>
+<p>-XX:HeapDumpPath=D:\CodeWorkspace\Java\Dump</p>
+<p>-Xms、-Xmx、-Xmn 后面分别是 Java 堆的最小值、Java 堆的最大值都是 20M，-XX后面可以添加一些额外的设置，PrintGCDetails 是打印出垃圾收集的详细信息，HeapDumpOnOutOfMemoryError 是发生OutOfMemoryError 异常时记录内存快照，HeapDumpPath后面是存放内存快照的文件夹位置。</p>
+<p>Debug 结果如下：</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/Java堆异常运行结果.jpg" title="Java堆异常运行结果">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\Java堆异常运行结果.jpg" alt=""></p>
+<p>从上图中可以看到 Java堆区域（Java heap space）出现了 OutOfMemoryError 的异常，并且在我们指定的文件夹生成了内存快照文件。在使用 MAT 内存分析器工具之前，我们还要知道内存泄露和内存溢出的区别，我在前面没有将 OutOfMemoryError 异常翻译成内存泄露异常或内存溢出异常，而是使用原本的英文，内存泄露和内存溢出只是导致出现异常的原因，该事件的结果才是产生 OutOfMemoryError 异常。</p>
+<p>内存泄露和内存溢出的区别：</p>
+<ul>
+<li>内存泄露是指程序在申请内存后，无法释放已申请的内存空间，内存泄露会导致内存资源耗光，通俗的说就是对象占着内存空间不归还给系统。</li>
+<li>内存溢出是指程序申请内存使用时，发现内存空间并不够使用，很常见的例子就是在存一个大数时超过了该数据类型的最大值，通俗的是说就是程序在借内存空间时发现无法满足自己的要求。</li>
+</ul>
+<p>知道了内存泄露和内存溢出的区别，我们再来用 MAT 工具分析内存快照，首先调出 MAT 视图，然后在 “File” 选项中选择 “Open Heap Dump” 打开内存快照文件。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/调出MAT视图.jpg" title="调出MAT视图">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\调出MAT视图.jpg" alt=""></p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/打开内存快照文件.jpg" title="打开内存快照文件">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\打开内存快照文件.jpg" alt=""></p>
+<p>打开后快照文件后可以清晰的看出内存异常的可能出现问题的地方（Problem Suspect）。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/内存快照.jpg" title="内存快照">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\内存快照.jpg" alt=""></p>
+<p>点击 “Details” 可以查看具体的细节。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/具体细节.jpg" title="具体细节">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\具体细节.jpg" alt=""></p>
+<p>可以看到 OOMObject 占用的内存空间很大，可以查看该对象是否有到 GC roots 的引用链，导致垃圾收集器无法回收对象占用的内存空间，由于是内存空间被占用无法回收，所以 OutOfMemoryError 异常产生的原因是内存泄露。</p>
+
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\查看泄露对象到GC Roots的引用链.gif" alt=""></p>
+<h3 id="3-2-栈内存异常"><a href="#3-2-栈内存异常" class="headerlink" title="3.2 栈内存异常"></a>3.2 栈内存异常</h3><p>在 HotSpot 虚拟机中并不区分 Java 虚拟机栈和本地方法栈，栈的容量可以通过 -Xss 参数来设定。</p>
+<p>在 Java 虚拟机规范中描述了两种栈会出现的异常：</p>
+<ul>
+<li>如果线程请求的栈深度大于虚拟机所允许的深度，抛出 StackOverflowError 异常。</li>
+<li>如果虚拟机栈在动态扩展时无法申请到足够的内存，抛出 OutOfMemoryError 异常。</li>
+</ul>
+<p>栈的深度是由栈的内存空间决定的，请求的栈越深，也即是已使用的栈的空间越大，所以上面 Java 虚拟机规范中的两种异常是有重叠之处的，一种异常也可能会导致另外一种异常的发生，到底是栈的内存空间太小引起的内存异常还是已使用的栈的内存空间太大引起的内存异常？</p>
+<p>减少栈内存的容量和定义大量的局部变量来增加栈帧中局部变量表的长度，理论上都是可以产生 StackOverflowError 异常，也可以产生 OutOfMemoryError 异常的。</p>
+<p>但是下面的代码只能产生 StackOverflowError 异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 栈 StackOverflowError 异常</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JVMStackSOF</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> stackLength = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// 递归函数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stackLeak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		stackLength++;</span><br><span class="line">		stackLeak();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		JVMStackSOF stackSOF = <span class="keyword">new</span> JVMStackSOF();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			stackSOF.stackLeak();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">			System.out.println(<span class="string">"Stack Length:"</span> + stackSOF.stackLength);</span><br><span class="line">			<span class="keyword">throw</span> e;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Debug 的参数为：-verbose:gc -Xss128k -XX:+PrintGCDetails -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=D:\CodeWorkspace\Java\Dump</p>
+<p>Debug 结果如下，只产生了 StackOverflowError 异常。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/栈异常结果1.jpg" title="栈异常结果1">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\栈异常结果1.jpg" alt=""></p>
+<p>而在多线程环境中测试，可以才模拟出 OutOfMemoryError 异常。</p>
+<p><strong>特别提醒：此代码运行时会导致系统假死，具有一定的风险性，请在运行前保存好其他文件。</strong></p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 栈 OutOfMemoryError 异常</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JVMStackOOM</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dontStop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// !危险代码请勿随便尝试</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stackLeakByTread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 死循环不断创建线程</span></span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">				</span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">					dontStop();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">			thread.start();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		JVMStackOOM stackOOM = <span class="keyword">new</span> JVMStackOOM();</span><br><span class="line">		stackOOM.stackLeakByTread();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于在做这项危险的测试时，系统死掉了，所以笔者并没有得出实际结果，根据《深入理解Java虚拟机：JVM高级特性与最佳时实践（第二版）》，这里给出理论结果，也可以在虚拟机系统中尝试运行此代码，但也可能会出现外部系统假死的情况，读者可以自己尝试。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/栈异常结果2.jpg" title="栈异常结果2">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\栈异常结果2.jpg" alt=""></p>
+<h3 id="3-3-方法区内存异常"><a href="#3-3-方法区内存异常" class="headerlink" title="3.3 方法区内存异常"></a>3.3 方法区内存异常</h3><p>方法区中有运行时常量池，如果向常量池中添加大量的内容，也可以导致方法区内存异常，可以通过 -XX:Permsize 和 -XX:MaxPermSize 来限制方法区的大小，进而限制常量池的容量。常量池在编译期可以放入常量了，在运行时也可以再添加新的常量，不存在内存被占用无法回收，所以这里的异常不是内存泄露导致的，而是内存溢出。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟方法区中的常量池内存溢出</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RuntimeConstantPoolOOM</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">		<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			list.add(String.valueOf(i++).intern());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经过实际测试，发现 JDK6 会出现下面内存异常的情况，而在 JDK7 和 JDK8 中，发现垃圾回收器会不断的回收常量池的旧常量所占用的内存，以便新的常量可以进入，从而避免了常量池内存异常的发生。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/方法区常量池内存异常.jpg" title="方法区常量池内存异常">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\方法区常量池内存异常.jpg" alt=""></p>
+<p>方法区用于存放类的相关信息，如类名，访问修饰符，常量池，字段描述，方法描述等。使方法区内存异常的大致思路是产生大量的类填满方法区，直到方法区内存溢出。由于实验操作起来比较麻烦，直接操作字节码文件来动态的生成大量的类，所以这里也是使用书中的运行结果。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/方法区内存异常.jpg" title="方法区内存异常">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\方法区内存异常.jpg" alt=""></p>
+<h3 id="3-4-直接内存异常"><a href="#3-4-直接内存异常" class="headerlink" title="3.4 直接内存异常"></a>3.4 直接内存异常</h3><p>直接内存的大小可以通过 -XX:MaxDirectMemorySize 来指定，如果不指定默认是和 Java 堆的最大值（-Xmx）一样，可以通过使用 Unsafe 类来申请内存，由于该类的使用有限制，只有引导类的加载器才会返回对象实例，所以只能通过反射来获取 Unsafe 类的实例，但是在 Eclipse 中导入该类的包会报错，解决方案见参考文章。</p>
+<p>参考文章：</p>
+<p><a href="https://blog.csdn.net/yaochangliang159/article/details/50556772" target="_blank" rel="noopener">eclipse中解决import sun.misc.Unsafe报错的方法</a></p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> sun.misc.Unsafe;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟直接内存异常</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DirectMemoryOOM</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _1MB = <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalArgumentException, IllegalAccessException </span>&#123;</span><br><span class="line">		Field unsafeField = Unsafe.class.getDeclaredFields()[<span class="number">0</span>];</span><br><span class="line">		unsafeField.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">		Unsafe unsafe = (Unsafe)unsafeField.get(<span class="keyword">null</span>);</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">			unsafe.allocateMemory(_1MB); <span class="comment">// 申请内存</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Debug 参数：-verbose:gc -Xmx20M -XX:MaxDirectMemorySize=10M -XX:+PrintGCDetails</p>
+<p>由于在 Eclipse 中使用 JDK6 和 JDK7 运行该程序时会直接闪退，无法得到输出的异常，所以直接在控制台中使用 JDK8 编译运行该程序，运行结果如下：</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/直接内存异常.jpg" title="直接内存异常">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\直接内存异常.jpg" alt=""></p>
+<p>小结：模拟内存异常是一件危险的事情，所以务必在测试前保存好各种文件，以免造成文件内容丢失。</p>
 <h2 id="4、垃圾回收"><a href="#4、垃圾回收" class="headerlink" title="4、垃圾回收"></a>4、垃圾回收</h2>
       
 
@@ -381,7 +482,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、内存划分"><span class="toc-number">1.</span> <span class="toc-text">1、内存划分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-程序计数器"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Java-虚拟机栈"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 Java 虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-本地方法栈"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-Java-堆"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 Java 堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-方法区"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-直接内存"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 直接内存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、堆的使用"><span class="toc-number">2.</span> <span class="toc-text">2、堆的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-给对象分配内存"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 给对象分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-初始化对象"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 初始化对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-对象在内存中存储"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 对象在内存中存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-访问对象"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 访问对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-内存异常"><span class="toc-number">3.</span> <span class="toc-text">3.内存异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、垃圾回收"><span class="toc-number">4.</span> <span class="toc-text">4、垃圾回收</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、内存划分"><span class="toc-number">1.</span> <span class="toc-text">1、内存划分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-程序计数器"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Java-虚拟机栈"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 Java 虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-本地方法栈"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-Java-堆"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 Java 堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-方法区"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-直接内存"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 直接内存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、堆的使用"><span class="toc-number">2.</span> <span class="toc-text">2、堆的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-给对象分配内存"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 给对象分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-初始化对象"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 初始化对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-对象在内存中存储"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 对象在内存中存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-访问对象"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 访问对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、内存异常"><span class="toc-number">3.</span> <span class="toc-text">3、内存异常</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Java-堆内存异常"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Java 堆内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-栈内存异常"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 栈内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-方法区内存异常"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 方法区内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-直接内存异常"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 直接内存异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、垃圾回收"><span class="toc-number">4.</span> <span class="toc-text">4、垃圾回收</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -504,6 +605,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
@@ -513,14 +622,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,6 +673,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
               </li>
              
@@ -601,18 +714,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">命令</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,18 +817,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">王者荣耀</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
@@ -737,6 +826,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">王者荣耀</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
               </li>
              
               <li class="article-tag-list-item">
