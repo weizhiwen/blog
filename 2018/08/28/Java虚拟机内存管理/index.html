@@ -16,15 +16,19 @@
 <meta property="og:site_name" content="Wizey&#39;s blog">
 <meta property="og:description" content="Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术所围成的 “高墙”，墙外面的人想进去，墙里面的人却想出来。——《深入理解Java虚拟机：JVM高级特性与最佳时实践（第二版）》周志明  Java 虚拟机作为运行 Java 程序抽象出来的计算机，具有内存管理的能力，像内存分配、垃圾回收等这些相关的内存管理问题，Java 虚拟机都会帮我们解决，所以作为一个 Java 程序员要比 C++ 程">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/内存划分.png">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/内存划分.png">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/栈帧数据结构.png">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/栈帧数据结构.png">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/通过句柄访问对象.jpg">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/通过句柄访问对象.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/通过直接指针访问对象.jpg">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/通过直接指针访问对象.jpg">
-<meta property="og:updated_time" content="2018-08-28T01:59:34.868Z">
+<meta property="og:updated_time" content="2018-08-28T02:06:51.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机内存管理">
 <meta name="twitter:description" content="Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术所围成的 “高墙”，墙外面的人想进去，墙里面的人却想出来。——《深入理解Java虚拟机：JVM高级特性与最佳时实践（第二版）》周志明  Java 虚拟机作为运行 Java 程序抽象出来的计算机，具有内存管理的能力，像内存分配、垃圾回收等这些相关的内存管理问题，Java 虚拟机都会帮我们解决，所以作为一个 Java 程序员要比 C++ 程">
-<meta name="twitter:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/内存划分.png">
+<meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/内存划分.png">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -182,12 +186,15 @@
 <p>Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术所围成的 “高墙”，墙外面的人想进去，墙里面的人却想出来。——《深入理解Java虚拟机：JVM高级特性与最佳时实践（第二版）》周志明</p>
 </blockquote>
 <p>Java 虚拟机作为运行 Java 程序抽象出来的计算机，具有内存管理的能力，像内存分配、垃圾回收等这些相关的内存管理问题，Java 虚拟机都会帮我们解决，所以作为一个 Java 程序员要比 C++ 程序员幸福，但是内存方面一旦出现问题，如果对虚拟机怎样使用内存不了解，就很难排查错误。</p>
+<a id="more"></a>
 <p>这段时间看周志明先生的《深入理解Java虚拟机：JVM高级特性与最佳时实践（第二版）》，下面就对 Java 虚拟机对内存的管理做一个系统的整理。</p>
 <h2 id="1、内存划分"><a href="#1、内存划分" class="headerlink" title="1、内存划分"></a>1、内存划分</h2><p>内存是计算机中运行系统和软件的场所，而内存划分是 Java 虚拟机管理内存中人为添加的概念，是为了更好的描述 Java 虚拟机对内存的管理。下图中的的<strong>运行时数据区域</strong>即是 Java 虚拟机所管理的内存区域。</p>
-<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\内存划分.png" alt="内存划分"></p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/内存划分.png" title="内存划分">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\内存划分.png" alt=""></p>
 <h3 id="1-1-程序计数器"><a href="#1-1-程序计数器" class="headerlink" title="1.1 程序计数器"></a>1.1 程序计数器</h3><p>在 CPU 的寄存器中有指令计数器，而在 Java 虚拟机内存管理中也有类似的程序计数器。程序计数器占用一块很小的内存空间，并且每条线程中都有独立的程序计数器。指令计数器记录的是 CPU 将要执行的下一条指令的地址，而程序计数器略有不同。在线程执行的 Java 方法时，程序计数器记录的是正在执行的虚拟机字节码指令的地址，而在线程执行 Native 方法时，程序计数器为空，因为此时 Java 虚拟机调用是和操作系统相关的接口，与 Java 语言无关。</p>
 <p>此区域是唯一一个在 Java 虚拟机规范中没有规定会出现 OutOfMemoryError 情况的区域，对 OutOutOfMemoryError 的讲解会在后面说到。</p>
 <h3 id="1-2-Java-虚拟机栈"><a href="#1-2-Java-虚拟机栈" class="headerlink" title="1.2 Java 虚拟机栈"></a>1.2 Java 虚拟机栈</h3><p>我们常在程序运行的内存划分为堆区和栈区，但是在 Java 中，这样的划分是很粗糙的，Java 虚拟机中栈有 Hava虚拟机栈和本地方法栈。同程序计数器一样，Java 虚拟机栈也是每条线程私有的。虚拟机栈描述的是 Java 方法执行时的内存模型：每个方法在执行的同时都会创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。栈这种数据结构，就不多说了，特点是先进先出（FIFO），而栈帧就是栈中的数据元素，下图中是栈帧的这种数据在 Java 栈中的结构图。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/栈帧数据结构.png" title="栈帧数据结构">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\栈帧数据结构.png" alt=""></p>
 <p>局部变量表中存放的是编译期可知的各种基本数据类型，包括 Java 的八大基本数据类型和对象引用（reference）类型（这种类型不在这里详细说了）。一个方法需要在帧中分配多大的局部变量空间是完全确定的，并且在其方法运行期间不会改变局部变量表的大小，进而可以知道局部变量表所需的内存空间在编译期就确定下来了。</p>
 <p>在 Java 虚拟机规范中，对这个区域规定了两种异常出现的情况：</p>
@@ -216,14 +223,16 @@
 <p>对齐填充并不一定是必然存在的，因为 HotSpot 虚拟机内存管理的要求是给对象分配内存的大小必须是 8 字节的整数倍，所以不够的部分才需要对齐填充。又因为对象头部分正好是 8 字节的倍数，所以对齐填充是为了补全实例数据区域的。对齐填充并没有特别的含义，仅仅是起到填充占位符的作用。</p>
 <h3 id="2-4-访问对象"><a href="#2-4-访问对象" class="headerlink" title="2.4 访问对象"></a>2.4 访问对象</h3><p>我们创建对象的目的是为了使用对象，这就要牵扯到如何访问对象了。在前面对内存的划分中说到，Java 虚拟机栈的局部变量表，存放的有对象引用（reference）类型，这个类型在 Java 虚拟机规范中只是规定这是指向一个对象的引用，但并没有规定如何定位对象，访问对象在堆中的具体位置。在不同的虚拟机中，对象的访问方式也是不同的，主流的访问方式有<strong>使用句柄</strong>和<strong>直接指针</strong>两种。</p>
 <p><strong>使用句柄：</strong></p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/通过句柄访问对象.jpg" title="通过句柄访问对象">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\通过句柄访问对象.jpg" alt=""></p>
 <p>如果使用句柄访问方式，Java 堆中将会划分出一块内存来作为句柄池，reference 中存储的是对象的句柄地址，而句柄中包含的才是对象实例数据和类型数据各自的具体地址信息，所以说使用句柄是一种间接使用指针访问对象的方式。</p>
 <p><strong>直接指针：</strong></p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/通过直接指针访问对象.jpg" title="通过直接指针访问对象">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\通过直接指针访问对象.jpg" alt=""></p>
 <p>如果使用直接指针访问方式，Java 堆中对象的布局中就必须考虑如何放置访问类型数据的相关信息，reference 中直接存储的就是对象地址。</p>
 <p>两种访问方式各有优势，使用句柄访问方式的最大好处是 reference 中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而 reference 本身不需要被修改。而使用直接指针访问方式的最大好处就是速度更快，它节省了一次指针定位的的时间开销。在 HotSpot 虚拟机中采用的是第二中访问方式，但使用句柄方式来访问的情况在软件开发中也很常见。</p>
 <p><strong>小结：</strong></p>
-<p>Java 堆就像是游戏玩家出生的新手村，承载着一个对象来到 Java 世界的梦想，资源的分配，初始的装备，以及对象的区分和查找，每一个都和对象的命运息息相关。</p>
+<p>Java 堆就像是游戏玩家出生的新手村，承载着一个对象来到 Java 世界的梦想，资源的分配，初始的装备，以及对象的区分和查找，每一步都和对象的命运息息相关。</p>
 <h2 id="3-内存异常"><a href="#3-内存异常" class="headerlink" title="3.内存异常"></a>3.内存异常</h2><p>虽然说有 Java 虚拟机帮助我们管理内存，但是在管理过程中仍然有内存异常的发生。除了前面内存划分中说到的程序计数器外，其他区域都有发生 OutOfMemoryError 异常的可能。</p>
 <h2 id="4、垃圾回收"><a href="#4、垃圾回收" class="headerlink" title="4、垃圾回收"></a>4、垃圾回收</h2>
       
@@ -495,11 +504,63 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">2018</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">年中总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">组装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">主机</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,11 +580,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">组装</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">主机</a>
+                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,18 +604,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
               </li>
              
@@ -563,10 +616,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
@@ -575,19 +624,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,7 +648,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,7 +668,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -632,10 +685,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,10 +697,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">RBAC模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,6 +748,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -715,19 +764,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -759,14 +804,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MFC</a>
               </li>
              
@@ -776,34 +813,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
             
             <div class="clearfix"></div>
