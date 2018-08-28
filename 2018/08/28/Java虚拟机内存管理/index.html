@@ -36,7 +36,7 @@
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/内存快照.jpg">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/具体细节.jpg">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/具体细节.jpg">
-<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/查看泄露对象到GC%20Roots的引用链.gif">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/查看泄露对象到GCRoots的引用链.gif">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/栈异常结果1.jpg">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/栈异常结果1.jpg">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/栈异常结果2.jpg">
@@ -47,7 +47,7 @@
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/方法区内存异常.jpg">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/直接内存异常.jpg">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/直接内存异常.jpg">
-<meta property="og:updated_time" content="2018-08-28T23:52:54.618Z">
+<meta property="og:updated_time" content="2018-08-28T23:55:35.552Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机内存管理">
 <meta name="twitter:description" content="Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术所围成的 “高墙”，墙外面的人想进去，墙里面的人却想出来。——《深入理解Java虚拟机：JVM高级特性与最佳时实践（第二版）》周志明  Java 虚拟机作为运行 Java 程序抽象出来的计算机，具有内存管理的能力，像内存分配、垃圾回收等这些相关的内存管理问题，Java 虚拟机都会帮我们解决，所以作为一个 Java 程序员要比 C++ 程">
@@ -294,7 +294,7 @@
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\具体细节.jpg" alt=""></p>
 <p>可以看到 OOMObject 占用的内存空间很大，可以查看该对象是否有到 GC roots 的引用链，导致垃圾收集器无法回收对象占用的内存空间，由于是内存空间被占用无法回收，所以 OutOfMemoryError 异常产生的原因是内存泄露。</p>
 
-<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\查看泄露对象到GC Roots的引用链.gif" alt=""></p>
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\查看泄露对象到GCRoots的引用链.gif" alt=""></p>
 <h3 id="3-2-栈内存异常"><a href="#3-2-栈内存异常" class="headerlink" title="3.2 栈内存异常"></a>3.2 栈内存异常</h3><p>在 HotSpot 虚拟机中并不区分 Java 虚拟机栈和本地方法栈，栈的容量可以通过 -Xss 参数来设定。</p>
 <p>在 Java 虚拟机规范中描述了两种栈会出现的异常：</p>
 <ul>
@@ -617,19 +617,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -801,11 +801,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">复习</a>
+                <a href="javascript:void(0)" class="js-tag color3">SQLite3</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SQLite3</a>
+                <a href="javascript:void(0)" class="js-tag color3">复习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -841,18 +841,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -862,6 +850,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
              
               <li class="article-tag-list-item">
