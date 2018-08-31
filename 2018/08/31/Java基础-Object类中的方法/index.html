@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Wizey&#39;s blog">
 <meta property="og:description" content="下面这些是 Java 中的 Object 类中方法，共 11 个，9 种方法，wait() 方法被重载了。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-08-31T13:08:11.054Z">
+<meta property="og:updated_time" content="2018-08-31T23:55:46.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础-Object类中的方法">
 <meta name="twitter:description" content="下面这些是 Java 中的 Object 类中方法，共 11 个，9 种方法，wait() 方法被重载了。">
@@ -251,8 +251,17 @@
 <p>在重写 equals() 方法时，也最好一并重写 hashCode() 方法，使得当 equals() 方法返回 true 时，两个对象的 hashCode 也是相同的。当然这并不是必须的，但为什么要这样做呢？因为如果对象要存储在散列结构（如 HashTable、HashSet、HashMap）中时，判断两个对象是否相等依据是 hashCode() 方法，如果只重写了 equals() 方法，而没有重写 HashCode() 方法，就可能会出现两个对象 equals 是 true，但 hashCode 不同，造成我们认为一样的对象被重复放入这些散列结构中。使用  hashCode 比较对象的另一好处是可以提高性能和搜索效率，从原来的全部查找对比，变为只查找一次，时间复杂度从原来的 O(n) 变为了 O(1)。</p>
 <p>注意： equals 为 true 的对象，hashCode 也是相同的，但是反过来，hashCode 相同的两个对象，equals 不一定为 true。</p>
 <p>equals() 就是一个普通的方法，返回 true 还是 false 的决定权在于我们。</p>
+<p>常用的实现步骤：</p>
+<ul>
+<li>检查是否是同一个对象的引用，如果是，直接返回 true</li>
+<li>检查是否是同一类型，如果不是直接，返回 false，注意这里判断是否是同一类型，不能使用 instanceof 关键字，这个关键字判断的是前面对象是否是后面类的实例或者子类的实例额，不够准确。</li>
+<li>将 Object 对象转型</li>
+<li>判断每个关键域值是否相等（业务的实际需要）</li>
+</ul>
+<p>实例代码如下（来自 GitHub）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EqualExample</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> y;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> z;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EqualExample</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">        <span class="keyword">this</span>.z = z;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        EqualExample that = (EqualExample) o;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (x != that.x) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (y != that.y) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> z == that.z;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>3、finalize() 方法</strong></p>
-<p>虽然这个方法也可以被子类重写，但是极少被使用，这个方法和 C++ 的析构函数功能是不一样的，C++ 中使用析构函数来清除一个对象，而 Java 中清除对象的工作是有 Java 虚拟机帮我们完成的。Java 中设计这个方法只是想在垃圾回收器将对象从内存中清除前做一些其他自定义的清理工作，在未来的 JDK 版本中，这个方法很有可能会被取消。在 Java 中，与 finalize() 方法相似的有 finally 语句块，用来在异常发生后关闭一些资源（如文件），常和 try .. catch 语句结合使用。final 关键字和 finalize() 看上去也很相似，但是一点关系都没有，final 关键词可以用来修饰变量、属性、方法和类，分别表示常量、属性不可变、方法不可被重写、类不可被继承。</p>
+<p>虽然这个方法也可以被子类重写，但是极少被使用，这个方法和 C++ 的析构函数功能是不一样的，C++ 中使用析构函数来清除一个对象，而 Java 中清除对象的工作是由 Java 虚拟机帮我们完成的。Java 中设计这个方法只是想在垃圾回收器将对象从内存中清除前做一些其他自定义的清理工作，在未来的 JDK 版本中，这个方法很有可能会被取消。在 Java 中，与 finalize() 方法相似的有 finally 语句块，用来在异常发生后关闭一些资源（如文件），常和 try .. catch 语句结合使用。final 关键字和 finalize() 看上去也很相似，但是一点关系都没有，final 关键词可以用来修饰变量、属性、方法和类，分别表示常量、属性不可变、方法不可被重写、类不可被继承。</p>
 <p><strong>4、hashCode() 方法</strong></p>
 <p>hashCode() 方法当然就是用来返回一个对象的哈希码（hashCode）啦，hashCode 是一个 int 类型的数字，如果我们没有重写一个类的 toString() 方法，而使用 System.out.println 打印这个类，调用的就是 Object 类中的 toString() 方法，输出格式为 <strong>类名@hashCode的十六进制数</strong> ，其实 hashCode() 方法完全不用手写，强大的 IDE 工具一般都有自动生成的功能，可以帮我们写 hashCode() 方法和 equals() 方法，另外在 JDK7 中新增的 Objects 类，也有个静态方法 hashCode(obj) 可以生成对象的 hashCode 值。</p>
 <p><strong>5、toString() 方法</strong></p>
@@ -675,6 +684,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -684,14 +701,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">文件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
