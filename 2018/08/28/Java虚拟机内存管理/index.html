@@ -58,7 +58,12 @@
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/标记-整理算法.jpg">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/分代收集算法.jpg">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/分代收集算法.jpg">
-<meta property="og:updated_time" content="2018-08-30T00:07:30.724Z">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/查看默认的垃圾回收器.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/查看默认的垃圾回收器.jpg">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/08/28/Java虚拟机内存管理/垃圾回收器组合.jpg">
+<meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java虚拟机内存管理/垃圾回收器组合.jpg">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5763525-5e80ed57b0e58441.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-08-31T01:05:59.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机内存管理">
 <meta name="twitter:description" content="Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术所围成的 “高墙”，墙外面的人想进去，墙里面的人却想出来。——《深入理解Java虚拟机：JVM高级特性与最佳时实践（第二版）》周志明  Java 虚拟机作为运行 Java 程序抽象出来的计算机，具有内存管理的能力，像内存分配、垃圾回收等这些相关的内存管理问题，Java 虚拟机都会帮我们解决，所以作为一个 Java 程序员要比 C++ 程">
@@ -368,15 +373,15 @@
 <p>弱引用也是用来描述一些非必须的对象引用，但是引用的强度要比软引用弱，被弱引用关联的对象将会在下一次垃圾收集时回收，而不管内存是否充足。</p>
 <p>虚引用又称为是幽灵引用或是幻影引用，是最弱的引用关系。一个对象是否有虚引用，完全不会对该对象的生存造成影响，也无法用虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是，在这个对象被垃圾收集器回收时收到一个系统的死亡通知，通俗的说也就是死的明明白白吧。</p>
 <p><strong>生存还是死亡？这是个问题。</strong></p>
-<p>在可达性分析算法中，即使是不可达的对象，也并非是要立即 “执行死刑”，它们暂时处于 “死缓”。就像 C++ 中，对象死亡要调用析构函数一样，Java 中对象在死亡时也有一个类似的 finalize() 方法，不可达的对象会被第一次标记并进行一次筛选，筛选的条件就是这个 finalize() 方法。当对象没有覆盖 finalize() 方法，或者 finalize() 方法被虚拟机调用了而这个对象还没有被会回收，都不会执行 finalize() 方法。如果判定需要执行 finaliz() 方法，这个对象就会被放到一个队列中，由低优先级的单独线程（刽子手）执行对象中的 finalize() 方法。如果在 finalize() 方法中，该对象被引用链上的其他对象关联了，那么这个对象就可以被移出这个 “即将回收” 队列，从而死里逃生。这个 finalize() 方法可以说是对象逃脱死亡命运的最后一次机会，如果没有逃脱，这个对象就真正要被执行死刑了。但是这个机会只有一次，第一次是可以逃脱的，第二次再次进入这个队列无论如何也逃脱不了被回收的命运。</p>
-<p>虽然 Java 虚拟机规范中没有要求对方法区进行垃圾回收，但是一些虚拟机（如 HotSpot 虚拟机）仍然实现了方法区的垃圾回收，HotSpot 虚拟机称方法区为 “永久代”，都是一个意思，方法区的回收主要是废弃的常量和无用的类。我们知道方法区中有一些常量池，如字符串常量池，如果没有系统中没有引用某个字符串常量池的常量，那么在内存紧张的时候，这些常量就应该被废弃回收，常量池中的其他类（接口）、方法、字段、符号引用也是如此。</p>
-<p>判断常量是否应该被废弃比较简单，判断一个类是无用的类，则需要满足下面三个条件：</p>
+<p>在可达性分析算法中，即使是不可达的对象，也并非是要立即执行 “死刑”，它们暂时处于 “死缓”。就像 C++ 中，对象死亡要调用析构函数一样，Java 中对象在死亡时也有一个类似的 finalize() 方法，不可达的对象会被第一次标记并进行一次筛选，筛选的条件就是这个 finalize() 方法。当对象没有覆盖 finalize() 方法，或者 finalize() 方法被虚拟机调用了而这个对象还没有会回收，finalize() 方法都不会被执行。如果判定需要执行 finaliz() 方法，这个对象就会被放到一个队列中，由低优先级的单独线程（刽子手）执行对象中的 finalize() 方法。如果在 finalize() 方法中，该对象被引用链上的其他对象关联了，那么这个对象就可以被移出这个 “即将回收” 队列，从而死里逃生。这个 finalize() 方法可以说是对象逃脱死亡命运的最后一次机会，如果没有逃脱，这个对象就真正要被垃圾回收器执行死刑了。但是这个机会每个对象只有一次，第一次是可以逃脱的，第二次再次进入这个队列无论如何也逃脱不了被回收的命运。</p>
+<p>虽然 Java 虚拟机规范中没有要求对方法区进行垃圾回收，但是一些虚拟机（如 HotSpot 虚拟机）仍然实现了方法区的垃圾回收，在 HotSpot 虚拟机中称方法区为 “永久代”，其实都是一个意思，方法区的垃圾主要是废弃的常量和无用的类。我们知道方法区中有一些常量池，如字符串常量池，如果系统中不存在引用常量池中常量的引用，那么在内存紧张的时候，这些常量就应该被废弃回收，常量池中的其他类（接口）、方法、字段、符号引用也是如此。</p>
+<p>判断常量是否应该被废弃的方法比较简单，而判断一个类是无用的类，则需要满足下面三个条件：</p>
 <ul>
 <li>该类的所有实例都已经被回收了，也即 Java堆内存中没有该类的对象实例。</li>
 <li>加载该类的 ClassLoader 已经被回收了。</li>
 <li>该类对应的 java.lang.Class 对象在任何地方都没有被引用，也即无法通过反射访问该类。</li>
 </ul>
-<p>满足了上述这些条件也不是说要对这个类非回收不可，可以设置虚拟机参数进行控制。</p>
+<p>但满足了上述这些条件，也不是说这个类就要被非回收不可，我们可以通过设置虚拟机参数进行控制。</p>
 <p>至此，哪些内存区域需要回收和什么时候回收就说完了，下面就是如何去回收了。垃圾回收是一个具体的过程，里面涉及到一些收集算法。几种常见的垃圾回收算法思想如下：</p>
 <p><strong>1、标记-清除算法</strong></p>
 <p>如同它的名字，算法分为 “标记” 和 “清除” 两个过程，首先标记出需要回收的对象，如下图中的灰色区域，然后再将标记出的区域内容清除。标记过程肯定需要遍历，这里面也涉及到广度优先搜索和深度优先搜索，这里就不多说了。</p>
@@ -385,19 +390,73 @@
 <img src="/blog/2018/08/28/Java虚拟机内存管理/标记-清除算法.jpg" title="标记-清除算法">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\标记-清除算法.jpg" alt=""></p>
 <p><strong>2、复制算法</strong></p>
-<p>为了解决标记-清除算法的效率问题，复制算法将内存容量划分为等量的两部分，每次只使用一块，当一块使用完后，就将还存活的对象复制到另一块内存区域，把刚才使用的那块内存区域一次性清除。这样每次都是对一半内存区域进行垃圾回收。</p>
-<p>不足之处：这种做法看似简单除暴，但实现简单，运行高效，确实可以解决产生内存碎片的问题，而牺牲了一半可以使用的内存空间的代价确实太大。另外在对象存活率较高的时候，需要进行大量的复制操作，效率将会变低，所以对于存活时间长的对象一般不使用这种收集算法。</p>
+<p>为了解决标记-清除算法的效率问题，复制算法将内存容量划分为两个等量的部分，每次只使用一块，当一块使用完后，就将还存活的对象复制到另一块内存区域，并把刚才使用的那块内存区域一次性清除，这样每次都只需要对一半内存区域进行垃圾回收。</p>
+<p>不足之处：这种做法看似简单除暴，但实现简单，运行高效，确实可以解决产生内存碎片的问题，而牺牲了一半可以使用的内存空间的代价未免太大。另外在对象存活率较高的时候，就需要进行大量的复制操作，效率将会变低，所以对于存活时间长的对象一般不使用这种收集算法。</p>
 <img src="/blog/2018/08/28/Java虚拟机内存管理/复制算法.jpg" title="复制算法">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\复制算法.jpg" alt=""></p>
 <p><strong>3、标记-整理算法</strong></p>
-<p>标记-整理算法和标记-清除算法，标记过程相同，但标记-整理算法是将存活对象向同一端移动，然后再清除这之外的内存区域，而不是对可回收的内存直接清除。</p>
+<p>标记-整理算法和标记-清除算法，标记过程相同，但不同的是，标记-整理算法是将存活对象向同一端移动，然后再清除这之外的内存区域，而不是对可回收的内存直接清除。</p>
 <img src="/blog/2018/08/28/Java虚拟机内存管理/标记-整理算法.jpg" title="标记-整理算法">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\标记-整理算法.jpg" alt=""></p>
 <p><strong>4、分代收集算法</strong></p>
-<p>分代收集算法中没有新的思想，只是根据对象存活的周期长短对内存进行的划分，一般是把 Java堆分为新生代（Young）和老年代（Old）。新生代和老年代的默认内存大小比例是 1 : 2，也即是新生代占据 1/3 的堆内存空间，老生代占据 2/3 的堆内存空间，这个比例值是可以通过 -XX:NewRatio 参数来动态设置的。而新生代又被划分为 Eden、From Survivor、To Survivor 三个区域，Eden 占据 8/10 的新生代内存空间，并且Java 虚拟机每次只会使用 Eden 区和 Survivor（From Survivor 和 To Survivor中的一个） 区，总有一个 Survivor 区是空闲着的。新生代区域用来存放哪些朝生夕死的 Java 对象，这些对象存活时间很短，很容易就会被垃圾收集器回收，所以新生代使用复制算法会比较好，而老生代区域用来存放大对象（如对象数组），这些对象不是很容易被回收，存活时间比较长，使用标记-清除算法和标记-清理算法是比较好的。针对不同区域内对象存活时间的长短，使用合适的收集算法，发挥出了算法的优势。</p>
+<p>分代收集算法中没有新的思想，只是根据对象存活的周期长短又对 Java堆内存进行了划分，一般是把 Java堆分为新生代（Young）和老年代（Old）。新生代和老年代的默认内存大小比例是 1 : 2，也即是新生代占据 1/3 的堆内存空间，老生代占据 2/3 的堆内存空间，这个比例值是可以通过 -XX:NewRatio 参数来动态设置的。而新生代又被划分为 Eden、From Survivor、To Survivor 三个区域，Eden 占据 8/10 的新生代内存空间，并且Java 虚拟机每次只会使用 Eden 区和一个 Survivor（From Survivor 和 To Survivor中的一个） 区，总有一个 Survivor 区是空闲着的。新生代区域用来存放那些朝生夕死的 Java 对象，这些对象存活时间很短，很容易就会被垃圾收集器回收，所以新生代使用复制算法会比较好，而老生代区域用来存放大对象（如对象数组），这些对象不是很容易被回收，存活时间比较长，使用标记-清除算法和标记-清理算法是比较好的。针对不同区域内对象存活时间的长短，使用合适的收集算法，可以最大的发挥出算法优势。</p>
 <img src="/blog/2018/08/28/Java虚拟机内存管理/分代收集算法.jpg" title="分代收集算法">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\分代收集算法.jpg" alt=""></p>
-<h2 id="5、垃圾回收器"><a href="#5、垃圾回收器" class="headerlink" title="5、垃圾回收器"></a>5、垃圾回收器</h2>
+<h2 id="5、垃圾收集器"><a href="#5、垃圾收集器" class="headerlink" title="5、垃圾收集器"></a>5、垃圾收集器</h2><p>前面的算法都是理论知识，而垃圾收集器是这些算法实现。</p>
+<p>不同版本的 JDK 选择的垃圾收集器也可能不同，我们在命令行查看安装的 JDK 的默认垃圾收集器，我这里是在 Windows 的 cmd 中输入 <code>java -XX:+PrintCommandLineFlags -version</code>，执行结果如下图。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/查看默认的垃圾回收器.jpg" title="查看默认的垃圾回收器">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\查看默认的垃圾回收器.jpg" alt=""></p>
+<p>我的机器上装的是 JDK8，ParallelGC 就是 JDK 默认采用的垃圾收集器组合，包括 PS Scavenge（新生代收集器） 和 PS MarkSweep（老生代收集器），也可以通过下面的代码打印出正在使用的垃圾收集器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.management.GarbageCollectorMXBean;</span><br><span class="line"><span class="keyword">import</span> java.lang.management.ManagementFactory;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GCTest</span> </span>&#123;</span><br><span class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">	        List&lt;GarbageCollectorMXBean&gt; list = ManagementFactory.getGarbageCollectorMXBeans();</span><br><span class="line">	        <span class="keyword">for</span>(GarbageCollectorMXBean bean : list) &#123;</span><br><span class="line">	            System.out.println(bean.getName());</span><br><span class="line">	        &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里也给出一张垃圾收集器组合相关的常用参数表。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">UseSerialGC</td>
+<td style="text-align:center">虚拟机运行在 Client 模式下的默认值，使用 Serial + Serial Old 收集器组合回收内存</td>
+</tr>
+<tr>
+<td style="text-align:center">UseParNewGc</td>
+<td style="text-align:center">使用 ParNew + Serial Old 收集器组合回收内存</td>
+</tr>
+<tr>
+<td style="text-align:center">UseConcMarkSweepGC</td>
+<td style="text-align:center">使用 ParNew + CMS + Serial Old 收集器组合回收内存</td>
+</tr>
+<tr>
+<td style="text-align:center">UseParallelGC</td>
+<td style="text-align:center">虚拟机运行在 Server 模式下的默认值，使用 PS Parallel + Serial Old（PS MarkSweep）收集器组合回收内存</td>
+</tr>
+</tbody>
+</table>
+<p>为什么不是一个垃圾收集器，而是垃圾收集器组合呢？在前面，我们提到分代收集算法将堆内存区域再次划分，综合了其他算法的优点，所以主流的虚拟机也是根据不同年代的内存区域，使用不同算法实现的收集器，下面将逐一介绍这些垃圾收集器。</p>
+<p>在介绍收垃圾收集器之前，我们先想象一个打扫卫生的场景，如果在一边有人打扫，一边又有人扔垃圾，那么卫生能打扫干净吗？答案肯定是不能的。那么怎样才能打扫干净呢？你可能会说打扫的时候不能有人再扔垃圾了，没错就是这样，在 Java 虚拟机中，垃圾收集器就像打扫卫生的人，可能有一个也可能有多个，对应也就是单线程和多线程，其他线程就像是扔垃圾的人。垃圾收集器打扫卫生肯定也是需要时间，在这个时间不能有其他线程 “扔垃圾”，也即是暂停其他线程使用直到垃圾收集结束。在 Java 虚拟机中，这种事情叫做 “<strong>Stop The Word</strong>”，简称 STW。计算机运行速度很快，如果把 STW 的时间缩到很短，人们根本察觉不出来。理解了这些，下面就来想看看每种垃圾回收器的介绍。</p>
+<p><strong>1、Serial 收集器</strong></p>
+<p>从名字上看是串行的意思，这个收集器是一个单线程的新生代收集器。Serial 采取 “复制算法” 实现，如果是在单 CPU 环境下，Serial 收集器没有线程交互的开销，理论上是可以获得最高的单线程执行效率，STW 的时间也可以控制在几十到几百毫米内，这个时间是完全可以接受的。</p>
+<p><strong>2、Serial Old 收集器</strong></p>
+<p>Serial Old 收集器 是 Serial 收集器的老年代版本，同样也是一个单线程收集器，使用 “标记-整理算法”。由于 PS MarkSweep 收集器与 Serial Old 收集器的实现非常接近，在官方的许多资料中都是直接以 Serial Old 代替 PS MarkSweep 的，所以 Ps MarkSweep 收集器可以看做是 Serial Old 收集器的别名。</p>
+<p><strong>3、ParNew 收集器</strong></p>
+<p>ParNew 收集器实际上就是 Serial 收集器的多线程版本，收集算法、STW、对象分配的规则、回收策略等都与 Serial 收集器完全一样，两者相同的代码很多。ParNew 收集器虽然有多线程优势，但在单 CPU 和多 CPU 环境下，效果并不一定会比 Serial 好，在单 CPU 环境下是肯定不如的 Serial 的。看起来人多力量大，但由于线程交互开销的时间，效果并不如人意，多线程的好处在于更高效率的利用 CPU ，提高 CPU 的吞吐量，也就是 CPU 空闲的时间很少。</p>
+<p><strong>4、Parallel Scavenge收集器 </strong></p>
+<p>Parallel Scavenge收集器和 ParNew 收集器很像，也是一个新生代收集器，也是使用复制算法，并且还是并行的多线程的收集器。相比于 ParNew 收集器，Parallel Scavenge收集器可以增加精准的控制 CPU 的吞吐量和 STW 的时间，对于交互不多任务可以更快的完成。</p>
+<p><strong>5、Parallel Old 收集器 </strong></p>
+<p>Parallel Old 收集器是 Parallel Scavenge 收集器的老年代版本，使用多线程和 “标记-整理算法”。在 Parallel Old 收集器出现之间，选择了  Parallel Scavenge 收集器作为新生代的收集器，就只能选择 Serial Old 收集器作为老生代收集器，这样肯定就是对多 CPU 的浪费，所以 Parallel Scavenge收集器 + Parallel Old 收集器，对于多 CPU 环境吞吐量要求高的环境，算是强强联合。</p>
+<p><strong>6、CMS 收集器</strong></p>
+<p>CMS （Concurrent Mark Sweep）收集器从英文名字上看就是基于 “标记-清除算法” 实现的，并且还有并发的特征，它是一种以缩短 STW 的时间为目标的收集器，对于一些重视服务响应速度的网站，肯定是 STW 越短，用户体验越好了。但是缺点是会在垃圾收集结束后产生大量的空间碎片，这点从使用的算法也可以看出来。</p>
+<p><strong>7、G1 收集器</strong></p>
+<p>G1 收集器是目前最前沿的收集器，它是基于 “标记-整理算法” 实现的，所以不会产生内存碎片，并且也可以精准的控制 STW 的时间。G1 收集器对于新生代和老年代都是适用的，优先回收垃圾最多的区域。</p>
+<p>几种垃圾收集器的组合如下图所示。</p>
+<img src="/blog/2018/08/28/Java虚拟机内存管理/垃圾回收器组合.jpg" title="垃圾回收器组合">
+<p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java虚拟机内存管理\垃圾回收器组合.jpg" alt=""></p>
+<h2 id="6、内存分配与回收策略"><a href="#6、内存分配与回收策略" class="headerlink" title="6、内存分配与回收策略"></a>6、内存分配与回收策略</h2><p>觉得文章还不错，可以关注 <strong>编程心路</strong> 微信公众号，在编程的路上，我们一起成长。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/5763525-5e80ed57b0e58441.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="编程心路"></p>
+
       
 
       
@@ -544,7 +603,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、内存划分"><span class="toc-number">1.</span> <span class="toc-text">1、内存划分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-程序计数器"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Java-虚拟机栈"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 Java 虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-本地方法栈"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-Java-堆"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 Java 堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-方法区"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-直接内存"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 直接内存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、堆的使用"><span class="toc-number">2.</span> <span class="toc-text">2、堆的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-给对象分配内存"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 给对象分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-初始化对象"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 初始化对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-对象在内存中存储"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 对象在内存中存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-访问对象"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 访问对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、内存异常"><span class="toc-number">3.</span> <span class="toc-text">3、内存异常</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Java-堆内存异常"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Java 堆内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-栈内存异常"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 栈内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-方法区内存异常"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 方法区内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-直接内存异常"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 直接内存异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、垃圾回收"><span class="toc-number">4.</span> <span class="toc-text">4、垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、垃圾回收器"><span class="toc-number">5.</span> <span class="toc-text">5、垃圾回收器</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、内存划分"><span class="toc-number">1.</span> <span class="toc-text">1、内存划分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-程序计数器"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Java-虚拟机栈"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 Java 虚拟机栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-本地方法栈"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 本地方法栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-Java-堆"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 Java 堆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-方法区"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-直接内存"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 直接内存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、堆的使用"><span class="toc-number">2.</span> <span class="toc-text">2、堆的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-给对象分配内存"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 给对象分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-初始化对象"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 初始化对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-对象在内存中存储"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 对象在内存中存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-访问对象"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 访问对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、内存异常"><span class="toc-number">3.</span> <span class="toc-text">3、内存异常</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Java-堆内存异常"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Java 堆内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-栈内存异常"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 栈内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-方法区内存异常"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 方法区内存异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-直接内存异常"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 直接内存异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、垃圾回收"><span class="toc-number">4.</span> <span class="toc-text">4、垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、垃圾收集器"><span class="toc-number">5.</span> <span class="toc-text">5、垃圾收集器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、内存分配与回收策略"><span class="toc-number">6.</span> <span class="toc-text">6、内存分配与回收策略</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -787,11 +846,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -811,7 +870,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -827,19 +890,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -879,7 +938,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Win10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -895,6 +962,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -907,18 +986,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
@@ -927,23 +994,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">写作</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">互联网杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Win10</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -959,6 +1018,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MFC</a>
               </li>
              
@@ -968,14 +1035,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
               </li>
             
             <div class="clearfix"></div>
