@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
-  <title>Java基础-Object类中的方法 | Wizey&#39;s blog</title>
+  <title>Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="下面这些是 Java 中的 Object 类中方法，共 11 个，9 种方法，wait() 方法被重载了。">
-<meta name="keywords" content="基础,Object">
+  <meta name="description" content="序列化和反序列化在面试中也经常考查，下面就总结一下 Java 中的序列化和反序列化。">
+<meta name="keywords" content="基础,序列化,反序列化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java基础-Object类中的方法">
-<meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/08/31/Java基础-Object类中的方法/index.html">
+<meta property="og:title" content="Wizey&#39;s blog">
+<meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/09/02/Java基础-序列化与反序列化/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="下面这些是 Java 中的 Object 类中方法，共 11 个，9 种方法，wait() 方法被重载了。">
+<meta property="og:description" content="序列化和反序列化在面试中也经常考查，下面就总结一下 Java 中的序列化和反序列化。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-08-31T23:55:46.645Z">
+<meta property="og:updated_time" content="2018-09-02T06:10:33.082Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java基础-Object类中的方法">
-<meta name="twitter:description" content="下面这些是 Java 中的 Object 类中方法，共 11 个，9 种方法，wait() 方法被重载了。">
+<meta name="twitter:title" content="Wizey&#39;s blog">
+<meta name="twitter:description" content="序列化和反序列化在面试中也经常考查，下面就总结一下 Java 中的序列化和反序列化。">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -148,23 +148,8 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java基础-Object类中的方法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java基础-序列化与反序列化" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Java基础-Object类中的方法
-    </h1>
-  
-
-        
-        <a href="/blog/2018/08/31/Java基础-Object类中的方法/" class="archive-article-date">
-  	<time datetime="2018-08-31T11:37:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-31</time>
-</a>
-        
-      </header>
     
     
       <span class="archive-article-date">
@@ -173,99 +158,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>下面这些是 Java 中的 Object 类中方法，共 11 个，9 种方法，wait() 方法被重载了。</p>
+        <p>序列化和反序列化在面试中也经常考查，下面就总结一下 Java 中的序列化和反序列化。</p>
 <a id="more"></a>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">方法</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">protected native Object clone()</td>
-<td style="text-align:center">创建并返回当前对象的一份拷贝</td>
-</tr>
-<tr>
-<td style="text-align:center">public boolean equals(Object obj)</td>
-<td style="text-align:center">比较两个对象是否相等</td>
-</tr>
-<tr>
-<td style="text-align:center">protected void finalize()</td>
-<td style="text-align:center">当对象要被垃圾回收<strong>前</strong>，调用该方法</td>
-</tr>
-<tr>
-<td style="text-align:center">public final native Class&lt;?&gt; getClass()</td>
-<td style="text-align:center">返回该类的 Class 对象</td>
-</tr>
-<tr>
-<td style="text-align:center">public native int hashCode()</td>
-<td style="text-align:center">返回该对象的哈希码值</td>
-</tr>
-<tr>
-<td style="text-align:center">public final native void notify()</td>
-<td style="text-align:center">唤醒正在等待的对象监视器所在的单个线程</td>
-</tr>
-<tr>
-<td style="text-align:center">public final native void notifyAll()</td>
-<td style="text-align:center">唤醒正在等待的对象监视器所在的所有线程</td>
-</tr>
-<tr>
-<td style="text-align:center">public String toString()</td>
-<td style="text-align:center">返回对象的字符串表示</td>
-</tr>
-<tr>
-<td style="text-align:center">public final void wait()</td>
-<td style="text-align:center">线程等待</td>
-</tr>
-<tr>
-<td style="text-align:center">public final native void wait(long timeout)</td>
-<td style="text-align:center">在规定的时间内线程等待</td>
-</tr>
-<tr>
-<td style="text-align:center">public final void wait(long timeout, int nanos)</td>
-<td style="text-align:center">在规定的时间内线程等待</td>
-</tr>
-</tbody>
-</table>
-<p>我们知道 Java 的继承是单继承的，也即继承树是单根继承，树的根就是 Object 类，Java 中的所有类都直接或间接继承自 Object，无论是否明确指明，无论类是否是抽象类。Object 类可以说是 Java 类的始祖类，其中有一些方法也是预留给了后代类，也即是上面表中没有 final 关键字修饰的方法，有 clone() 方法，equals() 方法，finalize() 方法，hashCode() 方法，toString() 方法，这些都是常见的被子类重写的方法，下面就针对这些方法做一个探讨。</p>
-<p><strong>1、clone() 方法</strong></p>
-<p>从字面意上看，这个方法被设计为克隆对象，返回一个和被克隆的对象一模一样的对象。这个方法被 protect 关键字修饰，说明只能被子类重写和调用。但是在子类重写该方法时，必须要加上一个 “克隆标记” 的接口 Cloneable，这个接口里面什么方法都没有，纯粹就是一个 “标记”。这个方法被 native 关键字修饰，所以可以看出这个是一个本地方法，最终调用的是外部的链接库（C语言或C++写成），非 Java 代码实现。</p>
-<p>下面通过实验看看 clone() 方法的真相。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CloneTest</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CloneTest</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        CloneTest c1 = <span class="keyword">new</span> CloneTest(<span class="string">"小明"</span>);</span><br><span class="line">        CloneTest c2 = (CloneTest) c1.clone();</span><br><span class="line">        System.out.println(c1 == c2); <span class="comment">// false</span></span><br><span class="line">        System.out.println(c1.name == c2.name); <span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码运行的结果已经写在了代码注释中，该类没有实际重写父类中的 clone() 方法，只是简单的调用了父类的 clone() 方法。可以看到 c1 所引用的对象中 name 字段和 c2 所引用的对象的 name 字段地址相同，说明 c1.name 和 c2.name 都是对 “小明” 这一个字符串对象的引用，而并没有因克隆而产生一个新的 “小明” 字符串对象，也即是 clone() 方法本质上只是对 <strong>引用的复制（克隆）</strong>，并没有真正复制对应对象中的内容，所以这只能算是一种 “浅克隆” 或者说是 “浅拷贝”。上面这段代码如果改变 c1.name 的值，c2.name 的值不会跟着改变，但如果 像下面代码这样，改变了 name 对应的值，就会对克隆对象中对应字段的值造成影响。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CloneTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Clothes</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> String name;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Clothes</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line">                </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">People</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> Clothes clothes;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">People</span><span class="params">(Clothes clothes)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.clothes = clothes;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        People p1 = <span class="keyword">new</span> People(<span class="keyword">new</span> Clothes(<span class="string">"测试"</span>));</span><br><span class="line">        People p2 = (People) p1.clone();</span><br><span class="line">        System.out.println(p1 == p2); <span class="comment">// false</span></span><br><span class="line">        System.out.println(p1.clothes == p2.clothes); <span class="comment">// true</span></span><br><span class="line">        System.out.println(p1.clothes.name == p2.clothes.name); <span class="comment">// true</span></span><br><span class="line">        p1.clothes.name = <span class="string">"小明"</span>;</span><br><span class="line">        System.out.println(p2.clothes.name); <span class="comment">// 小明</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>所以要想真正实现 “ 深拷贝”，必须要递归克隆到字段不再是一个类类型的字段，对类类型也要调用对应的 clone () 方法，这样就可以保证引用字段都被复制了一遍。</p>
-<p>上面 People 类中的 clone() 方法可以写成：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">    People people = (People) <span class="keyword">super</span>.clone();</span><br><span class="line">    people.clothes = (Clothes) clothes.clone();</span><br><span class="line">    <span class="keyword">return</span> people;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>2、equals() 方法</strong></p>
-<p>equals方法用来判断两个对象是否相等，Obejct 类中的 equals() 方法和直接使用 == 运算符是一样的，都是看引用是否相同，这点可以从源码中看出。子类可以根据自己的需要重写这个方法，并且重写该方法时遵循以下规则：</p>
+<p><strong>什么是序列化和反序列化？</strong></p>
+<p>序列化是将 Java 对象转换成于平台无关的二进制流，而反序列化则是将二进制流恢复成原来的 Java 对象，二进制流便于保存到磁盘上或者在网络上传输。</p>
+<p><strong>如何实现序列化和反序列化？</strong></p>
+<p>如果想要序列化某个类的对象，就需要让该类实现 Serializable 接口或者 Externalizable 接口。 </p>
+<p>如果实现 Serializable 接口，由于该接口只是个 “标记接口”，接口中不含任何方法，序列化是使用 ObjectOutputStream（处理流）中的 writeObject(obj) 方法将 Java 对象输出到输出流中，反序列化是使用 ObjectInputStream 中的 readObject(in) 方法将输入流中的 Java 对象还原出来（反序列化）。</p>
+<p>下面程序演示实现 Serializable 接口，将对象序列化到文件中，再从文件中反序列化对象。</p>
+<p>Java Bean 类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="comment">// 此次没有提供无参的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 省略 getter 和 setter 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>序列化和反序列化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 序列化</span></span><br><span class="line">        <span class="keyword">try</span> (ObjectOutputStream outputStream = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> File(<span class="string">""</span>).getAbsolutePath()+<span class="string">"/object.txt"</span>))) &#123;</span><br><span class="line">            Person person = <span class="keyword">new</span> Person(<span class="string">"小明"</span>, <span class="number">21</span>);</span><br><span class="line">            outputStream.writeObject(person);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 反序列化</span></span><br><span class="line">        <span class="keyword">try</span> (ObjectInputStream objectInputStream = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">""</span>).getAbsolutePath()+<span class="string">"/object.txt"</span>))) &#123;</span><br><span class="line">            Person person = (Person) objectInputStream.readObject();</span><br><span class="line">            System.out.println(<span class="string">"name:"</span> + person.getName() + <span class="string">",age:"</span> + person.getAge());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为：<code>name:小明,age:21</code></p>
+<p><strong>需要注意的是反序列化读取的仅仅是 Java 对象中的数据，而不是包含 Java 类的信息，所以在反序列化时还需要对象所属类字节码（class）文件，否则会出现 ClassNotFoundException 异常。</strong></p>
+<p>如果实现 Externalizable接口，该接口继承自 Serializable 接口，在 Java Bean 类中实现接口中的 writeExternal(out) 和 readExternal(in) 方法，需要注意的是必须提供默认的无参构造函数，否则反序列失败。</p>
+<p>上面的 Java Bean 代码可修改为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Externalizable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需要提供默认的无参构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeExternal</span><span class="params">(ObjectOutput out)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        out.writeObject(name);</span><br><span class="line">        out.writeInt(age);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">readExternal</span><span class="params">(ObjectInput in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = in.readObject().toString();</span><br><span class="line">        <span class="keyword">this</span>.age = in.readInt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这两种序列化和反序列方式，前一种是使用默认的 Java 实现，而后一种是自定义实现，可以在序列化中选择如何序列化，比如对某个属性加密处理。</p>
+<p><strong>注意序列化属性的顺序要和属性反序列化中的顺序一样，否则不能正常恢复对象。</strong></p>
+<p>其实让类实现 Serializable 也可以实现自定义序列化，只需要在类中提供下面这三个方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutStream out)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObject</span><span class="params">(java.io.ObjectInputStream in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException</span>;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObjectNoData</span><span class="params">()</span> <span class="keyword">throws</span> ObjectStreamException</span>;</span><br></pre></td></tr></table></figure>
+<p>writeObject() 方法的作用和上面 writeExternal() 方法类似，readObject() 方法的作用和上面 readExternal() 方法类似，而 readObjectNoData() 方法是在序列化流不完整、序列化和反序列化版本不一致导致不能正确反序列时调用的。</p>
+<p>使用默认的序列化方式，会将对象中的每个实例属性依次进行序列化，如果某个属性是一个类类型，那么需要保证这个类也要是可序列化的类，否则将不能序列化该对象，在 Java 的序列化机制中，被序列化后的对象都有一个编号，多次序列化同一个对象，除了第一次真正序列化对象外，其他都是保存一个序列化编号。这样的机制带来的问题就是如果在序列化一个对象后，修改了对象中的属性，也不会生效。并不是对象中每个属性都需要序列化的，如被 static 修饰的属性是属于类的，而不是只属于某个对象。使用默认序列化方式，是不会将这些属性序列化的，在自定义的序列化方式中，我们也可以将这些属性忽略掉。除此之外，可以使用 transient 关键字来修饰某个属性，这样默认的序列化方式就不会序列化该属性了，自定义还是可以的。如果在反序列化时强行得到这些没有被序列化的值，得到的会是默认值（0 或 null）。</p>
+<p><strong>序列化和反序列化的版本问题</strong></p>
+<p>在 Java 的序列化机制中，允许给类提供一个 private static final 修饰的 SerialVersionUID 类常量，来作为类版本的代号。这样即使类被修改了（只修改了方法），也会把修改前的类和修改后的类当成同一版本的类，序列化和反序列化照样可以正常使用。如果我们不显式的定义这个 SerialVersionUID，Java 虚拟机会根据类的信息帮我们自动生成，修改前和修改后的计算结果往往不同，造成版本不兼容而发生反序列失败，另外由于平台的差异性，在程序移植中无法反序列化。在现在强大的 IDE 工具下，也都有自动生成 SeriaVersionUID 的方法，这里就不多说了。JDK 中自带的也有生成 SeriaVersionUID 值的工具 serialver.exe，使用 <code>serialver 类名（编译后）</code> 命令就能生成 SeriaVersionUID 啦！</p>
+<p>总结：</p>
 <ul>
-<li>自反性，对象必须与自身相等，即 x.equals(x) 为 true</li>
-<li>对称性，如果 x.equals(y) 为 true，那么 y.equals(x) 也为 true</li>
-<li>传递性，如果 x.equals(y) 为 true，y.equals(z) 为 true，那么 x.equals(z) 也为 true</li>
-<li>一致性，多次调用 equals() 方法，返回值应该始终是 true 或始终是 false</li>
-<li>对于非空的 null 值，x.equals(null) 为 false</li>
+<li>序列化和反序列化的方式可以分为三种，一种是实现 Serializable 接口使用默认的序列化和反序列方式，一种是实现 Serializable 接口但是自定义序列化和反序列方法，另外一种是实现 Externalizable 接口，实现接口中的方法。</li>
+<li>序列化和反序列化要注意版本问题，自定义序列化和反序列化时还要注意属性的顺序要保持一致，这些都可能会导致序列化失败。</li>
 </ul>
-<p>在重写 equals() 方法时，也最好一并重写 hashCode() 方法，使得当 equals() 方法返回 true 时，两个对象的 hashCode 也是相同的。当然这并不是必须的，但为什么要这样做呢？因为如果对象要存储在散列结构（如 HashTable、HashSet、HashMap）中时，判断两个对象是否相等依据是 hashCode() 方法，如果只重写了 equals() 方法，而没有重写 HashCode() 方法，就可能会出现两个对象 equals 是 true，但 hashCode 不同，造成我们认为一样的对象被重复放入这些散列结构中。使用  hashCode 比较对象的另一好处是可以提高性能和搜索效率，从原来的全部查找对比，变为只查找一次，时间复杂度从原来的 O(n) 变为了 O(1)。</p>
-<p>注意： equals 为 true 的对象，hashCode 也是相同的，但是反过来，hashCode 相同的两个对象，equals 不一定为 true。</p>
-<p>equals() 就是一个普通的方法，返回 true 还是 false 的决定权在于我们。</p>
-<p>常用的实现步骤：</p>
-<ul>
-<li>检查是否是同一个对象的引用，如果是，直接返回 true</li>
-<li>检查是否是同一类型，如果不是直接，返回 false，注意这里判断是否是同一类型，不能使用 instanceof 关键字，这个关键字判断的是前面对象是否是后面类的实例或者子类的实例额，不够准确。</li>
-<li>将 Object 对象转型</li>
-<li>判断每个关键域值是否相等（业务的实际需要）</li>
-</ul>
-<p>实例代码如下（来自 GitHub）：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EqualExample</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> y;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> z;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EqualExample</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">        <span class="keyword">this</span>.z = z;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        EqualExample that = (EqualExample) o;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (x != that.x) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (y != that.y) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> z == that.z;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>3、finalize() 方法</strong></p>
-<p>虽然这个方法也可以被子类重写，但是极少被使用，这个方法和 C++ 的析构函数功能是不一样的，C++ 中使用析构函数来清除一个对象，而 Java 中清除对象的工作是由 Java 虚拟机帮我们完成的。Java 中设计这个方法只是想在垃圾回收器将对象从内存中清除前做一些其他自定义的清理工作，在未来的 JDK 版本中，这个方法很有可能会被取消。在 Java 中，与 finalize() 方法相似的有 finally 语句块，用来在异常发生后关闭一些资源（如文件），常和 try .. catch 语句结合使用。final 关键字和 finalize() 看上去也很相似，但是一点关系都没有，final 关键词可以用来修饰变量、属性、方法和类，分别表示常量、属性不可变、方法不可被重写、类不可被继承。</p>
-<p><strong>4、hashCode() 方法</strong></p>
-<p>hashCode() 方法当然就是用来返回一个对象的哈希码（hashCode）啦，hashCode 是一个 int 类型的数字，如果我们没有重写一个类的 toString() 方法，而使用 System.out.println 打印这个类，调用的就是 Object 类中的 toString() 方法，输出格式为 <strong>类名@hashCode的十六进制数</strong> ，其实 hashCode() 方法完全不用手写，强大的 IDE 工具一般都有自动生成的功能，可以帮我们写 hashCode() 方法和 equals() 方法，另外在 JDK7 中新增的 Objects 类，也有个静态方法 hashCode(obj) 可以生成对象的 hashCode 值。</p>
-<p><strong>5、toString() 方法</strong></p>
-<p>这个方法就不多说了，相信都懂，通俗的说就是对象的自我介绍方法，嘿嘿。</p>
 
       
 
@@ -314,7 +236,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Object</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">序列化</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">反序列化</a>
         		</li>
       		
 		</ul>
@@ -370,7 +296,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://wenshixin.gitee.io/blog/2018/08/31/Java基础-Object类中的方法/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://wenshixin.gitee.io/blog/2018/09/02/Java基础-序列化与反序列化/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -384,18 +310,9 @@
   
 <nav id="article-nav">
   
-    <a href="/blog/2018/09/01/Java基础-抽象类和接口/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Java基础-抽象类和接口
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2018/08/28/Java虚拟机内存管理/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java虚拟机内存管理</div>
+    <a href="/blog/2018/09/01/Java基础-抽象类和接口/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java基础-抽象类和接口</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -438,7 +355,7 @@
   
 
   
-  <div id="SOHUCS" sid="Java基础-Object类中的方法" ></div> 
+  <div id="SOHUCS" sid="Java基础-序列化与反序列化" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
