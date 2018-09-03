@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Wizey&#39;s blog">
 <meta property="og:description" content="序列化和反序列化在面试中也经常考查，下面就总结一下 Java 中的序列化和反序列化。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-09-02T06:25:19.237Z">
+<meta property="og:updated_time" content="2018-09-03T01:04:51.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础-序列化与反序列化">
 <meta name="twitter:description" content="序列化和反序列化在面试中也经常考查，下面就总结一下 Java 中的序列化和反序列化。">
@@ -176,32 +176,32 @@
         <p>序列化和反序列化在面试中也经常考查，下面就总结一下 Java 中的序列化和反序列化。</p>
 <a id="more"></a>
 <p><strong>什么是序列化和反序列化？</strong></p>
-<p>序列化是将 Java 对象转换成于平台无关的二进制流，而反序列化则是将二进制流恢复成原来的 Java 对象，二进制流便于保存到磁盘上或者在网络上传输。</p>
+<p>序列化是将 Java 对象转换成与平台无关的二进制流，而反序列化则是将二进制流恢复成原来的 Java 对象，二进制流便于保存到磁盘上或者在网络上传输。</p>
 <p><strong>如何实现序列化和反序列化？</strong></p>
 <p>如果想要序列化某个类的对象，就需要让该类实现 Serializable 接口或者 Externalizable 接口。 </p>
-<p>如果实现 Serializable 接口，由于该接口只是个 “标记接口”，接口中不含任何方法，序列化是使用 ObjectOutputStream（处理流）中的 writeObject(obj) 方法将 Java 对象输出到输出流中，反序列化是使用 ObjectInputStream 中的 readObject(in) 方法将输入流中的 Java 对象还原出来（反序列化）。</p>
+<p>如果实现 Serializable 接口，由于该接口只是个 “标记接口”，接口中不含任何方法，序列化是使用 ObjectOutputStream（处理流）中的 writeObject(obj) 方法将 Java 对象输出到输出流中，反序列化是使用 ObjectInputStream 中的 readObject(in) 方法将输入流中的 Java 对象还原出来。</p>
 <p>下面程序演示实现 Serializable 接口，将对象序列化到文件中，再从文件中反序列化对象。</p>
 <p>Java Bean 类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="comment">// 此次没有提供无参的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 省略 getter 和 setter 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="comment">// 此处没有提供无参的构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 省略 getter 和 setter 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>序列化和反序列化</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 序列化</span></span><br><span class="line">        <span class="keyword">try</span> (ObjectOutputStream outputStream = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> File(<span class="string">""</span>).getAbsolutePath()+<span class="string">"/object.txt"</span>))) &#123;</span><br><span class="line">            Person person = <span class="keyword">new</span> Person(<span class="string">"小明"</span>, <span class="number">21</span>);</span><br><span class="line">            outputStream.writeObject(person);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 反序列化</span></span><br><span class="line">        <span class="keyword">try</span> (ObjectInputStream objectInputStream = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">""</span>).getAbsolutePath()+<span class="string">"/object.txt"</span>))) &#123;</span><br><span class="line">            Person person = (Person) objectInputStream.readObject();</span><br><span class="line">            System.out.println(<span class="string">"name:"</span> + person.getName() + <span class="string">",age:"</span> + person.getAge());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果为：<code>name:小明,age:21</code></p>
-<p><strong>需要注意的是反序列化读取的仅仅是 Java 对象中的数据，而不是包含 Java 类的信息，所以在反序列化时还需要对象所属类字节码（class）文件，否则会出现 ClassNotFoundException 异常。</strong></p>
-<p>如果实现 Externalizable接口，该接口继承自 Serializable 接口，在 Java Bean 类中实现接口中的 writeExternal(out) 和 readExternal(in) 方法，需要注意的是必须提供默认的无参构造函数，否则反序列失败。</p>
+<p><strong>需要注意的是反序列化读取的仅仅是 Java 对象中的数据，而不是包含 Java 类的信息，所以在反序列化时还需要对象所属类的字节码（class）文件，否则会出现 ClassNotFoundException 异常。</strong></p>
+<p>如果实现 Externalizable接口，该接口继承自 Serializable 接口，在 Java Bean 类中实现接口中的 writeExternal(out) 和 readExternal(in) 方法，需要注意的是必须提供默认的无参构造函数，否则反序列化失败。</p>
 <p>上面的 Java Bean 代码可修改为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Externalizable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需要提供默认的无参构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeExternal</span><span class="params">(ObjectOutput out)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        out.writeObject(name);</span><br><span class="line">        out.writeInt(age);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">readExternal</span><span class="params">(ObjectInput in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = in.readObject().toString();</span><br><span class="line">        <span class="keyword">this</span>.age = in.readInt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这两种序列化和反序列方式，前一种是使用默认的 Java 实现，而后一种是自定义实现，可以在序列化中选择如何序列化，比如对某个属性加密处理。</p>
-<p><strong>注意序列化属性的顺序要和属性反序列化中的顺序一样，否则不能正常恢复对象。</strong></p>
-<p>其实让类实现 Serializable 也可以实现自定义序列化，只需要在类中提供下面这三个方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Externalizable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需要提供默认的无参构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 省略 getter 和 setter 方法</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeExternal</span><span class="params">(ObjectOutput out)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        out.writeObject(name);</span><br><span class="line">        out.writeInt(age);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">readExternal</span><span class="params">(ObjectInput in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = in.readObject().toString();</span><br><span class="line">        <span class="keyword">this</span>.age = in.readInt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这两种序列化反序列化方式，前一种是使用默认的 Java 实现，而后一种是自定义实现，可以在序列化中选择如何序列化，比如对某个属性加密处理。</p>
+<p><strong>注意序列化属性的顺序要和属性反序列化中的顺序一样，否则在反序列化时不能恢复出原来的对象。</strong></p>
+<p>其实让类实现 Serializable 接口也是可以实现自定义序列化，只但需要在类中提供下面这三个方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutStream out)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObject</span><span class="params">(java.io.ObjectInputStream in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException</span>;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObjectNoData</span><span class="params">()</span> <span class="keyword">throws</span> ObjectStreamException</span>;</span><br></pre></td></tr></table></figure>
-<p>writeObject() 方法的作用和上面 writeExternal() 方法类似，readObject() 方法的作用和上面 readExternal() 方法类似，而 readObjectNoData() 方法是在序列化流不完整、序列化和反序列化版本不一致导致不能正确反序列时调用的。</p>
-<p>使用默认的序列化方式，会将对象中的每个实例属性依次进行序列化，如果某个属性是一个类类型，那么需要保证这个类也要是可序列化的类，否则将不能序列化该对象，在 Java 的序列化机制中，被序列化后的对象都有一个编号，多次序列化同一个对象，除了第一次真正序列化对象外，其他都是保存一个序列化编号。这样的机制带来的问题就是如果在序列化一个对象后，修改了对象中的属性，也不会生效。并不是对象中每个属性都需要序列化的，如被 static 修饰的属性是属于类的，而不是只属于某个对象。使用默认序列化方式，是不会将这些属性序列化的，在自定义的序列化方式中，我们也可以将这些属性忽略掉。除此之外，可以使用 transient 关键字来修饰某个属性，这样默认的序列化方式就不会序列化该属性了，自定义还是可以的。如果在反序列化时强行得到这些没有被序列化的值，得到的会是默认值（0 或 null）。</p>
+<p>writeObject() 方法的作用和上面 writeExternal() 方法类似，readObject() 方法的作用和上面 readExternal() 方法类似，而 readObjectNoData() 方法是在序列化流不完整、序列化和反序列化版本不一致导致不能正确反序列时调用的容错方法。</p>
+<p>使用默认的序列化方式，会将对象中的每个实例属性依次进行序列化，如果某个属性是一个类类型，那么需要保证这个类也要是可序列化的类，否则将不能序列化该对象。在 Java 的序列化机制中，被序列化后的对象都有一个编号，多次序列化同一个对象，除了第一次真正序列化对象外，其他都是保存一个序列化编号。这样的机制带来的问题就是如果在序列化一个对象后，修改了对象中的属性，也不会生效。并不是对象中每个属性都需要序列化的，如被 static 修饰的属性是属于类的，而不是只属于某个对象。使用默认序列化方式，是不会将这些属性序列化的，在自定义的序列化方式中，我们也可以将这些属性忽略掉。除此之外，可以使用 transient 关键字来修饰某个属性，这样默认的序列化方式就不会序列化该属性了，自定义还是可以的。如果在反序列化时强行得到这些没有被序列化的值，得到的会是默认值（0 或 null）。</p>
 <p><strong>序列化和反序列化的版本问题</strong></p>
-<p>在 Java 的序列化机制中，允许给类提供一个 private static final 修饰的 SerialVersionUID 类常量，来作为类版本的代号。这样即使类被修改了（只修改了方法），也会把修改前的类和修改后的类当成同一版本的类，序列化和反序列化照样可以正常使用。如果我们不显式的定义这个 SerialVersionUID，Java 虚拟机会根据类的信息帮我们自动生成，修改前和修改后的计算结果往往不同，造成版本不兼容而发生反序列失败，另外由于平台的差异性，在程序移植中无法反序列化。在现在强大的 IDE 工具下，也都有自动生成 SeriaVersionUID 的方法，这里就不多说了。JDK 中自带的也有生成 SeriaVersionUID 值的工具 serialver.exe，使用 <code>serialver 类名（编译后）</code> 命令就能生成 SeriaVersionUID 啦！</p>
+<p>在 Java 的序列化机制中，允许给类提供一个 private static final 修饰的 SerialVersionUID 类常量，来作为类版本的代号。这样即使类被修改了（如修改了方法），也会把修改前的类和修改后的类当成同一版本的类，序列化和反序列化照样可以正常使用。如果我们不显式的定义这个 SerialVersionUID，Java 虚拟机会根据类的信息帮我们自动生成，修改前和修改后的计算结果往往不同，造成版本不兼容而发生反序列化失败，另外由于平台的差异性，在程序移植中也可能出现无法反序列化。强大的 IDE 工具，也都有自动生成 SeriaVersionUID 的方法，这里就不多说了。JDK 中自带的也有生成 SeriaVersionUID 值的工具 serialver.exe，使用 <code>serialver 类名（编译后）</code> 命令就能生成该类的 SeriaVersionUID 值啦！</p>
 <p>总结：</p>
 <ul>
-<li>序列化和反序列化的方式可以分为三种，一种是实现 Serializable 接口使用默认的序列化和反序列方式，一种是实现 Serializable 接口但是自定义序列化和反序列方法，另外一种是实现 Externalizable 接口，实现接口中的方法。</li>
-<li>序列化和反序列化要注意版本问题，自定义序列化和反序列化时还要注意属性的顺序要保持一致，这些都可能会导致序列化失败。</li>
+<li>序列化和反序列化的方式可以分为三种，一种是实现 Serializable 接口使用默认的序列化和反序列化方式，一种是实现 Serializable 接口但是自定义序列化和反序列化方法，另外一种是实现 Externalizable 接口，实现接口中的方法。</li>
+<li>序列化和反序列化要注意版本问题，自定义序列化和反序列化时还要注意属性的顺序要保持一致，这些都可能会导致反序列化失败。</li>
 </ul>
 
       
@@ -553,18 +553,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -574,6 +562,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,6 +613,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">序列化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">反序列化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
@@ -625,31 +633,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">序列化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">反序列化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">接口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,11 +653,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,6 +674,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -741,10 +741,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -754,6 +750,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -777,15 +777,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">坑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
