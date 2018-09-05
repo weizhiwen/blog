@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="Wizey&#39;s blog">
 <meta property="og:description" content="这篇文章需要用到 Java 的反射知识，如果对反射还不清楚的小伙伴，可以先移步到这里 《Java进阶-反射》。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="c:/Users/wzw/Desktop/代理模式.png">
-<meta property="og:updated_time" content="2018-09-05T15:52:39.025Z">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/09/04/Java进阶-动态代理/代理模式.png">
+<meta property="og:updated_time" content="2018-09-05T15:54:07.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java进阶-动态代理">
 <meta name="twitter:description" content="这篇文章需要用到 Java 的反射知识，如果对反射还不清楚的小伙伴，可以先移步到这里 《Java进阶-反射》。">
-<meta name="twitter:image" content="c:/Users/wzw/Desktop/代理模式.png">
+<meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/09/04/Java进阶-动态代理/代理模式.png">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -178,8 +178,7 @@
         <p> 这篇文章需要用到 Java 的反射知识，如果对反射还不清楚的小伙伴，可以先移步到这里 <a href="https://wenshixin.gitee.io/blog/2018/09/04/Java%E8%BF%9B%E9%98%B6-%E5%8F%8D%E5%B0%84/">《Java进阶-反射》</a>。</p>
 <a id="more"></a>
 <p>编程思想都是来自于生活的，“代理” 在生活中很常见。比如我们买一个东西时，一般都不会是直接从工厂里买的，而是去商店或者其他的商家买，这些商家做的事情就是代理。再比如，做微商的朋友经常在朋友圈里推广商品，它们也是代理商。Java 程序中的代理是用接口实现的，用户买某件商品的需求就可以看做是一种接口，而真正卖给用户的是代理商，代理商和厂家都和这种需求有直接关系，代理商又和厂家有关系（代理与被代理），也即是下面这幅图。</p>
-
-<p><img src="C:\Users\wzw\Desktop\代理模式.png" alt="代理模式"></p>
+<img src="/blog/2018/09/04/Java进阶-动态代理/代理模式.png" title="代理模式">
 <p>在这里，图中的用户可以看做买东西的人，被代理的接口可以看做是某种商品，代理看做是中间代理商，真正被代理的对象看做是生产商品的工厂或者说是厂家吧。下面我们就以这个为例，实现代理模式。</p>
 <p><em>注：这里将所有的类放在了一个文件夹内，将内部类用 static 修饰，方便使用这些类。</em></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticProxy</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 商品接口</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">interface</span> <span class="title">Goods</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trade</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 商品产地类</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ChangJia</span> <span class="keyword">implements</span> <span class="title">Goods</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trade</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"厂家生产商品"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 商品代理类</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">JingXiaoShang</span> <span class="keyword">implements</span> <span class="title">Goods</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> ChangJia changJia;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">JingXiaoShang</span><span class="params">(ChangJia changJia)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.changJia = changJia;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">trade</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"厂家生产产品，成本为1000元"</span>);</span><br><span class="line">            changJia.trade();</span><br><span class="line">            System.out.println(<span class="string">"经销商卖出商品，利润为100元"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用户购买东西</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Goods proxy = <span class="keyword">new</span> JingXiaoShang(<span class="keyword">new</span> ChangJia());</span><br><span class="line">        proxy.trade(); <span class="comment">// 商品被交易</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -479,47 +478,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">组装</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+                <a href="javascript:void(0)" class="js-tag color3">主机</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -528,14 +491,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">年中总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">组装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">主机</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,10 +506,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -564,6 +515,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,6 +546,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
@@ -615,18 +574,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">equals</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">==</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">序列化</a>
               </li>
              
@@ -640,6 +587,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">接口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">equals</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">==</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,6 +663,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">RBAC模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -820,6 +783,42 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
             
             <div class="clearfix"></div>
