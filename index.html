@@ -151,50 +151,26 @@
     <article id="post-Java进阶-反射" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/09/04/Java进阶-反射/">Java进阶-反射</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/09/04/Java进阶-反射/" class="archive-article-date">
+  	<time datetime="2018-09-04T09:04:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-04</time>
+</a>
+        
+      </header>
+    
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>反射作为 Java 的高级特性，很多框架中都用到了反射的知识，如 Spring，Hibernate等，通过配置就可以动态干预程序的运行，那么什么是反射呢？</p>
-<p>要想理解 Java 反射，首先要弄清类的加载过程，比如这行代码 <code>Person p = new Person();</code>，我们想要创建一个 Person 对象，并用 p 作为对象的引用。在 Java 虚拟机会先执行类的加载，然后才生成对象（分配内存空间）。在类的加载过程中，类加载器负责把类编译好的 class （字节码）文件加入到内存中，并创建一个 Class 对象，这个对象是类 Class 的实例。也就是说，上面的一行的代码看似只是创建了一个 Person 对象，但是如果是第一次使用该类，也即类加载器还未把该类的 class 文件加载到内存中时，还会创建一个 Class 对象。</p>
-<p>在 Java 中，一切都是对象。类是对一类对象的抽象，类是一个概念，而类本身也是一种对象，在 Java 中，它们是 Class 类的对象，当然方法、属性、注解也分别是 Method、Field、Annotation 的对象。这些类都是和反射相关的类，在 java.lang.reflect 包中可以找到。</p>
-<p>我们怎么能干预程序运行期做的事情呢？比如创建一个在编译期不能确定的类。</p>
-<p>我们用反射就可以做到了，<strong>反射是在运行期获取自身的信息，比如某个类的信息，从而可以动态的创建某个类的对象。</strong>上面的问题其实就是一个类在编译期是未知的，在运行期才能知道它究竟是什么类。JDBC 操作数据库第一步加载数据库驱动， <code>Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</code>，这里是 MySQL 数据库，假如某一天我们想换成 Oracle 数据库，你可能会修改 forName() 方法中的参数为 Oracle 数据库驱动名。但其实我们还可以在不修改代码的情况下实现修改，就像大多数框架那样，我们可以使用个写个配置文件，forName() 方法中的参数在配置文件中动态读取，编译好的代码完全不用动，这里其实就是反射的一个应用。另外在我们写代码时，在对象后面敲一个 <code>.</code> ，IDE（如 Eclipse） 就会自动帮我们列出该对象有的方法，这里其实就是IDE使用了反射，通过对象找到该类对应的 Class 对象，从而就可以找到类中的属性和方法。</p>
-<h2 id="1、获取-Class-对象的三种方法"><a href="#1、获取-Class-对象的三种方法" class="headerlink" title="1、获取 Class 对象的三种方法"></a>1、获取 Class 对象的三种方法</h2><p>从上面的介绍中，可以看到这个 Class 对象是我们使用反射的关键，而得到这个对象有下面三种方式。</p>
-<p>1、调用 Class 类的 forName() 静态方法 <code>public static Class&lt;?&gt; forName(String className)</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"Person"</span>)</span><br></pre></td></tr></table></figure>
-<p>上面 JDBC 那里就是使用的这种方法。</p>
-<p><strong>2、调用类的隐藏类属性 class。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person.class</span><br></pre></td></tr></table></figure>
-<p>3、使用对象来获取，调用祖先类 Object 中的方法，<code>public final native Class&lt;?&gt; getClass()</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person p = <span class="keyword">new</span> Person();</span><br><span class="line">p.getClass();</span><br></pre></td></tr></table></figure>
-<p>无论是否显式声明继承，所有类都直接或间接继承自 Object。</p>
-<p>推荐使用第二种方式来获取 Class 对象，因为在编译期就会检查该类是否存在，更加安全，并且因为没有方法调用，使用的是属性，所以性能也更高。</p>
-<h2 id="2、Class-对象中的方法"><a href="#2、Class-对象中的方法" class="headerlink" title="2、Class 对象中的方法"></a>2、Class 对象中的方法</h2><p>可以说我们得到了 Class 对象，就得到了这个类的所有信息了。想一想我们编写的类中有什么信息？如下面这个类</p>
-<p>如果我们得到了 Class 对象，我们就得到了这个对象的一切信息，包括构造方法、属性、方法、注解。</p>
-<p>1、获取属性的方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Field <span class="title">getField</span><span class="params">(String name)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Field[] <span class="title">getFields</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Field <span class="title">getDeclaredField</span><span class="params">(String name)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Field[] <span class="title">getDeclaredFields</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<p>name 为属性的名称</p>
-<p>2、获取构造函数的方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;?&gt;[] <span class="title">getConstructors</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;T&gt; <span class="title">getDeclaredConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Constructor&lt;?&gt;[] <span class="title">getDeclaredConstructors</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<p>构造器在 Java 中也有对应的类 Constructor，parameterTypes 为参数的 Class 对象，这是一个可变参数。</p>
-<p>3、获取普通函数的方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Method[] <span class="title">getMethods</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Method <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Method[] <span class="title">getDeclaredMethods</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<p>name 为方法的名称，parameterTypes 为参数的 Class 对象，这是一个可变参数。</p>
-<p>4、获取注解的方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAnnotation</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> &lt;A extends Annotation&gt; A <span class="title">getAnnotation</span><span class="params">(Class&lt;A&gt; annotationClass)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Annotation[] <span class="title">getAnnotations</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> &lt;A extends Annotation&gt; A <span class="title">getDeclaredAnnotation</span><span class="params">(Class&lt;A&gt; annotationClass)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Annotation[] <span class="title">getDeclaredAnnotations</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> &lt;A extends Annotation&gt; A[] <span class="title">getAnnotationsByType</span><span class="params">(Class&lt;A&gt; annotationClass)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> &lt;A extends Annotation&gt; A[] <span class="title">getDeclaredAnnotationsByType</span><span class="params">(Class&lt;A&gt; annotationClass)</span></span></span><br></pre></td></tr></table></figure>
-<p>annotationClass 为对应的注解类。</p>
-<p>5、其他常用方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> <span class="comment">// 返回 Class 对象表示的类型(类、接口、数组或基本类型)的完整路径名字符串</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">newInstance</span><span class="params">()</span> <span class="comment">// 此方法是 Java 语言 instanceof 操作的动态等价方法</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ClassLoader <span class="title">getClassLoader</span><span class="params">()</span> <span class="comment">// 获取该类的类加载器</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Class&lt;? <span class="keyword">super</span> T&gt; <span class="title">getSuperclass</span><span class="params">()</span> <span class="comment">// 返回表示此 Class 所表示的实体（类、接口、基本类型或 void）的超类的 Class</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isArray</span><span class="params">()</span> <span class="comment">// 如果 Class 对象表示一个数组则返回 true, 否则返回 false</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isInterface</span><span class="params">()</span> <span class="comment">// 判定指定的 Class 对象是否表示一个接口类型</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPrimitive</span><span class="params">()</span> <span class="comment">// 判定指定的 Class 对象是否表示一个 Java 的基本类型</span></span></span><br></pre></td></tr></table></figure>
-<p>下面是测试代码：</p>
-<p>Animal 类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">protected</span> String sex;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Animal</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"动物在跑"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Dog 类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String color;</span><br><span class="line">    <span class="keyword">protected</span> String heart;</span><br><span class="line">    <span class="keyword">private</span> String unknown;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Dog</span><span class="params">(String color)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.run();</span><br><span class="line">        System.out.println(<span class="string">"狗在跑"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fanzhi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"生小狗"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>AnimalTest 类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnimalTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="comment">// 构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">constructorTest</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">        Class dog = Dog.class;</span><br><span class="line">        System.out.println(<span class="string">"获取指定的public构造方法"</span>);</span><br><span class="line">        System.out.println(dog.getConstructor(String.class));</span><br><span class="line">        System.out.println(<span class="string">"获取全部的public构造方法"</span>);</span><br><span class="line">        Constructor[] constructors1 = dog.getConstructors();</span><br><span class="line">        <span class="keyword">for</span>(Constructor constructor : constructors1) &#123;</span><br><span class="line">            System.out.println(constructor);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"获取指定的构造方法，不受访问修饰符的限制"</span>);</span><br><span class="line">        System.out.println(dog.getDeclaredConstructor(String.class));</span><br><span class="line">        System.out.println(<span class="string">"获取全部的构造方法，不受访问修饰符限制"</span>);</span><br><span class="line">        Constructor[] constructors2 = dog.getDeclaredConstructors();</span><br><span class="line">        <span class="keyword">for</span>(Constructor constructor : constructors2) &#123;</span><br><span class="line">            System.out.println(constructor);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">filedTest</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchFieldException </span>&#123;</span><br><span class="line">        Class dog = Dog.class;</span><br><span class="line">        System.out.println(<span class="string">"获取指定的public属性"</span>);</span><br><span class="line">        System.out.println(dog.getField(<span class="string">"color"</span>));</span><br><span class="line">        System.out.println(<span class="string">"获取全部的public属性"</span>);</span><br><span class="line">        Field[] fields1 = dog.getFields();</span><br><span class="line">        <span class="keyword">for</span>(Field field : fields1) &#123;</span><br><span class="line">            System.out.println(field);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"获取指定的属性，不受访问修饰符的限制"</span>);</span><br><span class="line">        System.out.println(dog.getDeclaredField(<span class="string">"unknown"</span>));</span><br><span class="line">        System.out.println(<span class="string">"获取全部的属性，不受访问修饰符限制"</span>);</span><br><span class="line">        Constructor[] constructors2 = dog.getDeclaredConstructors();</span><br><span class="line">        Field[] fields2 = dog.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span>(Field field : fields2) &#123;</span><br><span class="line">            System.out.println(field);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mothodTest</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException </span>&#123;</span><br><span class="line">        Class dog = Dog.class;</span><br><span class="line">        System.out.println(<span class="string">"获取指定的public方法"</span>);</span><br><span class="line">        System.out.println(dog.getMethod(<span class="string">"run"</span>));</span><br><span class="line">        System.out.println(<span class="string">"获取全部的public方法"</span>);</span><br><span class="line">        Method[] methods1 = dog.getMethods();</span><br><span class="line">        <span class="keyword">for</span>(Method method: methods1) &#123;</span><br><span class="line">            System.out.println(method);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"获取指定的方法，不受访问修饰符的限制"</span>);</span><br><span class="line">        System.out.println(dog.getDeclaredMethod(<span class="string">"fanzhi"</span>));</span><br><span class="line">        System.out.println(<span class="string">"获取全部的属性，不受访问修饰符限制"</span>);</span><br><span class="line">        Method[] methods2 = dog.getDeclaredMethods();</span><br><span class="line">        <span class="keyword">for</span>(Method method: methods2) &#123;</span><br><span class="line">            System.out.println(method);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="comment">// 其他测试</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">otherTest</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException </span>&#123;</span><br><span class="line">        Class dogClass = Dog.class;</span><br><span class="line">        Dog dog = (Dog) dogClass.newInstance();</span><br><span class="line">        <span class="comment">// 调用私有方法</span></span><br><span class="line">        Method fanzhi = dogClass.getDeclaredMethod(<span class="string">"fanzhi"</span>);</span><br><span class="line">        System.out.println(fanzhi.isAccessible()); <span class="comment">// 是否取消了权限检查</span></span><br><span class="line">        fanzhi.setAccessible(<span class="keyword">true</span>); <span class="comment">//  取消权限检查</span></span><br><span class="line">        System.out.println(fanzhi.getModifiers()); <span class="comment">// 权限符对应的数字 default：0，public：1，private：2，protected：4,</span></span><br><span class="line">        fanzhi.invoke(dog); <span class="comment">// 执行方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从上面的代码中可以看到，使用反射可以取消权限检查，使平时用一般方式不能访问的方法，可以访问并执行，但这也破坏了类的封装性。</p>
-<p><strong>总结：反射可以使我们的代码更具灵活性，但是反射也会消耗更多的系统资源，所以如果不需要动态创建一个对象，那么就不需要用到反射。</strong></p>
-
+        
       
 
       
@@ -800,15 +776,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Object</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -817,6 +789,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">==</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Object</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -833,6 +809,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">接口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -860,23 +844,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -948,6 +924,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -968,6 +948,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">写作</a>
               </li>
              
@@ -976,7 +960,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -985,10 +969,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">坑</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1009,10 +989,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
             
             <div class="clearfix"></div>

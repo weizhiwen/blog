@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
-  <title>Wizey&#39;s blog</title>
+  <title>Java进阶-反射 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="反射作为 Java 的高级特性，很多框架中都用到了反射的知识，如 Spring，Hibernate等，通过配置就可以动态干预程序的运行，那么什么是反射呢？ 要想理解 Java 反射，首先要弄清类的加载过程，比如这行代码 Person p = new Person();，我们想要创建一个 Person 对象，并用 p 作为对象的引用。在 Java 虚拟机会先执行类的加载，然后才生成对象（分配内存空间">
+  <meta name="description" content="反射作为 Java 的高级特性，很多框架中都用到了反射的知识，如 Spring，Hibernate等，通过配置就可以动态干预程序的运行，那么什么是反射呢？">
 <meta name="keywords" content="进阶,反射">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Wizey&#39;s blog">
+<meta property="og:title" content="Java进阶-反射">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/09/04/Java进阶-反射/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="反射作为 Java 的高级特性，很多框架中都用到了反射的知识，如 Spring，Hibernate等，通过配置就可以动态干预程序的运行，那么什么是反射呢？ 要想理解 Java 反射，首先要弄清类的加载过程，比如这行代码 Person p = new Person();，我们想要创建一个 Person 对象，并用 p 作为对象的引用。在 Java 虚拟机会先执行类的加载，然后才生成对象（分配内存空间">
+<meta property="og:description" content="反射作为 Java 的高级特性，很多框架中都用到了反射的知识，如 Spring，Hibernate等，通过配置就可以动态干预程序的运行，那么什么是反射呢？">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-09-05T03:22:22.331Z">
+<meta property="og:updated_time" content="2018-09-05T04:22:29.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wizey&#39;s blog">
-<meta name="twitter:description" content="反射作为 Java 的高级特性，很多框架中都用到了反射的知识，如 Spring，Hibernate等，通过配置就可以动态干预程序的运行，那么什么是反射呢？ 要想理解 Java 反射，首先要弄清类的加载过程，比如这行代码 Person p = new Person();，我们想要创建一个 Person 对象，并用 p 作为对象的引用。在 Java 虚拟机会先执行类的加载，然后才生成对象（分配内存空间">
+<meta name="twitter:title" content="Java进阶-反射">
+<meta name="twitter:description" content="反射作为 Java 的高级特性，很多框架中都用到了反射的知识，如 Spring，Hibernate等，通过配置就可以动态干预程序的运行，那么什么是反射呢？">
   
   
     <link rel="icon" href="http://ompezbwwe.bkt.clouddn.com/favicon.png">
@@ -151,6 +151,21 @@
             <article id="post-Java进阶-反射" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java进阶-反射
+    </h1>
+  
+
+        
+        <a href="/blog/2018/09/04/Java进阶-反射/" class="archive-article-date">
+  	<time datetime="2018-09-04T09:04:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-04</time>
+</a>
+        
+      </header>
+    
     
       <span class="archive-article-date">
         阅读量 <span id="busuanzi_value_page_pv" style="font-size:bold;"></span>
@@ -159,6 +174,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>反射作为 Java 的高级特性，很多框架中都用到了反射的知识，如 Spring，Hibernate等，通过配置就可以动态干预程序的运行，那么什么是反射呢？</p>
+<a id="more"></a>
 <p>要想理解 Java 反射，首先要弄清类的加载过程，比如这行代码 <code>Person p = new Person();</code>，我们想要创建一个 Person 对象，并用 p 作为对象的引用。在 Java 虚拟机会先执行类的加载，然后才生成对象（分配内存空间）。在类的加载过程中，类加载器负责把类编译好的 class （字节码）文件加入到内存中，并创建一个 Class 对象，这个对象是类 Class 的实例。也就是说，上面的一行的代码看似只是创建了一个 Person 对象，但是如果是第一次使用该类，也即类加载器还未把该类的 class 文件加载到内存中时，还会创建一个 Class 对象。</p>
 <p>在 Java 中，一切都是对象。类是对一类对象的抽象，类是一个概念，而类本身也是一种对象，在 Java 中，它们是 Class 类的对象，当然方法、属性、注解也分别是 Method、Field、Annotation 的对象。这些类都是和反射相关的类，在 java.lang.reflect 包中可以找到。</p>
 <p>我们怎么能干预程序运行期做的事情呢？比如创建一个在编译期不能确定的类。</p>
@@ -596,15 +612,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Object</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,6 +625,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">==</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Object</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,6 +645,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">接口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,23 +680,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -744,6 +760,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -764,6 +784,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">写作</a>
               </li>
              
@@ -772,7 +796,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -781,10 +805,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">坑</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -805,10 +825,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">团队</a>
               </li>
             
             <div class="clearfix"></div>
