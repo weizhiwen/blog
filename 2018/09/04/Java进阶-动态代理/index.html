@@ -17,7 +17,7 @@
 <meta property="og:description" content="这篇文章需要用到 Java 的反射知识，如果对反射还不清楚的小伙伴，可以先移步到这里 《Java进阶-反射》。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="c:/Users/wzw/Desktop/代理模式.png">
-<meta property="og:updated_time" content="2018-09-05T15:50:52.713Z">
+<meta property="og:updated_time" content="2018-09-05T15:52:39.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java进阶-动态代理">
 <meta name="twitter:description" content="这篇文章需要用到 Java 的反射知识，如果对反射还不清楚的小伙伴，可以先移步到这里 《Java进阶-反射》。">
@@ -178,6 +178,7 @@
         <p> 这篇文章需要用到 Java 的反射知识，如果对反射还不清楚的小伙伴，可以先移步到这里 <a href="https://wenshixin.gitee.io/blog/2018/09/04/Java%E8%BF%9B%E9%98%B6-%E5%8F%8D%E5%B0%84/">《Java进阶-反射》</a>。</p>
 <a id="more"></a>
 <p>编程思想都是来自于生活的，“代理” 在生活中很常见。比如我们买一个东西时，一般都不会是直接从工厂里买的，而是去商店或者其他的商家买，这些商家做的事情就是代理。再比如，做微商的朋友经常在朋友圈里推广商品，它们也是代理商。Java 程序中的代理是用接口实现的，用户买某件商品的需求就可以看做是一种接口，而真正卖给用户的是代理商，代理商和厂家都和这种需求有直接关系，代理商又和厂家有关系（代理与被代理），也即是下面这幅图。</p>
+
 <p><img src="C:\Users\wzw\Desktop\代理模式.png" alt="代理模式"></p>
 <p>在这里，图中的用户可以看做买东西的人，被代理的接口可以看做是某种商品，代理看做是中间代理商，真正被代理的对象看做是生产商品的工厂或者说是厂家吧。下面我们就以这个为例，实现代理模式。</p>
 <p><em>注：这里将所有的类放在了一个文件夹内，将内部类用 static 修饰，方便使用这些类。</em></p>
