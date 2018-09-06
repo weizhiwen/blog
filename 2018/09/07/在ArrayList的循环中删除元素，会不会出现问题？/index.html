@@ -8,22 +8,22 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>在ArrayList的循环中删除元素，会不会出现问题？ | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在 ArrayList 的循环中，删除元素，会不会出现问题？我开始觉得应该会有什么问题，但不知道哪里会有问题。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！。">
+  <meta name="description" content="在 ArrayList 的循环中删除元素，会不会出现问题？我开始觉得应该会有什么问题吧，但是不知道问题会在哪里。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！">
 <meta name="keywords" content="Java,ArrayList">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在ArrayList的循环中删除元素，会不会出现问题？">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/09/07/在ArrayList的循环中删除元素，会不会出现问题？/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="在 ArrayList 的循环中，删除元素，会不会出现问题？我开始觉得应该会有什么问题，但不知道哪里会有问题。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！。">
+<meta property="og:description" content="在 ArrayList 的循环中删除元素，会不会出现问题？我开始觉得应该会有什么问题吧，但是不知道问题会在哪里。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/09/07/在ArrayList的循环中删除元素，会不会出现问题？/循环中的正序删除.jpg">
 <meta property="og:image" content="c:/Users/wzw/Desktop/循环中的正序删除.jpg">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/09/07/在ArrayList的循环中删除元素，会不会出现问题？/循环中的倒序删除.jpg">
 <meta property="og:image" content="c:/Users/wzw/Desktop/循环中的倒序删除.jpg">
-<meta property="og:updated_time" content="2018-09-06T14:00:59.135Z">
+<meta property="og:updated_time" content="2018-09-06T23:59:09.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在ArrayList的循环中删除元素，会不会出现问题？">
-<meta name="twitter:description" content="在 ArrayList 的循环中，删除元素，会不会出现问题？我开始觉得应该会有什么问题，但不知道哪里会有问题。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！。">
+<meta name="twitter:description" content="在 ArrayList 的循环中删除元素，会不会出现问题？我开始觉得应该会有什么问题吧，但是不知道问题会在哪里。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！">
 <meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/09/07/在ArrayList的循环中删除元素，会不会出现问题？/循环中的正序删除.jpg">
   
   
@@ -178,7 +178,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在 ArrayList 的循环中，删除元素，会不会出现问题？我开始觉得应该会有什么问题，但不知道哪里会有问题。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！。</p>
+        <p>在 ArrayList 的循环中删除元素，会不会出现问题？我开始觉得应该会有什么问题吧，但是不知道问题会在哪里。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！</p>
 <a id="more"></a>
 <p>不在循环中的删除，是没有问题的，否则这个方法也没有存在的必要了嘛，我们这里讨论的是在循环中的删除，而对 ArrayList 的循环方法也是有多种的，这里定义一个类方法 remove()，先来看段代码吧。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">"aa"</span>);</span><br><span class="line">        list.add(<span class="string">"bb"</span>);</span><br><span class="line">        list.add(<span class="string">"aa"</span>);</span><br><span class="line">        list.add(<span class="string">"bb"</span>);</span><br><span class="line">        list.add(<span class="string">"cc"</span>);</span><br><span class="line">        <span class="comment">// 删除元素 aa</span></span><br><span class="line">        remove(list, <span class="string">"aa"</span>);</span><br><span class="line">        <span class="keyword">for</span> (String str : list) &#123;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(ArrayList&lt;String&gt; list, String elem)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 不同的循环及删除方法</span></span><br><span class="line">        <span class="comment">// 方法一：普通for循环正序删除，删除过程中元素向左移动，不能删除重复的元素</span></span><br><span class="line"><span class="comment">//        for (int i = 0; i &lt; list.size(); i++) &#123;</span></span><br><span class="line"><span class="comment">//            if (list.get(i).equals("bb")) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(list.get(i));</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 方法二：普通for循环倒序删除，删除过程中元素向左移动，可以删除重复的元素</span></span><br><span class="line"><span class="comment">//        for (int i = list.size() - 1; i &gt;= 0; i--) &#123;</span></span><br><span class="line"><span class="comment">//            if (list.get(i).equals("bb")) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(list.get(i));</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 方法三：增强for循环删除，使用ArrayList的remove()方法删除，产生并发修改异常 ConcurrentModificationException</span></span><br><span class="line"><span class="comment">//        for (String str : list) &#123;</span></span><br><span class="line"><span class="comment">//            if (str.equals("aa")) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(str);</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方法四：迭代器，使用ArrayList的remove()方法删除，产生并发修改异常 ConcurrentModificationException</span></span><br><span class="line"><span class="comment">//        Iterator iterator = list.iterator();</span></span><br><span class="line"><span class="comment">//        while (iterator.hasNext()) &#123;</span></span><br><span class="line"><span class="comment">//            if(iterator.next().equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(iterator.next());</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方法五：迭代器，使用迭代器的remove()方法删除，可以删除重复的元素，但不推荐</span></span><br><span class="line"><span class="comment">//        Iterator iterator = list.iterator();</span></span><br><span class="line"><span class="comment">//        while (iterator.hasNext()) &#123;</span></span><br><span class="line"><span class="comment">//            if(iterator.next().equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                iterator.remove();</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -513,19 +513,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">组装</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">主机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,14 +613,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">接口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">序列化</a>
               </li>
              
@@ -629,11 +621,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
+                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color3">接口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,6 +634,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,6 +749,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ArrayList</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CentOS</a>
               </li>
              
@@ -761,7 +765,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ArrayList</a>
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -773,14 +777,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">写作</a>
               </li>
              
@@ -789,11 +785,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -802,6 +794,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">坑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -817,19 +817,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -838,6 +830,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
               </li>
              
               <li class="article-tag-list-item">
