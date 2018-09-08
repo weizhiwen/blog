@@ -17,8 +17,7 @@
 <meta property="og:description" content="在 ArrayList 的循环中删除元素，会不会出现问题？我开始觉得应该会有什么问题吧，但是不知道问题会在哪里。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/09/07/在ArrayList的循环中删除元素，会不会出现问题？/删除.jpg">
-<meta property="og:image" content="c:/Users/wzw/Desktop/删除.jpg">
-<meta property="og:updated_time" content="2018-09-07T14:03:59.474Z">
+<meta property="og:updated_time" content="2018-09-08T06:48:55.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在ArrayList的循环中删除元素，会不会出现问题？">
 <meta name="twitter:description" content="在 ArrayList 的循环中删除元素，会不会出现问题？我开始觉得应该会有什么问题吧，但是不知道问题会在哪里。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！">
@@ -178,8 +177,8 @@
       
         <p>在 ArrayList 的循环中删除元素，会不会出现问题？我开始觉得应该会有什么问题吧，但是不知道问题会在哪里。在经历了一番测试和查阅之后，发现这个“小”问题并不简单！</p>
 <a id="more"></a>
-<p>不在循环中的删除，是没有问题的，否则这个方法也没有存在的必要了嘛，我们这里讨论的是在循环中的删除，而对 ArrayList 的循环方法也是有多种的，这里定义一个类方法 remove()，里面有五种删除的实现方法，有的方法编译就是不能通过的，有的是能通过但不能运行，读者也可以逐个测试。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">"aa"</span>);</span><br><span class="line">        list.add(<span class="string">"bb"</span>);</span><br><span class="line">        list.add(<span class="string">"aa"</span>);</span><br><span class="line">        list.add(<span class="string">"bb"</span>);</span><br><span class="line">        list.add(<span class="string">"cc"</span>);</span><br><span class="line">        <span class="comment">// 删除元素 aa</span></span><br><span class="line">        remove(list, <span class="string">"aa"</span>);</span><br><span class="line">        <span class="keyword">for</span> (String str : list) &#123;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(ArrayList&lt;String&gt; list, String elem)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 五种不同的循环及删除方法</span></span><br><span class="line">        <span class="comment">// 方法一：普通for循环正序删除，删除过程中元素向左移动，不能删除重复的元素</span></span><br><span class="line"><span class="comment">//        for (int i = 0; i &lt; list.size(); i++) &#123;</span></span><br><span class="line"><span class="comment">//            if (list.get(i).equals("bb")) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(list.get(i));</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 方法二：普通for循环倒序删除，删除过程中元素向左移动，可以删除重复的元素</span></span><br><span class="line"><span class="comment">//        for (int i = list.size() - 1; i &gt;= 0; i--) &#123;</span></span><br><span class="line"><span class="comment">//            if (list.get(i).equals("bb")) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(list.get(i));</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 方法三：增强for循环删除，使用ArrayList的remove()方法删除，产生并发修改异常 ConcurrentModificationException</span></span><br><span class="line"><span class="comment">//        for (String str : list) &#123;</span></span><br><span class="line"><span class="comment">//            if (str.equals("aa")) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(str);</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 方法四：迭代器，使用ArrayList的remove()方法删除，产生并发修改异常 ConcurrentModificationException</span></span><br><span class="line"><span class="comment">//        Iterator iterator = list.iterator();</span></span><br><span class="line"><span class="comment">//        while (iterator.hasNext()) &#123;</span></span><br><span class="line"><span class="comment">//            if(iterator.next().equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(iterator.next());</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方法五：迭代器，使用迭代器的remove()方法删除，可以删除重复的元素，但不推荐</span></span><br><span class="line"><span class="comment">//        Iterator iterator = list.iterator();</span></span><br><span class="line"><span class="comment">//        while (iterator.hasNext()) &#123;</span></span><br><span class="line"><span class="comment">//            if(iterator.next().equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                iterator.remove();</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不在循环中的删除，是没有问题的，否则这个方法也没有存在的必要了嘛，我们这里讨论的是在循环中的删除，而对 ArrayList 的循环方法也是有多种的，这里定义一个类方法 remove()，里面有五种删除的实现方法，有的方法运行时会报错，有的是能运行但不能删除完全，读者也可以逐个测试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        list.add(<span class="string">"aa"</span>);</span><br><span class="line">        list.add(<span class="string">"bb"</span>);</span><br><span class="line">        list.add(<span class="string">"bb"</span>);</span><br><span class="line">        list.add(<span class="string">"aa"</span>);</span><br><span class="line">        list.add(<span class="string">"cc"</span>);</span><br><span class="line">        <span class="comment">// 删除元素 bb</span></span><br><span class="line">        remove(list, <span class="string">"bb"</span>);</span><br><span class="line">        <span class="keyword">for</span> (String str : list) &#123;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(ArrayList&lt;String&gt; list, String elem)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 五种不同的循环及删除方法</span></span><br><span class="line">        <span class="comment">// 方法一：普通for循环正序删除，删除过程中元素向左移动，不能删除重复的元素</span></span><br><span class="line"><span class="comment">//        for (int i = 0; i &lt; list.size(); i++) &#123;</span></span><br><span class="line"><span class="comment">//            if (list.get(i).equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(list.get(i));</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 方法二：普通for循环倒序删除，删除过程中元素向左移动，可以删除重复的元素</span></span><br><span class="line"><span class="comment">//        for (int i = list.size() - 1; i &gt;= 0; i--) &#123;</span></span><br><span class="line"><span class="comment">//            if (list.get(i).equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(list.get(i));</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 方法三：增强for循环删除，使用ArrayList的remove()方法删除，产生并发修改异常 ConcurrentModificationException</span></span><br><span class="line"><span class="comment">//        for (String str : list) &#123;</span></span><br><span class="line"><span class="comment">//            if (str.equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(str);</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="comment">// 方法四：迭代器，使用ArrayList的remove()方法删除，产生并发修改异常 ConcurrentModificationException</span></span><br><span class="line"><span class="comment">//        Iterator iterator = list.iterator();</span></span><br><span class="line"><span class="comment">//        while (iterator.hasNext()) &#123;</span></span><br><span class="line"><span class="comment">//            if(iterator.next().equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                list.remove(iterator.next());</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方法五：迭代器，使用迭代器的remove()方法删除，可以删除重复的元素，但不推荐</span></span><br><span class="line"><span class="comment">//        Iterator iterator = list.iterator();</span></span><br><span class="line"><span class="comment">//        while (iterator.hasNext()) &#123;</span></span><br><span class="line"><span class="comment">//            if(iterator.next().equals(elem)) &#123;</span></span><br><span class="line"><span class="comment">//                iterator.remove();</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里我测试了五种不同的删除方法，一种是普通的 for 循环，一种是增强的 foreach 循环，还有一种是使用迭代器循环，一共这三种循环方式。也欢迎你留言和我们讨论哦！</p>
 <p>上面这几种删除方式呢，在删除 list 中单个的元素，也即是没有重复的元素，如 “cc”。在方法三和方法四中都会产生并发修改异常 ConcurrentModificationException，这两个删除方式中都用到了 ArrayList 中的 remove() 方法（快去上面看看代码吧）。而在删除 list 中重复的元素时，会有这么两种情况，一种是这两个重复元素是紧挨着的，如 “bb”，另一种是这两个重复元素没有紧挨着，如 “aa”。删除这种元素时，方法一在删除重复但不连续的元素时是正常的，但在删除重复且连续的元素时，会出现删除不完全的问题，这种删除方式也是用到了 ArrayList 中的 remove() 方法。而另外两种方法都是可以正常删除的，但是不推荐第五种方式，这个后面再说。</p>
 <p>经过对运行结果的分析，发现问题都指向了 ArrayList 中的 remove() 方法，（感觉有种侦探办案的味道，可能是代码写多了的错觉吧，txtx…）那么看 ArrayList 源码是最好的选择了，下面是我截取的关键代码（Java1.8）。</p>
@@ -221,7 +220,6 @@
 <p>这里我有个疑问，第一个 remove() 方法中的代码和 fastRemove() 方法中的代码是完全一样的，第一个 remove() 方法完全可以向第二个 remove() 方法一样调用 fastRemove() 方法嘛，这里代码确实是有些冗余，我又看了 Java10 的源码，这里编码作者已经修改了，而且代码写的很六~，看了半天才看懂大牛的高超的编程技巧，有兴趣的小伙伴可以去看看。</p>
 <p>我们重点关注的是删除过程，学过数据结构的小伙伴可能手写过这样的删除，下面我画个图来让大家更清楚的看到整个删除的过程。以删除 “bb” 为例，当指到下标为 1 的元素时，发现是 “bb”，此处元素应该被删除，根据上面的删除步骤可知，删除位置后面的元素要向前移动，移动之后 “bb” 后面的 “bb” 元素下标为1，后面的元素下标也依次减1，这是在 i = 1 时循环的操作。在下一次循环中 i = 2，第二个 “bb” 元素就被遗漏了，所以这种删除方法在删除连续重复元素时会有问题。但是如果我们使 i 递减循环，也即是方法二的倒序循环，这个问题就不存在了，正序删除和倒序删除如下图所示。</p>
 <img src="/blog/2018/09/07/在ArrayList的循环中删除元素，会不会出现问题？/删除.jpg" title="删除">
-<p><img src="C:\Users\wzw\Desktop\删除.jpg" alt=""></p>
 <p>既然我们已经搞清不能正常删除的原因，那么再来看看方法五中可以正常删除的原因。方法五中使用的是迭代器中的 remove() 方法，通过阅读 ArrayList 的源码可以发现，有两个私有内部类，Itr 和 ListItr，Itr 实现自 Iterator 接口，ListItr 继承 Itr 类和实现自 ListIterator 接口。Itr 类中也有一个 remove() 方法，迭代器实际调用的也正是这个 remove() 方法，我也截取这个方法的源码。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Itr</span> <span class="keyword">implements</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">private</span> <span class="title">class</span> <span class="title">ListItr</span> <span class="keyword">extends</span> <span class="title">Itr</span> <span class="keyword">implements</span> <span class="title">ListIterator</span>&lt;<span class="title">E</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (lastRet &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException();</span><br><span class="line">    checkForComodification(); <span class="comment">// 检查修改次数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ArrayList.<span class="keyword">this</span>.remove(lastRet);</span><br><span class="line">        cursor = lastRet;</span><br><span class="line">        lastRet = -<span class="number">1</span>;</span><br><span class="line">        expectedModCount = modCount;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IndexOutOfBoundsException ex) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -512,19 +510,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,18 +574,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -597,6 +583,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -700,11 +698,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -744,6 +742,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
@@ -765,14 +771,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,6 +802,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">写作</a>
               </li>
              
@@ -812,19 +814,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">坑</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -833,6 +823,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">坑</a>
               </li>
              
               <li class="article-tag-list-item">
