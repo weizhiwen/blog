@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>Java基础-语句块 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、静态代码块定义一个类的源文件（.java）被编译为字节码文件（.class）后，当需要使用某个类时，Java 虚拟机就将该类的字节码文件读入内存，加载类中的信息，静态代码块只被执行一次，且静态代码块不能被访问修饰符（private、default、protected、public）修饰。静态代码块是初始化该类的，而构造函数才是初始化该类具体的对象实例的。 1234// 静态代码块static">
+  <meta name="description" content="代码块也是面试中的常考题，理解了下面这些基本知识，就很容易做出来，开发固然重要，但是基础也要经常回顾。">
 <meta name="keywords" content="Java基础,语句块">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础-语句块">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/09/29/Java基础-语句块总结/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="一、静态代码块定义一个类的源文件（.java）被编译为字节码文件（.class）后，当需要使用某个类时，Java 虚拟机就将该类的字节码文件读入内存，加载类中的信息，静态代码块只被执行一次，且静态代码块不能被访问修饰符（private、default、protected、public）修饰。静态代码块是初始化该类的，而构造函数才是初始化该类具体的对象实例的。 1234// 静态代码块static">
+<meta property="og:description" content="代码块也是面试中的常考题，理解了下面这些基本知识，就很容易做出来，开发固然重要，但是基础也要经常回顾。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java基础-语句块总结/初始化图.png">
-<meta property="og:updated_time" content="2018-09-29T13:57:39.362Z">
+<meta property="og:updated_time" content="2018-09-29T14:01:17.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础-语句块">
-<meta name="twitter:description" content="一、静态代码块定义一个类的源文件（.java）被编译为字节码文件（.class）后，当需要使用某个类时，Java 虚拟机就将该类的字节码文件读入内存，加载类中的信息，静态代码块只被执行一次，且静态代码块不能被访问修饰符（private、default、protected、public）修饰。静态代码块是初始化该类的，而构造函数才是初始化该类具体的对象实例的。 1234// 静态代码块static">
+<meta name="twitter:description" content="代码块也是面试中的常考题，理解了下面这些基本知识，就很容易做出来，开发固然重要，但是基础也要经常回顾。">
 <meta name="twitter:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Java基础-语句块总结/初始化图.png">
   
   
@@ -175,7 +175,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、静态代码块"><a href="#一、静态代码块" class="headerlink" title="一、静态代码块"></a>一、静态代码块</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>一个类的源文件（.java）被编译为字节码文件（.class）后，当需要使用某个类时，Java 虚拟机就将该类的字节码文件读入内存，加载类中的信息，静态代码块只被执行一次，且静态代码块不能被访问修饰符（private、default、protected、public）修饰。静态代码块是初始化该类的，而构造函数才是初始化该类具体的对象实例的。</p>
+        <p>代码块也是面试中的常考题，理解了下面这些基本知识，就很容易做出来，开发固然重要，但是基础也要经常回顾。</p>
+<a id="more"></a>
+<h2 id="一、静态代码块"><a href="#一、静态代码块" class="headerlink" title="一、静态代码块"></a>一、静态代码块</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>一个类的源文件（.java）被编译为字节码文件（.class）后，当需要使用某个类时，Java 虚拟机就将该类的字节码文件读入内存，加载类中的信息，静态代码块只被执行一次，且静态代码块不能被访问修饰符（private、default、protected、public）修饰。静态代码块是初始化该类的，而构造函数才是初始化该类具体的对象实例的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 静态代码块</span></span><br><span class="line"><span class="keyword">static</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="静态代码块执行的时机"><a href="#静态代码块执行的时机" class="headerlink" title="静态代码块执行的时机"></a>静态代码块执行的时机</h3><p>1、显式使用 Class.forName() 加载某个类时。</p>
 <p>2、执行一个类的 main() 方法时。</p>
@@ -204,7 +206,6 @@
 <p>3、执行子类的非静态代码块和字类的构造函数，初始化子类的成员变量。</p>
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Java基础-语句块总结\初始化图.png" alt=""></p>
 <p>在继承中，创建一个子类对象时，会先加载父类文件，执行父类的静态代码块，然后执行子类的静态代码块，再然后才是初始化对象，执行父类的非静态代码块、父类的构造函数，最后执行子类的非静态代码块、子类的构造函数。 </p>
-<p>静态代码块也是面试中的常考题，理解了这些基本知识，就很容易做出来了。</p>
 
       
 
@@ -475,6 +476,50 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">2018</a>
               </li>
              
@@ -507,18 +552,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -531,15 +564,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">上传</a>
+                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,11 +588,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
+                <a href="javascript:void(0)" class="js-tag color3">上传</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,19 +624,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">语句块</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">序列化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">反序列化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">语句块</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,6 +720,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">复习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSH</a>
               </li>
              
@@ -695,19 +740,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据绑定</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">复习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">文件上传与下载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据绑定</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,14 +757,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -744,6 +773,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">团队</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,6 +808,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">写作</a>
               </li>
              
@@ -779,11 +820,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习经验</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -792,6 +833,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">坑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -804,54 +853,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习经验</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
             
             <div class="clearfix"></div>
