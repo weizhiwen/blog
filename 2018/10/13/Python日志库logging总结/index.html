@@ -8,22 +8,22 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>Python日志库logging总结 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在部署项目时，不可能直接将所有的信息都输出到控制台中，我们可以将这些信息记录到日志文件中，这样不仅方便我们查看程序运行时的情况，也可以在项目出现故障时根据运行时产生的日志快速定位问题出现的位置。">
+  <meta name="description" content="在部署项目时，不可能直接将所有的信息都输出到控制台中，我们可以将这些信息记录到日志文件中，这样不仅方便我们查看程序运行时的情况，也可以在项目出现故障时根据程序运行时产生的日志快速定位问题出现的位置。">
 <meta name="keywords" content="Python,logging">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python日志库logging总结">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/10/13/Python日志库logging总结/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="在部署项目时，不可能直接将所有的信息都输出到控制台中，我们可以将这些信息记录到日志文件中，这样不仅方便我们查看程序运行时的情况，也可以在项目出现故障时根据运行时产生的日志快速定位问题出现的位置。">
+<meta property="og:description" content="在部署项目时，不可能直接将所有的信息都输出到控制台中，我们可以将这些信息记录到日志文件中，这样不仅方便我们查看程序运行时的情况，也可以在项目出现故障时根据程序运行时产生的日志快速定位问题出现的位置。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/10/13/Python日志库logging总结/logging流程图.png">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Python日志库logging总结/logging流程图.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/10/13/Python日志库logging总结/默认日志输出格式.png">
 <meta property="og:image" content="d:/CodeWorkspace/GitRepository/SelfFlying/source/_posts/Python日志库logging总结/默认日志输出格式.png">
-<meta property="og:updated_time" content="2018-10-14T03:40:51.794Z">
+<meta property="og:updated_time" content="2018-10-15T00:22:15.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python日志库logging总结">
-<meta name="twitter:description" content="在部署项目时，不可能直接将所有的信息都输出到控制台中，我们可以将这些信息记录到日志文件中，这样不仅方便我们查看程序运行时的情况，也可以在项目出现故障时根据运行时产生的日志快速定位问题出现的位置。">
+<meta name="twitter:description" content="在部署项目时，不可能直接将所有的信息都输出到控制台中，我们可以将这些信息记录到日志文件中，这样不仅方便我们查看程序运行时的情况，也可以在项目出现故障时根据程序运行时产生的日志快速定位问题出现的位置。">
 <meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/10/13/Python日志库logging总结/logging流程图.png">
   
   
@@ -178,7 +178,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在部署项目时，不可能直接将所有的信息都输出到控制台中，我们可以将这些信息记录到日志文件中，这样不仅方便我们查看程序运行时的情况，也可以在项目出现故障时根据运行时产生的日志快速定位问题出现的位置。</p>
+        <p>在部署项目时，不可能直接将所有的信息都输出到控制台中，我们可以将这些信息记录到日志文件中，这样不仅方便我们查看程序运行时的情况，也可以在项目出现故障时根据程序运行时产生的日志快速定位问题出现的位置。</p>
 <a id="more"></a>
 <h4 id="1、日志级别"><a href="#1、日志级别" class="headerlink" title="1、日志级别"></a>1、日志级别</h4><p>Python 标准库 logging 用作记录日志，默认分为六种日志级别（括号为级别对应的数值），NOTSET（0）、DEBUG（10）、INFO（20）、WARNING（30）、ERROR（40）、CRITICAL（50）。我们自定义日志级别时注意不要和默认的日志级别数值相同，logging 执行时输出大于等于设置的日志级别的日志信息，如设置日志级别是 INFO，则 INFO、WARNING、ERROR、CRITICAL 级别的日志都会输出。</p>
 <h4 id="2、logging-流程"><a href="#2、logging-流程" class="headerlink" title="2、logging 流程"></a>2、logging 流程</h4><p>官方的 logging 模块工作流程图如下：</p>
@@ -192,7 +192,7 @@
 <img src="/blog/2018/10/13/Python日志库logging总结/logging流程图.png" title="logging流程图">
 <p><img src="D:\CodeWorkspace\GitRepository\SelfFlying\source\_posts\Python日志库logging总结\logging流程图.png" alt=""></p>
 <ol>
-<li>判断 Logger 对象对于设置的级别是否可用，如果可用，则往下执行，否则，流程结束。</li>
+<li>判断 Logger 对象执行方法（如图中的 info()）时对于设置的级别是否可用，如果可用，则往下执行，否则，流程结束。</li>
 <li>创建 LogRecord 对象，如果注册到 Logger 对象中的 Filter 对象过滤后返回 False，则不记录日志，流程结束，否则，则向下执行。</li>
 <li>LogRecord 对象将 Handler 对象传入当前的 Logger 对象，（图中的子流程）如果 Handler 对象的日志级别大于设置的日志级别，再判断注册到 Handler 对象中的 Filter 对象过滤后是否返回 True 而放行输出日志信息，否则不放行，流程结束。</li>
 <li>如果传入的 Handler 大于 Logger 中设置的级别，也即 Handler 有效，则往下执行，否则，流程结束。</li>
@@ -255,9 +255,9 @@
 <p>但是当发生异常时，直接使用无参数的 debug()、info()、warning()、error()、critical() 方法并不能记录异常信息，需要设置 exc_info 参数为 True 才可以，或者使用 exception() 方法，还可以使用 log() 方法，但还要设置日志级别和 exc_info 参数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(filename=<span class="string">"test.log"</span>, filemode=<span class="string">"w"</span>, format=<span class="string">"%(asctime)s %(name)s:%(levelname)s:%(message)s"</span>, datefmt=<span class="string">"%d-%M-%Y %H:%M:%S"</span>, level=logging.DEBUG)</span><br><span class="line">a = <span class="number">5</span></span><br><span class="line">b = <span class="number">0</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    c = a / b</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="comment"># 下面三种方式三选一，推荐使用第一种</span></span><br><span class="line">    logging.exception(<span class="string">"Exception occurred"</span>)</span><br><span class="line">    logging.error(<span class="string">"Exception occurred"</span>, exc_info=<span class="keyword">True</span>)</span><br><span class="line">    logging.log(level=logging.DEBUG, msg=<span class="string">"Exception occurred"</span>, exc_info=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
 <h4 id="5、自定义-Logger"><a href="#5、自定义-Logger" class="headerlink" title="5、自定义 Logger"></a>5、自定义 Logger</h4><p>上面的基本使用可以让我们快速上手 logging 模块，但一般并不能满足实际使用，我们还需要自定义 Logger。</p>
-<p>一个系统只有一个 Logger 对象，并且该对象不能被直接实例化，没错，这里用到了单例模式，获取 Logger 对象的方法为 <strong>getLogger</strong>。</p>
-<p>注意：这里的单例模式并不是说只有一个 Logger 对象，而是指整个系统只有一个根 Logger 对象，Logger 对象在执行 info()、error() 等方法时实际上调用都是根 Logger 对象对应的 info()、error() 等方法。</p>
-<p>我们可以创造多个 Logger 对象，但是真正输出日志的是根 Logger 对象。每个 Logger 对象都可以设置一个名字，如果设置<code>logger = logging.getLogger(__name__)</code>，__name__ 是 Python 中的一个特殊内置变量，他代表当前模块的名称（默认为 __main__）。则 Logger 对象的 name 为建议使用使用以点号作为分隔符的命名空间等级制度。</p>
+<p>系统中 Logger 对象，不能被直接实例化，获取 Logger 对象的方法为 <strong>getLogger()</strong>，并且这里运用了单例模式。</p>
+<p><strong>注意：这里的单例模式并不是说只有一个 Logger 对象，而是指整个系统只有一个 root Logger 对象，其他 Logger 对象在执行 info()、error() 等方法时实际上调用都是 root Logger 对象对应的 info()、error() 等方法。</strong></p>
+<p>我们可以创造多个 Logger 对象，但是真正输出日志的是root Logger 对象。每个 Logger 对象都可以设置一个名字，如果设置<code>logger = logging.getLogger(__name__)</code>，__name__ 是 Python 中的一个特殊内置变量，他代表当前模块的名称（默认为 __main__）。则 Logger 对象的 name 为建议使用使用以点号作为分隔符的命名空间等级制度。</p>
 <p>Logger 对象可以设置多个 Handler 对象和 Filter 对象，Handler 对象又可以设置 Formatter 对象。Formatter 对象用来设置具体的输出格式，常用变量格式如下表所示，所有参数见 <a href="https://docs.python.org/3.7/library/logging.html#logrecord-attributes" target="_blank" rel="noopener">Python(3.7)官方文档</a>：</p>
 <table>
 <thead>
@@ -663,6 +663,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -671,31 +675,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -755,6 +739,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
               </li>
              
@@ -764,14 +764,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">上传</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -831,6 +823,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">上传</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
               </li>
              
@@ -855,6 +855,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -864,10 +868,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">文件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1003,15 +1003,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">写作</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">互联网杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1027,15 +1027,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">String</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
               </li>
              
               <li class="article-tag-list-item">
