@@ -8,23 +8,23 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>MySQL数据库引擎 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MySQL 作为全世界广受欢迎的数据库，被用于很多中小型的项目中，但是你对 MySQL 数据库的存储引擎了解多少呢？ 1、什么是数据库引擎（这里只对关系型数据库来说）？我们将逻辑表中的数据存储到数据库中，数据库又将我们表中的数据存储到物理设备中（如磁盘，内存）。数据在物理设备上如何存储？如何创建索引？如何进行增删该查操作？对数据在物理设备上的存储和操作方式（或者说是类型、服务）就称为数据库引擎。">
+  <meta name="description" content="MySQL 作为全世界广受欢迎的数据库，被用于很多中小型的项目中，但是你对 MySQL 数据库的存储引擎了解多少呢？">
 <meta name="keywords" content="MySQL,数据库引擎">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL数据库引擎">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="MySQL 作为全世界广受欢迎的数据库，被用于很多中小型的项目中，但是你对 MySQL 数据库的存储引擎了解多少呢？ 1、什么是数据库引擎（这里只对关系型数据库来说）？我们将逻辑表中的数据存储到数据库中，数据库又将我们表中的数据存储到物理设备中（如磁盘，内存）。数据在物理设备上如何存储？如何创建索引？如何进行增删该查操作？对数据在物理设备上的存储和操作方式（或者说是类型、服务）就称为数据库引擎。">
+<meta property="og:description" content="MySQL 作为全世界广受欢迎的数据库，被用于很多中小型的项目中，但是你对 MySQL 数据库的存储引擎了解多少呢？">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/MySQL逻辑架构图.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/查看MySQL包含的数据库引擎.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/InnoDB引擎.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/MyISAM.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/各种引擎比较.png">
-<meta property="og:updated_time" content="2018-11-25T14:22:53.922Z">
+<meta property="og:updated_time" content="2018-11-25T14:24:15.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库引擎">
-<meta name="twitter:description" content="MySQL 作为全世界广受欢迎的数据库，被用于很多中小型的项目中，但是你对 MySQL 数据库的存储引擎了解多少呢？ 1、什么是数据库引擎（这里只对关系型数据库来说）？我们将逻辑表中的数据存储到数据库中，数据库又将我们表中的数据存储到物理设备中（如磁盘，内存）。数据在物理设备上如何存储？如何创建索引？如何进行增删该查操作？对数据在物理设备上的存储和操作方式（或者说是类型、服务）就称为数据库引擎。">
+<meta name="twitter:description" content="MySQL 作为全世界广受欢迎的数据库，被用于很多中小型的项目中，但是你对 MySQL 数据库的存储引擎了解多少呢？">
 <meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/MySQL逻辑架构图.png">
   
   
@@ -180,6 +180,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>MySQL 作为全世界广受欢迎的数据库，被用于很多中小型的项目中，但是你对 MySQL 数据库的存储引擎了解多少呢？</p>
+<a id="more"></a>
 <h2 id="1、什么是数据库引擎（这里只对关系型数据库来说）？"><a href="#1、什么是数据库引擎（这里只对关系型数据库来说）？" class="headerlink" title="1、什么是数据库引擎（这里只对关系型数据库来说）？"></a>1、什么是数据库引擎（这里只对关系型数据库来说）？</h2><p>我们将逻辑表中的数据存储到数据库中，数据库又将我们表中的数据存储到物理设备中（如磁盘，内存）。数据在物理设备上如何存储？如何创建索引？如何进行增删该查操作？对数据在物理设备上的存储和操作方式（或者说是类型、服务）就称为数据库引擎。</p>
 <p>比如，在赛车比赛中，如果赛车手根据不同的比赛地形选择合适的赛车引擎，就能够让赛车跑得更快。MysQL 数据库支持插拔式的存储引擎，可以很方便的更换不同的数据库引擎，相比较而言，赛车手更换引擎就没那么方便了。MySQL 数据库的逻辑架构图如下，可以看到，存储引擎在整个 MySQL 数据库系统中位于底层。</p>
 <img src="/blog/2018/11/26/MySQL数据库引擎/MySQL逻辑架构图.png" title="MySQL逻辑架构图">
@@ -379,7 +380,7 @@
   
   
     <a href="/blog/2018/11/23/Java语言的身世/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">技术趣味史(1)-Java语言的身世</div>
+      <div class="article-nav-title">Java语言的身世</div>
       <i class="icon-circle-right"></i>
     </a>
   
