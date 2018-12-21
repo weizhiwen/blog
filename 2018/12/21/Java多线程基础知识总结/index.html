@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>Java多线程基础知识总结 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0、并发和并行、进程核线程、多进程和多线程的区别： （这里的时间和时刻上的概念同物理上的一样） 并发：在一段时间内多个任务同时执行，或者说是在一段很短的时间内可以执行多条程序指令，宏观上看起来好像是可以同时运行多个进程，单核处理器就可以做到。 并行：在同一时刻多个任务同时执行，或者说是在同一时刻可以执行多条程序指令，多核处理器才可以做到。 进程：进程是程序的一次执行过程，是系统运行程序的基本单位，">
+  <meta name="description" content="0、并发和并行、进程核线程、多进程和多线程的区别：">
 <meta name="keywords" content="Java,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java多线程基础知识总结">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/12/21/Java多线程基础知识总结/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="0、并发和并行、进程核线程、多进程和多线程的区别： （这里的时间和时刻上的概念同物理上的一样） 并发：在一段时间内多个任务同时执行，或者说是在一段很短的时间内可以执行多条程序指令，宏观上看起来好像是可以同时运行多个进程，单核处理器就可以做到。 并行：在同一时刻多个任务同时执行，或者说是在同一时刻可以执行多条程序指令，多核处理器才可以做到。 进程：进程是程序的一次执行过程，是系统运行程序的基本单位，">
+<meta property="og:description" content="0、并发和并行、进程核线程、多进程和多线程的区别：">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/21/Java多线程基础知识总结/线程不同状态之间的转换.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/21/Java多线程基础知识总结/线程的生命周期.png">
-<meta property="og:updated_time" content="2018-12-21T02:07:06.929Z">
+<meta property="og:updated_time" content="2018-12-21T02:09:21.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程基础知识总结">
-<meta name="twitter:description" content="0、并发和并行、进程核线程、多进程和多线程的区别： （这里的时间和时刻上的概念同物理上的一样） 并发：在一段时间内多个任务同时执行，或者说是在一段很短的时间内可以执行多条程序指令，宏观上看起来好像是可以同时运行多个进程，单核处理器就可以做到。 并行：在同一时刻多个任务同时执行，或者说是在同一时刻可以执行多条程序指令，多核处理器才可以做到。 进程：进程是程序的一次执行过程，是系统运行程序的基本单位，">
+<meta name="twitter:description" content="0、并发和并行、进程核线程、多进程和多线程的区别：">
 <meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/12/21/Java多线程基础知识总结/线程不同状态之间的转换.png">
   
   
@@ -177,6 +177,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>0、并发和并行、进程核线程、多进程和多线程的区别：</strong></p>
+<a id="more"></a>
 <p>（这里的时间和时刻上的概念同物理上的一样）</p>
 <p><strong>并发</strong>：在一段时间内多个任务同时执行，或者说是在一段很短的时间内可以执行多条程序指令，宏观上看起来好像是可以同时运行多个进程，单核处理器就可以做到。</p>
 <p><strong>并行</strong>：在同一时刻多个任务同时执行，或者说是在同一时刻可以执行多条程序指令，多核处理器才可以做到。</p>
