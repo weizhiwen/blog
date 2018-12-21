@@ -148,6 +148,188 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java多线程基础知识总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/12/21/Java多线程基础知识总结/">Java多线程基础知识总结</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/12/21/Java多线程基础知识总结/" class="archive-article-date">
+  	<time datetime="2018-12-21T09:57:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-21</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>0、并发和并行、进程核线程、多进程和多线程的区别：</strong></p>
+<p>（这里的时间和时刻上的概念同物理上的一样）</p>
+<p><strong>并发</strong>：在一段时间内多个任务同时执行，或者说是在一段很短的时间内可以执行多条程序指令，宏观上看起来好像是可以同时运行多个进程，单核处理器就可以做到。</p>
+<p><strong>并行</strong>：在同一时刻多个任务同时执行，或者说是在同一时刻可以执行多条程序指令，多核处理器才可以做到。</p>
+<p><strong>进程</strong>：进程是程序的一次执行过程，是系统运行程序的基本单位，打开 Windows 的任务管理器就可以看到很多进程。</p>
+<p><strong>线程</strong>：线程与进程相似，但线程是一个比进程更小的执行单位，一个进程在其执行的过程中可能产生多个线程。</p>
+<p><strong>多进程</strong>：每个进程都拥有自己独立的资源，多个进程可在单核处理器上并发执行，在多核处理器上并行执行。</p>
+<p><strong>多线程</strong>：一个进程可由多个线程组成，多个线程共享进程内资源，多个线程可在单核处理器上并发执行，在多核处理器并行执行。</p>
+<p>在多核处理器上，并发和并行同时存在，处理器上的每个核同一时刻同时执行多个任务，每个核在很短的时间段内又同时执行多个任务，对多任务粗略划分是多个进程，对进程划分可能又是多个线程。同一时刻，处理器的每个核只能运行一个进程中的一个线程中的一条指令（Intel 的超线程技术，如双核四线程，四核八线程，处理器的线程（硬件上）和进程中的线程（软件上）不是一个概念，这个所谓的超线程技术也并不能达到真正的多核，只是尽可能的提高处理器的吞吐量和利用率）。</p>
+<p>线程比进程更加的轻量级，进程和线程都是提高程序并发性和系统性能的手段，但并不是说进程越多或线程越多，性能越高，还要结合硬件设备和操作系统来看。</p>
+<p><strong>1、创建线程的三种方式：</strong></p>
+<ul>
+<li>继承 Thread 类，覆写父类中的 run() 方法，新线程类创建线程</li>
+<li>实现 Runnable 接口，实现接口中的 run() 方法，Thread 类创建线程</li>
+<li>实现 Callable 接口，FutureTask 类构造创建方法体，Thread 类创建线程</li>
+</ul>
+<p><strong>2、三种方式的优劣：</strong></p>
+<p>三种方式的写法见GitHub上的 <a href="https://github.com/weizhiwen/KonwledgeLiboratory/tree/master/%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B" target="_blank" rel="noopener">测试代码</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方式</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">继承 Thread 类</td>
+<td style="text-align:center">编写简单</td>
+<td style="text-align:center">1、受限于 Java 类的单继承，无法继承其他类<br>2、多个线程之间无法共享方法或实例变量</td>
+</tr>
+<tr>
+<td style="text-align:center">实现 Runnable 接口</td>
+<td style="text-align:center">多个线程可共享一个 target 类（实现 Runnable 接口的类），非常适合多个线程处理同一个任务</td>
+<td style="text-align:center">1、run() 方法没有返回值<br>2、不能直接捕获 run() 方法中的异常，需要通过 setDefaultUncaughtExceptionHandler() 方式捕获子线程中的异常</td>
+</tr>
+<tr>
+<td style="text-align:center">实现 Callable 接口</td>
+<td style="text-align:center">1、多个线程可共享一个 target 类（实现 Callable 接口的类），非常适合多个线程处理同一个任务<br>2、call() 方法有返回值<br>3、方法可以抛出异常</td>
+<td style="text-align:center">编写稍微有些复杂</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3、线程的六种状态：</strong></p>
+<p>Thread.State 枚举类中的定义</p>
+<ul>
+<li>NEW：还没开始运行的线程处于这种状态</li>
+<li>RUNNABLE：在 Java 虚拟机中可运行的线程（正在运行也可能没在运行）处于这种状态</li>
+<li>BLOCKED：被阻塞而等待监视锁的线程处于这种状态</li>
+<li>WAITING：无限期的等待另一个线程执行特定方法的线程处于这种状态</li>
+<li>TIMED_WAITING：在指定等待时间内等待另一个线程执行特定的方法的线程处于这种状态</li>
+<li>TERMINATED：已经退出（运行结束）的线程处于这种状态</li>
+</ul>
+<img src="/blog/2018/12/21/Java多线程基础知识总结/线程不同状态之间的转换.png" title="线程不同状态之间的转换">
+<p><strong>4、线程的生命周期：</strong></p>
+<img src="/blog/2018/12/21/Java多线程基础知识总结/线程的生命周期.png" title="线程的生命周期">
+<p><strong>5、线程的分类：</strong></p>
+<p>1、普通线程：前台线程</p>
+<p>2、<strong>守护线程</strong>：</p>
+<p>后台线程，运行在后台为其他线程提供服务，如果所有的前台线程都死亡，后台线程也自动死亡。当整个虚拟机中只剩下后台线程，虚拟机也没有继续运行的必要了，虚拟机也就退出了。</p>
+<p>应用：JVM 虚拟机启动后的后台检测线程，数据库连接池中的检测线程。</p>
+<p>最常见的守护线程：虚拟机中的垃圾回收线程，可以通过 jstack、jconsole、jvisualvm 等工具查看。</p>
+<p><strong>6、线程中的常用方法说明：</strong></p>
+<ul>
+<li><p><strong>start()</strong>：</p>
+<p>在使用 new 关键字创建一个线程后（New 状态），并不表现出任何的线程活动状态（非 New、Terminated 状态，可以使用 isAlive 方法检测线程的活动状态），CPU 也不会执行线程中的代码。</p>
+<p>只有在 start() 方法执行后，才表示这个线程可运行了（Runnable 状态），至于何时真正运行还要看线程调度器的调度。</p>
+<p>在线程死亡后，不要再次调用 start() 方法。只能对新建状态的线程调用且只能调用一次 start() 方法，否则将抛出 IllegalThreadStateException 异常。</p>
+</li>
+<li><p><strong>run()</strong>：</p>
+<p>启动线程是 start() 方法，而不是 run() 方法。</p>
+<p>如果直接调用 run() 方法，这个线程中的代码会被立即执行，多个线程就无法并发执行了。</p>
+</li>
+<li><p><strong>join()</strong>：</p>
+<p>等待该线程完成的方法，其他线程将进入等待状态（Waiting 状态），通常由使用线程的程序（线程）调用，如将一个大问题分割为许多小问题，要等待所有的小问题处理后，再进行下一步操作。</p>
+</li>
+<li><p><strong>sleep()</strong>：</p>
+<p>主动放弃占用的处理器资源，该线程进入阻塞状态（Blocked 状态），指定的睡眠时间超时后，线程进入就绪状态（Runnable），等待线程调度器的调用。</p>
+</li>
+<li><p><strong>yield()</strong>：</p>
+<p>主动放弃占用的处理器资源，线程直接进入就绪状态（Runnable），等待线程调度器的调用。</p>
+<p>可能的情况是当线程使用 yield 方法放弃执行后，线程调度器又将该线程调度<strong>执行。</strong></p>
+</li>
+<li><p>interrupt()：</p>
+<p>没有任何强制线程终止的方法，这个方法只是请求线程终止，而实际上线程并不一定会终止，在调用 sleep() 方法时可能会出现 InterruptedException 异常，你可能会想在异常捕获后（try-catch语句中的catch）请求线程终止，而更好的选择是不处理这个异常，抛给调用者处理，所以这个方法并没有实际的用途，还有 isInterrupted() 方法检查线程是否被中断。</p>
+</li>
+<li><p><strong>setDaemon()</strong>：</p>
+<p>设置守护进程，该方法必须在 start() 方法之前调用，判断一个线程是不是守护线程，可以使用 isDaemon() 方法判断。</p>
+</li>
+<li><p><strong>setPriority()</strong>：</p>
+<p>设置线程的优先级，理论上来说，线程优先级高的线程更容易被执行，但也要结合具体的系统。</p>
+<p>每个线程默认的优先级和父线程（如 main 线程、普通优先级）的优先级相同，线程优先级区间为 1~10，三个静态变量：MIN_PRIORITY = 1、NORM_PRIORITY = 5、MAX_PRIORITY = 10。</p>
+<p>使用 getPriority() 方法可以查看线程的优先级。</p>
+</li>
+<li><p><strong>isAlive()</strong>：</p>
+<p>检查线程是否处于活动状态，如果线程处于就绪、运行、阻塞状态，方法返回 true，如果线程处于新建和死亡状态，方法返回 false。</p>
+</li>
+</ul>
+
+      
+      
+      
+		
+		  <div class="declare" hidden="hidden"></div>
+		
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">多线程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2018/12/21/Java多线程基础知识总结/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-HashMap个人理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -484,89 +666,9 @@
 
 
   
-    <article id="post-算法的复杂度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/11/28/算法的复杂度/">算法的复杂度</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2018/11/28/算法的复杂度/" class="archive-article-date">
-  	<time datetime="2018-11-28T14:53:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-28</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="0、什么是算法的复杂度？"><a href="#0、什么是算法的复杂度？" class="headerlink" title="0、什么是算法的复杂度？"></a>0、什么是算法的复杂度？</h2><p>对于任何一个程序来说，都可以从三个方面进行分析，分别是 <strong>输入</strong>、<strong>处理</strong>、<strong>输出</strong>，也即 <strong>IPO</strong>（Input、Process、Output），这种分析方法对硬件和软件程序都是适用的。</p>
-        
-      
-      
-      
-		
-		  <div class="declare" hidden="hidden"></div>
-		
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2018/11/28/算法的复杂度/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/14/">14</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/15/">15</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -675,14 +777,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -691,19 +785,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编程技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,6 +814,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编程技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -763,18 +865,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -784,6 +874,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编译源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">安装</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,10 +909,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">各个版本的特性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">上传</a>
               </li>
              
@@ -820,6 +918,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">各个版本的特性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -851,14 +953,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">接口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
@@ -867,7 +961,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+                <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">接口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -879,6 +981,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">技术趣味史</a>
               </li>
              
@@ -887,19 +993,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IO</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+                <a href="javascript:void(0)" class="js-tag color3">IO</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LinkedList</a>
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -912,6 +1014,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">文件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LinkedList</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -931,14 +1037,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">数据库引擎</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">OA系统</a>
               </li>
              
@@ -948,6 +1046,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">RBAC模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">数据库引擎</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -991,11 +1097,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编译 Java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Win10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1011,15 +1121,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Win10</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">环境配置</a>
+                <a href="javascript:void(0)" class="js-tag color3">编译 Java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1039,14 +1145,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
@@ -1055,7 +1153,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1064,10 +1174,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">互联网杂谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1095,10 +1201,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">MFC</a>
               </li>
              
@@ -1108,6 +1210,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">脚本</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
               </li>
              
               <li class="article-tag-list-item">
