@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>Java虚拟机内存管理知识总结 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0、Java 对内存的划分：  Java虚拟机规范将物理内存（主内存和CPU中的缓存、寄存器）划分为 程序计数器、Java 虚拟机栈、本地方法栈、Java 堆、方法区五个区域，但并没有规定这些区域的具体实现，在其他地方听到的一些名词（如永久代、元空间等，这些都是方法区的具体实现）可能都是这些区域具体的实现，这点要特别注意，别被这些概念搞晕。 各个区域的特点如下表：    区域 线程关系 内存异常">
+  <meta name="description" content="0、Java 对内存的划分：">
 <meta name="keywords" content="Java,虚拟机,总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java虚拟机内存管理知识总结">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/12/28/Java虚拟机内存管理知识总结/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="0、Java 对内存的划分：  Java虚拟机规范将物理内存（主内存和CPU中的缓存、寄存器）划分为 程序计数器、Java 虚拟机栈、本地方法栈、Java 堆、方法区五个区域，但并没有规定这些区域的具体实现，在其他地方听到的一些名词（如永久代、元空间等，这些都是方法区的具体实现）可能都是这些区域具体的实现，这点要特别注意，别被这些概念搞晕。 各个区域的特点如下表：    区域 线程关系 内存异常">
+<meta property="og:description" content="0、Java 对内存的划分：">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/28/Java虚拟机内存管理知识总结/内存划分.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/28/Java虚拟机内存管理知识总结/双亲委派模型.png">
@@ -24,10 +24,10 @@
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/28/Java虚拟机内存管理知识总结/标记-复制算法.jpg">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/28/Java虚拟机内存管理知识总结/标记-整理算法.jpg">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/28/Java虚拟机内存管理知识总结/分代收集算法.jpg">
-<meta property="og:updated_time" content="2018-12-28T01:14:08.559Z">
+<meta property="og:updated_time" content="2018-12-28T01:18:46.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机内存管理知识总结">
-<meta name="twitter:description" content="0、Java 对内存的划分：  Java虚拟机规范将物理内存（主内存和CPU中的缓存、寄存器）划分为 程序计数器、Java 虚拟机栈、本地方法栈、Java 堆、方法区五个区域，但并没有规定这些区域的具体实现，在其他地方听到的一些名词（如永久代、元空间等，这些都是方法区的具体实现）可能都是这些区域具体的实现，这点要特别注意，别被这些概念搞晕。 各个区域的特点如下表：    区域 线程关系 内存异常">
+<meta name="twitter:description" content="0、Java 对内存的划分：">
 <meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/12/28/Java虚拟机内存管理知识总结/内存划分.png">
   
   
@@ -183,6 +183,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>0、Java 对内存的划分：</strong></p>
+<a id="more"></a>
 <img src="/blog/2018/12/28/Java虚拟机内存管理知识总结/内存划分.png" title="内存划分">
 <p>Java虚拟机规范将物理内存（主内存和CPU中的缓存、寄存器）划分为 <strong>程序计数器</strong>、<strong>Java 虚拟机栈</strong>、<strong>本地方法栈</strong>、<strong>Java 堆</strong>、<strong>方法区</strong>五个区域，但并没有规定这些区域的具体实现，在其他地方听到的一些名词（如永久代、元空间等，这些都是方法区的具体实现）可能都是这些区域具体的实现，这点要特别注意，别被这些概念搞晕。</p>
 <p>各个区域的特点如下表：</p>
