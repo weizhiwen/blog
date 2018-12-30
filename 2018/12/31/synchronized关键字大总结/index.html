@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://wenshixin.gitee.io/blog">
   <title>synchronized关键字大总结 | Wizey&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0、synchronized 的特点： 可以保证代码的原子性和可见性。 1、synchronized 的性质： 可重入（可以避免死锁、单个线程可以重复拿到某个锁，锁的粒度是线程而不是调用）、不可中断（其实也就是上面的原子性） 2、synchronized 的分类：  按照作用对象划分为 对象锁、类锁 按照作用位置划分为 代码块、方法（静态和非静态） 按照具体细节划分为 实例（普通方法）同步方法、静">
+  <meta name="description" content="全面对 synchronized 进行总结。">
 <meta name="keywords" content="synchronized">
 <meta property="og:type" content="article">
 <meta property="og:title" content="synchronized关键字大总结">
 <meta property="og:url" content="http://wenshixin.gitee.io/blog/2018/12/31/synchronized关键字大总结/index.html">
 <meta property="og:site_name" content="Wizey&#39;s blog">
-<meta property="og:description" content="0、synchronized 的特点： 可以保证代码的原子性和可见性。 1、synchronized 的性质： 可重入（可以避免死锁、单个线程可以重复拿到某个锁，锁的粒度是线程而不是调用）、不可中断（其实也就是上面的原子性） 2、synchronized 的分类：  按照作用对象划分为 对象锁、类锁 按照作用位置划分为 代码块、方法（静态和非静态） 按照具体细节划分为 实例（普通方法）同步方法、静">
+<meta property="og:description" content="全面对 synchronized 进行总结。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/31/synchronized关键字大总结/Synchronized关键字加解锁原理1.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/31/synchronized关键字大总结/Synchronized关键字加解锁原理2.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/31/synchronized关键字大总结/可见性原理.png">
-<meta property="og:updated_time" content="2018-12-30T10:54:36.799Z">
+<meta property="og:updated_time" content="2018-12-30T10:57:51.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="synchronized关键字大总结">
-<meta name="twitter:description" content="0、synchronized 的特点： 可以保证代码的原子性和可见性。 1、synchronized 的性质： 可重入（可以避免死锁、单个线程可以重复拿到某个锁，锁的粒度是线程而不是调用）、不可中断（其实也就是上面的原子性） 2、synchronized 的分类：  按照作用对象划分为 对象锁、类锁 按照作用位置划分为 代码块、方法（静态和非静态） 按照具体细节划分为 实例（普通方法）同步方法、静">
+<meta name="twitter:description" content="全面对 synchronized 进行总结。">
 <meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2018/12/31/synchronized关键字大总结/Synchronized关键字加解锁原理1.png">
   
   
@@ -177,7 +177,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>0、synchronized 的特点：</strong></p>
+        <p>全面对 synchronized 进行总结。</p>
+<a id="more"></a>
+<p><strong>0、synchronized 的特点：</strong></p>
 <p>可以保证代码的原子性和可见性。</p>
 <p><strong>1、synchronized 的性质：</strong></p>
 <p>可重入（可以避免死锁、单个线程可以重复拿到某个锁，锁的粒度是线程而不是调用）、不可中断（其实也就是上面的原子性）</p>
