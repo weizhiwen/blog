@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Wizey&#39;s blog">
 <meta property="og:description" content="Hexo 中的博客文章都是用 Markdown 来写的，在 Markdown 中解决上传到码云上的显示不正常的问题，是通过先找到项目的根路径，在逐层寻找图片存放的位置。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-03-10T03:57:51.343Z">
+<meta property="og:updated_time" content="2019-01-02T01:22:50.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于Hexo博客文章中图片引用问题">
 <meta name="twitter:description" content="Hexo 中的博客文章都是用 Markdown 来写的，在 Markdown 中解决上传到码云上的显示不正常的问题，是通过先找到项目的根路径，在逐层寻找图片存放的位置。">
@@ -177,7 +177,7 @@
 <a id="more"></a>
 <p>而在 Hexo 中 Markdown 的图片使用并不是这样的，Hexo 官网上给出了 <a href="https://hexo.io/zh-cn/docs/asset-folders.html#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%BC%95%E7%94%A8%E7%9A%84%E6%A0%87%E7%AD%BE%E6%8F%92%E4%BB%B6" target="_blank" rel="noopener">资源文件夹</a> 的介绍，正确的引用图片方式是使用下列的标签插件。</p>
 <p>在使用标签插件时，需要在 Hexo 的 _config.yml 文件中把 post_asset_folder 选项设置为 true，这样在使用 <code>hexo new 博客文章名</code> 命令创建新的博客时，会在 source 目录中的 post 文件夹下创建该博客文章的 Markdown 文件，并且还会创建一个用来存放该篇博客文章相关的静态资源，比如说图片，这样也便于对文章资源的分类。</p>
-<p>在博客文章中，我们需要引入图片时，则先把图片放入到该篇文章的资源文件夹，在正文使用图片的标签插件， <code></code> ，asset_img 代表引用图片，example.jpg 是要引用的图片的名称，This is an example image 为给图片加的标注信息（鼠标放上去可以显示出来）。</p>
+<p>在博客文章中，我们需要引入图片时，则先把图片放入到该篇文章的资源文件夹，在正文使用图片的标签插件，  ，asset_img 代表引用图片，example.jpg 是要引用的图片的名称，This is an example image 为给图片加的标注信息（鼠标放上去可以显示出来）。</p>
 <p>这样该博客文章的图片就显示正常了。</p>
 <p>其实万能的解决方法是，讲图片这些静态资源存放到专门的服务器上，推荐使用 <a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a>。我们在使用图片时，使用图片的 web url 就可以访问到，不过这样做的弊端时，如果服务器不能正常工作，所有的图片链接都会失效，博客中引用的图片资源都会无法显示。而上面的解决方法虽然保证了图片和文章在同一个项目中，但是会增加项目的占用空间，各有利弊。</p>
 
@@ -413,7 +413,7 @@ gitalk.render('gitalk-container')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Wizey &nbsp;&nbsp;
+    		&copy; 2019 Wizey &nbsp;&nbsp;
         <span id="busuanzi_container_site_uv">本站访客数 <span id="busuanzi_value_site_uv" style="font-size:bold;"></span> 人
         </span> 
         <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
