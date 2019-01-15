@@ -17,9 +17,10 @@
 <meta property="og:description" content="手里没有那么多云服务器（还是家里没矿呀~），所以想用虚拟机虚拟出几台机器搭建一些软件的集群环境，但虚拟机中的系统 IP地址默认是动态分配的，这就给连接带来了很大的麻烦，启动虚拟机运行系统，然后在主机中使用终端工具更加方便的连接这些机器（假装自己有很多的服务器~）。给机器配置静态 IP，使用 IP地址给每台机器编号，也有利于使用终端连接和使用。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2019/01/15/在虚拟机中配置静态IP/给机器编号.png">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2019/01/15/在虚拟机中配置静态IP/VMware方式.gif">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2019/01/15/在虚拟机中配置静态IP/VirtualBox方式.gif">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2019/01/15/在虚拟机中配置静态IP/系统环境配置.png">
-<meta property="og:updated_time" content="2019-01-14T16:24:37.185Z">
+<meta property="og:updated_time" content="2019-01-15T03:21:48.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在虚拟机中配置静态IP">
 <meta name="twitter:description" content="手里没有那么多云服务器（还是家里没矿呀~），所以想用虚拟机虚拟出几台机器搭建一些软件的集群环境，但虚拟机中的系统 IP地址默认是动态分配的，这就给连接带来了很大的麻烦，启动虚拟机运行系统，然后在主机中使用终端工具更加方便的连接这些机器（假装自己有很多的服务器~）。给机器配置静态 IP，使用 IP地址给每台机器编号，也有利于使用终端连接和使用。">
@@ -184,7 +185,7 @@
 <p>1、虚拟机设置中使用NAT模式。</p>
 <p>2、虚拟机编辑器中的子网IP，DHCP 设置中的 IP 地址范围（后面在系统中设置IP地址时要在这个范围内），NAT 设置中的网关（后面也要用到，要记住）。</p>
 <p>3、在系统的网络连接中，找到 VMnet8 网卡，属性中查看 IPv4 的配置，是否和虚拟机编辑器中配置的相同，IP 地址、子网掩码：255.255.255.0、默认网关和虚拟机编辑器设置的网关保持一致。</p>
-
+<img src="/blog/2019/01/15/在虚拟机中配置静态IP/VMware方式.gif" title="VMware方式">
 <h2 id="2、VirtualBox-中的配置"><a href="#2、VirtualBox-中的配置" class="headerlink" title="2、VirtualBox 中的配置"></a>2、VirtualBox 中的配置</h2><p><strong>关键地方：</strong></p>
 <p>1、虚拟机系统设置中，网络中的网卡1设置为仅主机（Host-Only）网络（连通外部物理主机的网络），网卡2设置为网络地址转换（配置静态IP）。</p>
 <p>2、管理菜单中的主机网络管理器，IPv4地址（后面要用），DHCP 服务器，设置服务器地址（和前面的IPv4保持一致即可），地址范围。</p>
@@ -514,6 +515,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -535,14 +544,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">编程技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,6 +615,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">NoSQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
               </li>
              
@@ -630,19 +643,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">NoSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">各个版本的特性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,10 +656,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">各个版本的特性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,6 +668,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Object</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,10 +688,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">反序列化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Object</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,6 +711,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java 虚拟机</a>
               </li>
              
@@ -727,10 +732,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">技术趣味史</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -810,6 +811,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">logging</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SQLite3</a>
               </li>
              
@@ -823,10 +828,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">logging</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -898,6 +899,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
@@ -951,14 +960,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Eclipse</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
               </li>
              
               <li class="article-tag-list-item">
