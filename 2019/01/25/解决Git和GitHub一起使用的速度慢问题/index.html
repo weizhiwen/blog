@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="Wizey&#39;s blog">
 <meta property="og:description" content="GitHub 由于是国外的服务器，再加上国内的安全保护，所以日常访问速度很慢，一般都要借助一些工具（tz）来提高访问速度，但是想要提高 git clone、push、pull 的速度，还需要做些其他事情。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-01-25T03:24:52.675Z">
+<meta property="og:image" content="http://wenshixin.gitee.io/blog/2019/01/25/解决Git和GitHub一起使用的速度慢问题/路由表记录.png">
+<meta property="og:updated_time" content="2019-01-25T03:27:23.322Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决Git和GitHub一起使用的速度慢问题">
 <meta name="twitter:description" content="GitHub 由于是国外的服务器，再加上国内的安全保护，所以日常访问速度很慢，一般都要借助一些工具（tz）来提高访问速度，但是想要提高 git clone、push、pull 的速度，还需要做些其他事情。">
+<meta name="twitter:image" content="http://wenshixin.gitee.io/blog/2019/01/25/解决Git和GitHub一起使用的速度慢问题/路由表记录.png">
   
   
     <link rel="icon" href="/blog/img/favicon.png">
@@ -177,6 +179,7 @@
 <a id="more"></a>
 <p>首先可以使用 ping 命令，ping 下 github.com 这个域名，看是否会有请求超时的情况，一步步查找速度慢的原因。如果是请求超时，就很可能和 DNS 解析有关系，这个和你使用的运营商也有关，每个人要根据实际情况来处理，可以直接修改 hosts 文件来绕过 DNS 解析提高访问速度。</p>
 <p>访问 <a href="https://www.ipaddress.com/，查找" target="_blank" rel="noopener">https://www.ipaddress.com/，查找</a> GitHub 的 DNS 路由记录，将第一条设为 github.com 的访问地址，重启 DNS 解析，windows 系统是 <code>ipconfig/flushdns</code>，Linux 下要安装 nscd ，然后刷新这个守护进程，具体可参看这篇文章《<a href="https://www.cnblogs.com/EasonJim/p/10014517.html" target="_blank" rel="noopener">Linux下刷新DNS缓存（Ubuntu/CentOS）</a>》</p>
+<img src="/blog/2019/01/25/解决Git和GitHub一起使用的速度慢问题/路由表记录.png" title="路由表记录">
 <p>然后再次 <code>ping github.com</code>，看是否还是请求超时，如果不超时了，可以访问 GitHub 和使用 git 和 GitHub 交互，测试速度，此时速度已有很大改观。</p>
 <p>如果想进一步提高速度，可以使用 SSR 工具，在 git 中配置代理，<strong>注意端口号以你 SSR 上的为准</strong>。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http.proxy=http://127.0.0.1:1088</span><br><span class="line">https.proxy=https://127.0.0.1:1088</span><br></pre></td></tr></table></figure>
@@ -507,11 +510,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">字符编码</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">字符编码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,19 +574,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,10 +614,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">HashMap</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
               </li>
              
@@ -624,6 +623,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">HashMap</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,15 +750,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">目录</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">文件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -819,11 +822,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">文件上传与下载</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据绑定</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据绑定</a>
+                <a href="javascript:void(0)" class="js-tag color3">文件上传与下载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -919,11 +922,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习经验</a>
+                <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习经验</a>
               </li>
              
               <li class="article-tag-list-item">
