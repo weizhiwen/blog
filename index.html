@@ -170,115 +170,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>托管在本站上的 <a href="https://wenshixin.gitee.io/py3/">Redis 学习讲义</a>。</p>
-<h2 id="1、数据类型"><a href="#1、数据类型" class="headerlink" title="1、数据类型"></a>1、数据类型</h2><p>Redis key（键）的类型只能为字符串，value （值）的类型如下 5 种类型：</p>
-<p>- string —— 字符串</p>
-<p>- hash —— 无序散列表</p>
-<p>- list —— 列表</p>
-<p>- set —— 无序集合</p>
-<p>- zset —— 有序集合</p>
-<p>## 2、操作命令</p>
-<p><em>&gt;**说明这里的命令只是 Redis 命令的冰山一角，更多命令的详细介绍可以参看这里</em> <em>[</em>Redis 中文网的命令中心<em>]**(</em><a href="http://redis.cn/commands.html*)**，重要！！！*" target="_blank" rel="noopener">http://redis.cn/commands.html*)**，重要！！！*</a></p>
-<p>### 2.1 string</p>
-<p>对整个字符串或者字符串的其中一部分执行操作，对整数和浮点数执行自增或者自减操作。</p>
-<p>- <code>set key value</code> 添加或修改（对已存在的键）单个字符串</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">set</span> name xiaoming</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>get key</code> 获取（查询）键对应的字符串值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">get name</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>del key</code> 删除键和对应的值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">del key </span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>mset key value [key value ...]</code> 添加或修改（已存在的键）多个字符串</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mset user1 xiaoming user2 xiaohong</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>mget key [key ...]</code> 获取（查询）多个键对应的字符串值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mget user1 user2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>incr key</code> 对整数型的字符串加 1</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">set</span> age 21</span><br><span class="line"></span><br><span class="line">incr age // 22</span><br><span class="line"></span><br><span class="line">get age  // 22</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>decr key</code> 对整数型的字符串减 1</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">set</span> age 22</span><br><span class="line"></span><br><span class="line">decr age // 21</span><br><span class="line"></span><br><span class="line">get age  // 21</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>append key value</code> 追加值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">set</span> name aaa</span><br><span class="line"></span><br><span class="line">get name // aaa</span><br><span class="line"></span><br><span class="line">append name bbb</span><br><span class="line"></span><br><span class="line">get name // aaabbb</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>### 2.2 hash</p>
-<p>⽤于存储对象，对象的结构为属性、值，添加、获取、移除单个键值对 获取所有键值对 检查某个键是否存在。</p>
-<p>- <code>hset key field value</code> 设置单个属性</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hset user name xiaoming</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>hget key field</code> 获取单个属性的值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hget user name // xiaoming</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>hmset key field1 value1 field2 value2 ...</code> 设置多个属性</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hmset user name xiaoming age 21</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>hmget key field1 field2 ...</code> 获取多个属性的值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hmget user name age</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>hkeys key</code> 获取指定键所有的属性</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hkeys user</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>hvals key</code> 获取指定键所有属性的值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hvals user</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>hdel key field1 [field2 ...]</code> 删除指定的属性及属性对应的值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">hdel user name</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>### 2.3 list</p>
-<p>列表的元素类型为 string，按照插入顺序排序，从两端压入或者弹出元素，读取单个或者多个元素进行修剪，只保留一个范围内的元素。</p>
-<p>- <code>lpush key value1 [value2 ...]</code> 从左端插入数据</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">lpush nums1 0 1 2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>rpush key value1 [value2 ...]</code> 从右端插入数据</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">rpush nums2 0 1 2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>lrange key start stop</code> 获取键对应列表指定范围的元素，start 为开始索引（索引从左侧开始，第一个元素下标为 0），stop 为结束索引（索引可以是负数，表示从右侧开始）</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">lrange nums1 0 -1 // 2 1 0</span><br><span class="line"></span><br><span class="line">lrange nums2 0 -1 // 0 1 2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>linsert key before|after pivot value</code> 在 pivot 的前或后插入元素</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">linsert key nums1 before 2 3</span><br><span class="line"></span><br><span class="line">lrange nums1 0 -1 // 3 2 1 0</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>lset key index value</code> 设置（修改）指定索引位置的元素值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">lset nums2 1 11</span><br><span class="line"></span><br><span class="line">lrange nums2 0 -1 // 0 11 2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>lrem key count value</code> 删除键对应列表前 count 次出现的值（count &gt; 0 表示从头往尾删除，count &lt; 0 表示从尾往头删除，count = 0 表示删除所有）</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">lpush ab a b a a b a b b</span><br><span class="line"></span><br><span class="line">lrange ab 0 -1 // b b a b a a b a</span><br><span class="line"></span><br><span class="line">lrem ab 2 b // a b a a b a</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>### 2.4 set</p>
-<p>无序集合的元素为 string，元素具有唯一性，不重复，对集合没有修改操作，添加、获取、移除单个元素 检查一个元素是否存在于集合中 计算交集、并集、差集 从集合里面随机获取元素。</p>
-<p>- <code>sadd key member [member ...]</code> 添加元素到无序集合</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sadd set1 0 0 1 1 2 2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>smembers key</code> 查看无序集合中的元素成员</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">smembers set1 // 0 1 2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>scard key</code> 查看无序集合中的元素数量</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">scard set1 // 3</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>srem key member [member ...]</code>  删除指定无序集合中的元素成员</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">srem set1 1</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>sinter key [key ...]</code> 计算交集</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sadd set1 0 1 2</span><br><span class="line"></span><br><span class="line">sadd set2 1 2 3</span><br><span class="line"></span><br><span class="line">sinter set1 set2 // 1 2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>sinterstore destination key [key]</code> 计算交集并将交集值存储在 destination 集合中</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sadd set1 0 1 2</span><br><span class="line"></span><br><span class="line">sadd set2 1 2 3</span><br><span class="line"></span><br><span class="line">sinterstore set1_inter_set2 set1 set2</span><br><span class="line"></span><br><span class="line">smembers set1_inter_set2 // 1 2</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>sunion key [key ...]</code> 计算并集</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sunion set1 set2 // 0 1 2 3</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>sunionstore destination key [key]</code> 计算并集并将并集值存储在 destination 集合中</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sadd set1 0 1 2</span><br><span class="line"></span><br><span class="line">sadd set2 1 2 3</span><br><span class="line"></span><br><span class="line">sunionstore set1_union_set2 set1 set2</span><br><span class="line"></span><br><span class="line">smembers set1_union_set2 // 0 1 2 3</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>sdiff key [key ...]</code> 计算差集</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sdiff set1 set2 // 0</span><br><span class="line"></span><br><span class="line">sdiff set2 set1 // 3</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>sdiffstore destination key [key]</code> 计算差集并将差集值存储在 destination 集合中</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sadd set1 0 1 2</span><br><span class="line"></span><br><span class="line">sadd set2 1 2 3</span><br><span class="line"></span><br><span class="line">sdiffstore set1_diff_set2 set1 set2</span><br><span class="line"></span><br><span class="line">sdiffstore set2_diff_set1 set1 set2</span><br><span class="line"></span><br><span class="line">smembers set1_diff_set2 // 0</span><br><span class="line"></span><br><span class="line">smembers set2_diff_set1 // 3</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>### 2.5 zset</p>
-<p>有序集合的元素为 string，元素具有唯一性，不重复，每个元素都会关联一个 double 类型的 score 表示权重，通过权重来给元素排序，没有修改操作，添加、获取、删除元素 根据分值范围或者成员来获取元素 计算一个键的排名。</p>
-<p>- zadd key score member [score member …] 添加元素到有序集合</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zadd rank 10 xiaoming 9 xiaohong 8 xiaoguang 7 xiaohei 6 xiaozhi 5 xiaozhang</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- zrange key start stop 查看有序集合中所有元素（默认是升序排序）</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zrange rank 0 -1 // xiaozhang xiaozhi xiaohei xiaoguang xiaohong xiaoming</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>zcard key</code> 查看有序集合中的元素数量</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zcard rank // 6</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- zrangebyscore min max 查看有序集合中 score 在 min 和 max 之间的元素</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zrangebyscore 6 8 // xiaozhi xiaohei xiaoguang</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- zscore key member 查看有序集合中指定元素的 score 值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zscore rank xiaohei // 7</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- zrem key member [member …] 删除有序集合中指定元素及对应的 score 值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zrem rank xiaohei xiaozhang</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- zremrangebyscore key min max 删除有序集合中指定返回 score 值的元素</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">zremrangebyscore rank 7 8</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>### 2.6 key 命令</p>
-<p>查找键的相关命令（对上面的类型都适用），参数支持正则表达式。</p>
-<p>- <code>keys pattern</code> 根据规则查找键</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">keys * // 查找所有的键</span><br><span class="line"></span><br><span class="line">keys a* // 查找 a 开头的键</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>exists key [key ...]</code> 判断键是否存在，如果存在返回 1，不存在返回 0</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">exists name</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>type key</code> 查看键对应的 value 类型</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">type</span> name</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>del  key [key ...]</code> 删除键和键对应的值</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">del name</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>expire key seconds</code> 设置键的过期时间，单位为秒</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">set</span> name xiaoming</span><br><span class="line"></span><br><span class="line">get name // xiaoming</span><br><span class="line"></span><br><span class="line">expire name 1</span><br><span class="line"></span><br><span class="line">get name // nil</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-<p>- <code>ttl key</code> 查看剩下的有效时间，单位为秒</p>
-<p>\<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">set</span> name xiaoming</span><br><span class="line"></span><br><span class="line">get name // xiaoming</span><br><span class="line"></span><br><span class="line">expire name 100</span><br><span class="line"></span><br><span class="line">ttl name // 98</span><br><span class="line"></span><br><span class="line">ttl name // 97 有效时间逐渐减少</span><br><span class="line"></span><br><span class="line">\</span><br></pre></td></tr></table></figure></p>
-
+        
       
       
       
@@ -767,6 +659,66 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">字符编码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">2018</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">年中总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">组装</a>
               </li>
              
@@ -783,15 +735,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">2018</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年中总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,14 +755,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">HashMap</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Haddop</a>
               </li>
              
@@ -827,7 +767,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java Web</a>
+                <a href="javascript:void(0)" class="js-tag color3">HashMap</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -839,10 +783,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">web.xml</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">过滤器</a>
               </li>
              
@@ -851,23 +791,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">接口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">注解</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">序列化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">反序列化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">接口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -880,6 +816,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">多线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">注解</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -907,15 +847,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">数据库引擎</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -928,14 +876,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">RBAC模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hibernate</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -955,14 +895,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
@@ -975,6 +907,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">虚拟机</a>
               </li>
              
@@ -983,11 +923,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习心境</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Gradle</a>
+                <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -999,11 +943,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">年终总结</a>
+                <a href="javascript:void(0)" class="js-tag color2">String</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GitHub</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1019,71 +975,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单例模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">String</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">StringBuffer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">怀疑人生</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">字符编码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Session</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Jsp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+                <a href="javascript:void(0)" class="js-tag color5">编程技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1111,6 +1011,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Object</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">equals</a>
               </li>
              
@@ -1119,7 +1023,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Object</a>
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1127,15 +1031,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1163,15 +1063,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">synchronized</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">王者荣耀</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">策略模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">synchronized</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,14 +1100,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编程技术</a>
               </li>
              
               <li class="article-tag-list-item">
