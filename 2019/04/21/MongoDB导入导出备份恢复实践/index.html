@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2019/04/21/MongoDB导入导出备份恢复实践/MogoDB恢复指定数据库.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2019/04/21/MongoDB导入导出备份恢复实践/MongoDB导出指定数据库中指定表.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2019/04/21/MongoDB导入导出备份恢复实践/MongoDB导入指定数据库中指定表.png">
-<meta property="og:updated_time" content="2019-04-20T15:18:35.452Z">
+<meta property="og:updated_time" content="2019-04-20T15:21:02.818Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB导入导出备份恢复实践">
 <meta name="twitter:description" content="毕业设计使用机器学习分类算法来训练新闻分类模型，从 MongoDB 数据库读取爬虫获取的新闻文本数据（300多万条数据），自己笔记本性能有限，6个机器学习分类算法搞了一天只跑出来一个 LR 的，所以想借助基友大学实验室 2 万多的主机来跑模型，但是考虑到他本地并没有装 MongoDB 的环境，我就想把本地的 MongoDB 数据库中的数据上传到自己的阿里云服务器上，方便后面使用他的主机（哈哈~）。">
@@ -200,7 +200,7 @@
 <p><strong>恢复命令</strong></p>
 <p>详情见MongoDB官方文档 <a href="https://docs.mongodb.com/manual/reference/program/mongorestore/" target="_blank" rel="noopener">MongoDB官方文档mongorestore命令</a></p>
 <p>基本语法：<code>mongorestore -h dbhost -d dbname --dir dbdirectory</code></p>
-<p>参数或名：</p>
+<p>参数说明：</p>
 <p>-h： MongoDB所在服务器地址</p>
 <p>-d： 需要恢复的数据库实例，例如：test，当然这个名称也可以和备份时候的不一样，比如test2</p>
 <p>--dir： 备份数据所在位置</p>
@@ -228,6 +228,7 @@
 <p>-f ：导入的字段名</p>
 <p>--headerline ：如果导入的格式是csv，则可以使用第一行的标题作为导入的字段</p>
 <p>--file ：要导入的文件</p>
+<p>下图为在我服务器上导入 test 表的实践</p>
 <img src="/blog/2019/04/21/MongoDB导入导出备份恢复实践/MongoDB导入指定数据库中指定表.png" title="MongoDB导入指定数据库中指定表">
 <p>参考文章：</p>
 <p><a href="https://segmentfault.com/a/1190000006236494" target="_blank" rel="noopener">mongodb 备份、还原、导入、导出简单操作</a></p>
@@ -536,7 +537,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,27 +561,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">布局</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">字符编码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Cookie</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Session</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">字符编码</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,11 +809,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -928,19 +929,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">反射</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">复习</a>
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">复习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -949,6 +946,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">配置文件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
