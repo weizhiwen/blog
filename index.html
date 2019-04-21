@@ -342,10 +342,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>感受：刚开始没有深入进去，感觉数据库设计的很垃圾，觉得如果换成自己设计会怎样怎样，然后熟悉了一些业务和功能之后，开始试着做数据库的设计。设计过程中，根据目前的业务和功能要求，自己在向着之前的人的表设计靠拢，一些表的抽象，也是之前的人比自己设计的更好，尽管之前的人的表设计并不是那么完美，但是优秀的设计也很多，瑕不掩瑜，渐渐觉得之前人的表设计还是蛮优秀的，这一点不得不承认。</p>
-<p>1、<strong>数据表不加外键</strong>，当时看到数据表连个外键都不加，心里就对这些表很看低（觉得垃圾），后来查阅了一些资料发现，不加外键还真是有道理的，是自己学识短浅了。数据表加外键可以保证数据的一致性和完整性，我之前在有逻辑关联的数据上会加上外键，但是外键也是有缺点，在一定程度上会影响插入、删除的性能，当然不加外键，也有缺点，如果没有说明文档，不容易查看数据的外键关系，不过只要文档写得规范，这个缺点是可以克服的。</p>
-<p>2、<strong>实体类的划分</strong>，这是老代码中做的不好的地方，数据库实体类和业务实体类是混着用的，这当然和项目规范也有关系，其实之前自己写代码的时候，也没有将实体类划分清晰，我是拿数据库实体类当业务实体类使用了，当然这和我做的业务不是很复杂也有关系，查阅了《阿里巴巴Java开发手册》，我才知道实体类根据不同的数据领域原来可以划分的那么清晰，当然划分的越清晰，实体类的数量也就越多，我觉得粗略划分至少是数据库实体类和业务实体类两大类，这样虽然不及《阿里巴巴Java开发手册》中的那般详细，但是对于一般的应用也足够了。</p>
-<p>3、<strong>善于利用Mybatis的Criteria类</strong>，之前自己在项目中从来没有用到过这个查询条件类，老代码中一些地方是使用了的，简而言之这个查询类就是SQL语句中where后面的查询条件，但是这个Criteria类并不是哪里都用的，我思考了什么时候使用这个查询类比较合适，对于查询涉及的表较少，最好是一张，数据库实体类在使用Mybatis生成插件生成的时候就可以生成这个查询类，当然可以根据业务自己组装实体类，单独再写Criteria类，这样查询是把实体类的所有字段都查询出来，但可能有些字段是业务不需要的，这当然是不太推荐的。Mybatis相比于之前我们直接用JDBC写的静态SQL，它的SQL能够更加的灵活，尤其是对于查询操作来说。如果不使用Criteria类，我们想要使用多个条件查询，就直接将查询条件封装到一个类中，可以是普通的用于查询的类，也可以封装到一个Map集合中。两者的使用，我觉得应该是看具体的业务，如果是一般的列表查询的话，查询条件一般会比较简单，那么直接使用封装类会简单些，但是如果是复杂的搜索栏筛选查询，使用一个查询类封装查询条件会比较好。</p>
-
+        
       
       
       
@@ -571,9 +568,421 @@
 
 
   
+    <article id="post-解决Git和GitHub一起使用的速度慢问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/01/25/解决Git和GitHub一起使用的速度慢问题/">解决Git和GitHub一起使用的速度慢问题</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/01/25/解决Git和GitHub一起使用的速度慢问题/" class="archive-article-date">
+  	<time datetime="2019-01-25T10:53:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-25</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>GitHub 由于是国外的服务器，再加上国内的安全保护，所以日常访问速度很慢，一般都要借助一些工具（tz）来提高访问速度，但是想要提高 git clone、push、pull 的速度，还需要做些其他事情。</p>
+        
+      
+      
+      
+		
+		  <div class="declare" hidden="hidden"></div>
+		
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">GitHub</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/01/25/解决Git和GitHub一起使用的速度慢问题/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-在虚拟机中配置静态IP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/01/15/在虚拟机中配置静态IP/">在虚拟机中配置静态IP</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/01/15/在虚拟机中配置静态IP/" class="archive-article-date">
+  	<time datetime="2019-01-15T00:19:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-15</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>手里没有那么多云服务器（还是家里没矿呀~），所以想用虚拟机虚拟出几台机器搭建一些软件的集群环境，但虚拟机中的系统 IP地址默认是动态分配的，这就给连接带来了很大的麻烦，启动虚拟机运行系统，然后在主机中使用终端工具更加方便的连接这些机器（假装自己有很多的服务器~）。给机器配置静态 IP，使用 IP地址给每台机器编号，也有利于使用终端连接和使用。</p>
+        
+      
+      
+      
+		
+		  <div class="declare" hidden="hidden"></div>
+		
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">虚拟机</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">配置静态IP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/01/15/在虚拟机中配置静态IP/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Linux下安装Redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/01/14/Linux下安装Redis/">Linux下安装Redis</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/01/14/Linux下安装Redis/" class="archive-article-date">
+  	<time datetime="2019-01-13T22:02:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-13</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、下载-Redis"><a href="#1、下载-Redis" class="headerlink" title="1、下载 Redis"></a>1、下载 Redis</h2><p>去Redis<a href="https://redis.io/" target="_blank" rel="noopener">官网</a>上下载 Redis 的源码包，并在Linux系统中解压。</p>
+        
+      
+      
+      
+		
+		  <div class="declare" hidden="hidden"></div>
+		
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/01/14/Linux下安装Redis/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-synchronized关键字大总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/12/31/synchronized关键字大总结/">synchronized关键字大总结</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/12/31/synchronized关键字大总结/" class="archive-article-date">
+  	<time datetime="2018-12-30T18:50:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-30</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>全面对 synchronized 进行总结。</p>
+        
+      
+      
+      
+		
+		  <div class="declare" hidden="hidden"></div>
+		
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">synchronized</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2018/12/31/synchronized关键字大总结/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-我的-2018-年终总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/12/29/我的-2018-年终总结/">我的 2018 年终总结</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2018/12/29/我的-2018-年终总结/" class="archive-article-date">
+  	<time datetime="2018-12-28T17:08:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-28</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2018 年度总结，以及对下一年的展望。</p>
+        
+      
+      
+      
+		
+		  <div class="declare" hidden="hidden"></div>
+		
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">年终总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2018/12/29/我的-2018-年终总结/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/17/">17</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
     </nav>
   
 
