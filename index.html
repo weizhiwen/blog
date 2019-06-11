@@ -149,6 +149,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-毕业设计总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/06/06/毕业设计总结/">毕业设计总结</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/06/06/毕业设计总结/" class="archive-article-date">
+  	<time datetime="2019-06-06T13:54:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-06</time>
+</a>
+        
+      </header>
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当时（2018年11月）在选毕业设计题目时，我的想法比较多，用 Java 做管理系统也写烦了（原生、SSH、SSM），所以毕业设计也就不想用 Java 写了，刚好也学了一段时间 Python，就想着用 Python 做些东西，和指导老师交流想法后，最终确定毕业设计的题目为<strong>《基于Scrapy的新闻智能分类微信小程序》</strong>。</p>
+<p>看到这个题目就能知道这里面涉及的面比较多，当然和自己在大学接触的东西比较多也有原因，直到 2019 年 3 月我才正式开始写毕业设计，在这之前预研了要用到的技术，在做的过程中，也有把重点放到了在不重要的地方，又和老师交流一番后，自己逐渐找到了这个毕业设计的定位，做的是文本分类相关的应用，目的是打造出一个可以对新闻进行智能分类的微信小程序，也即是可以对任意一篇新闻进行自动分类处理。</p>
+<p>整个项目涉及爬虫、文本分类、Web 开发和微信小程序，技术栈为 Python + Scrapy + MongoDB + scikit-learn + Flask + 微信小程序。</p>
+<img src="/blog/2019/06/06/毕业设计总结/技术栈.png" title="技术栈">
+<p>整个系统的架构如下图所示，分为基础设施层、服务层、交互层、应用层。</p>
+<img src="/blog/2019/06/06/毕业设计总结/系统架构图.png" title="系统架构图">
+<p>整个系统的实现分为如下四个步骤，分别是新闻数据爬取、文本分类处理、后端 API 接口开发，微信小程序客户端构建。</p>
+<img src="/blog/2019/06/06/毕业设计总结/实现步骤.png" title="实现步骤">
+<p>数据爬取部分，爬取的目标网站为中国新闻网，新闻数据爬取分类为：国内、国际、军事、体育、社会、娱乐、财经，爬取新闻的时间跨度为 2012 年到 2019 年。</p>
+<img src="/blog/2019/06/06/毕业设计总结/新闻数量分布.png" title="新闻数量分布">
+<p>文本分类部分，分类效果如下图所示，橙色和蓝色的数量约接近，代表这个分类下的新闻机器分类正确率越高，可以看到由于上面军事类新闻的数量较少，所以训练出来的新闻分类模型效果不是很高，错误率较高。</p>
+<img src="/blog/2019/06/06/毕业设计总结/文本分类.png" title="文本分类">
+<p>下面是小程序的效果演示，首先是小程序首页，展示带有机器分类的新闻列表，点击新闻条目可以查看新闻详情，可以点击分类按钮选择新闻分类，还可以输入关键字查找新闻，都是一些很常见的功能。</p>
+<img src="/blog/2019/06/06/毕业设计总结/小程序首页.png" title="小程序首页">
+<p>接下来是该小程序的特色功能，输入新闻标题，程序对其进行智能分类。</p>
+<img src="/blog/2019/06/06/毕业设计总结/小程序工具页.png" title="小程序工具页">
+<p>最后通过录制的一段 gif 动图展示整个程序。</p>
+<img src="/blog/2019/06/06/毕业设计总结/新闻分类动图演示.gif" title="新闻分类动图演示">
+<p>整个毕业涉及的源码，都放到了我的 GitHub 仓库中，仓库地址： <a href="https://github.com/weizhiwen/News-Intelligent-Classification-WeChat-Mini-Program" target="_blank" rel="noopener">https://github.com/weizhiwen/News-Intelligent-Classification-WeChat-Mini-Program</a></p>
+<p>最终论文被评为校级优秀，省级优秀还未知，在整个毕业设计过程中，下面的书籍对我帮助很大，非常感谢这些书籍的作者，自己在平时实践中锻炼出来的解决问题的能力也在本次毕业设计中得到了展现，特别感谢两年来指导老师对我的锻炼和指导。</p>
+<p>《Scrapy从入门到精通》</p>
+<p>《Python机器学习实践》</p>
+
+      
+      
+      
+		
+		  <div class="declare" hidden="hidden"></div>
+		
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">毕业设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/06/06/毕业设计总结/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我在Intellij-IDEA中常用的快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -904,90 +1005,6 @@
 
 
   
-    <article id="post-Linux下安装Redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2019/01/14/Linux下安装Redis/">Linux下安装Redis</a>
-    </h1>
-  
-
-        
-        <a href="/blog/2019/01/14/Linux下安装Redis/" class="archive-article-date">
-  	<time datetime="2019-01-13T22:02:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-13</time>
-</a>
-        
-      </header>
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、下载-Redis"><a href="#1、下载-Redis" class="headerlink" title="1、下载 Redis"></a>1、下载 Redis</h2><p>去Redis<a href="https://redis.io/" target="_blank" rel="noopener">官网</a>上下载 Redis 的源码包，并在Linux系统中解压。</p>
-        
-      
-      
-      
-		
-		  <div class="declare" hidden="hidden"></div>
-		
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/blog/2019/01/14/Linux下安装Redis/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
@@ -1155,19 +1172,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ArrayList</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Deepin</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SublimeText3</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1359,11 +1376,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1400,6 +1417,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">坑</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">毕业设计</a>
               </li>
              
               <li class="article-tag-list-item">
