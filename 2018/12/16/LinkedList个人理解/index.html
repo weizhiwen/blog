@@ -17,7 +17,7 @@
 <meta property="og:description" content="查看 👉 LinkedList源码翻译">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/12/16/LinkedList个人理解/LinkList数据结构图.png">
-<meta property="og:updated_time" content="2018-12-16T05:02:54.000Z">
+<meta property="og:updated_time" content="2019-06-12T08:10:56.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinkedList（Java8）个人理解">
 <meta name="twitter:description" content="查看 👉 LinkedList源码翻译">
@@ -186,7 +186,7 @@
 <p>LinkedList 对数据进行封装，在内部组装成 Node。LinkedList 由下面几个部分组成，主体为若干个 Node，首尾各一个 Node 的引用，一个记录 Node 个数的 size。前后的 Node 之间互相引用，构成双向链表。如果链表为空，first 和 last 都指向 null，如果链表中只有一个 Node，first 和 last 都指向这个 Node（first 和 last 都是这个 Node 的引用）。如果链表有多个 Node，first 和 last 分别指向链表首尾的 Node。对于每个 Node 来说，如果该 Node 前还有 Node，那么这个 Node 的 prev 指向前一个 Node，否则 prev 指向 null；如果该 Node 后还有 Node，那么这个 Node 的 next 指向后一个 Node，否则 next 指向 null。</p>
 <img src="/blog/2018/12/16/LinkedList个人理解/LinkList数据结构图.png" title="LinkList数据结构图">
 <p><strong>问题：LinkedList 是怎么进行查找的？</strong></p>
-<p>LinkedList 相比于 ArrayList 的优势在于插入和删除，劣势是查找，LinkedList 类使用双向链表一定程度上确实可以提高查找效率。<br>LinedList 中的查询分为两种，一种是根据 index 查询 node（包含元素值），也即是 node() 方法，另一种是根据 object（元素值） 查询 index，也即是 indexOf() 方法。链表不像数组那样，可以根据 index 直接查询出元素的值，因为两者在内存种的结构是不一样的，数组存储在连续的内存空间，而链表存储不需要连续的内存空间。<br>链表中的 index 只是标记元素的相对于链表头部（first 指向的）node 的个数，这样在根据 index 查询时，可以根据 index 和 size 的关系，提高查询性能。当 index 大致在链表的前半部分时（index &lt; (size &gt;&gt; 1)），从链表的首部开始遍历显然更快，而当 index 大致在链表的后半部分时（index &gt; (size &gt;&gt; 1)），从链表的尾部开始遍历显然更快，这样就使得查找次数从 n 次将为了 n/2 次，虽然查找算法的时间复杂度还是 O(n)。<br>根据元素值来查找 node 的 index，使用的是 indexOf() 方法和 lastIndexOf() 方法，前一个方法是从前往后查找，后一个方法是从后往前查找。</p>
+<p>LinkedList 相比于 ArrayList 的优势在于插入和删除，劣势是查找，LinkedList 类使用双向链表一定程度上确实可以提高查找效率。<br>LinedList 中的查询分为两种，一种是根据 index 查询 node（包含元素值），也即是 node() 方法，另一种是根据 object（元素值） 查询 index，也即是 indexOf() 方法。链表不像数组那样，可以根据 index 直接查询出元素的值，因为两者在内存中的结构是不一样的，数组存储在连续的内存空间，而链表存储不需要连续的内存空间。<br>链表中的 index 只是标记元素的相对于链表头部（first 指向的）node 的个数，这样在根据 index 查询时，可以根据 index 和 size 的关系，提高查询性能。当 index 大致在链表的前半部分时（index &lt; (size &gt;&gt; 1)），从链表的首部开始遍历显然更快，而当 index 大致在链表的后半部分时（index &gt; (size &gt;&gt; 1)），从链表的尾部开始遍历显然更快，这样就使得查找次数从 n 次将为了 n/2 次，虽然查找算法的时间复杂度还是 O(n)。<br>根据元素值来查找 node 的 index，使用的是 indexOf() 方法和 lastIndexOf() 方法，前一个方法是从前往后查找，后一个方法是从后往前查找。</p>
 <p><strong>问题：LinkedList 内部一些方法的区别？</strong></p>
 <p>LinkedList 内部有很多功能相同的方法，方法内部大多都是调用 link 相关的方法。</p>
 <table>
@@ -675,19 +675,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">接口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">语句块</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">接口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,6 +703,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LinkedList</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -711,19 +715,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LinkedList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -732,10 +736,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -807,11 +807,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -852,6 +852,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">毕业设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小技巧</a>
               </li>
              
               <li class="article-tag-list-item">

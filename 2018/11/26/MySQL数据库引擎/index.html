@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/InnoDB引擎.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/MyISAM.png">
 <meta property="og:image" content="http://wenshixin.gitee.io/blog/2018/11/26/MySQL数据库引擎/各种引擎比较.png">
-<meta property="og:updated_time" content="2018-11-25T14:24:16.000Z">
+<meta property="og:updated_time" content="2019-06-12T09:04:57.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库引擎">
 <meta name="twitter:description" content="MySQL 作为全世界广受欢迎的数据库，被用于很多中小型的项目中，但是你对 MySQL 数据库的存储引擎了解多少呢？">
@@ -204,7 +204,7 @@
 <p>使用 MEG_MyISAM 引擎创建表，会生成 frm 文件和 MRG 文件，frm 文件中存储表的定义，MEG 文件存储表的数据。</p>
 <p>MEG_MyISAM 引擎需要主表 MERGE 和子表具有完全一样的数据结构（属性、数据类型、索引）。对于存储策略是分成多表，如日志表，按照一年十二个月份划分，需要 12 张定义完全一样的数据表。当联合多个月份的表查询数据时，需要写多个表的连接，这时使用 MEG_MyISAM 引擎只需要像对待一张表一样查询，对数据的操作就变得简单了。</p>
 <p><strong>MEMORY 引擎：</strong></p>
-<p>MEMEORY 速度快，数据直接存储在内存中。</p>
+<p>MEMORY 速度快，数据直接存储在内存中。</p>
 <p>使用 MEMORY 引擎创建表，只会生成 frm 文件，因为表的数据是暂时存放在内存中的。</p>
 <p>MEMORY 追求的是速度，为了得到更快的响应时间，采用速度相对磁盘快得多的内存做为存储介质，可以作为临时表使用。但由于数据是放在内存中的，表中的数据需要立即使用，否则当 MySQL守护进程奔溃时，表中的数据就会丢失。</p>
 <p><strong>CSV 引擎：</strong></p>
@@ -217,7 +217,7 @@
 <p><strong>PERFORMANCE_SCHEMA 引擎：</strong></p>
 <p>该引擎用于收集数据库性能相关的参数，是 MySQL 的性能模式，主要关注性能数据。用户不能直接创建存储引擎为 PERFORMANCE_SCHEMA 的表。</p>
 <p><strong>ARCHIVE 引擎：</strong></p>
-<p>ARICHIVE 支持数据压缩，支持插入和查询操作两种功能。</p>
+<p>ARCHIVE 支持数据压缩，支持插入和查询操作两种功能。</p>
 <p>使用 ARCHIVE 引擎创建表，会生成 frm 文件和 ARZ 文件，frm 文件中存储表的定义，ARZ 文件中存储表的压缩后的数据和索引。</p>
 <p><strong>FEDERATED 引擎：</strong></p>
 <p>支持代理查询，即创建一个远程的 MySQL客户端连接，将要查询的语句传输到远程服务器上执行，完成数据的存取。</p>
@@ -693,19 +693,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">接口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">语句块</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">接口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,6 +721,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LinkedList</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -729,19 +733,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LinkedList</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
+                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">依赖</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">pom文件</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -750,10 +754,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">数据类型对照</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -825,11 +825,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color4">工具类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -870,6 +870,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">毕业设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小技巧</a>
               </li>
              
               <li class="article-tag-list-item">
